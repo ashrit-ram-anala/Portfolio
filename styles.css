@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 *{
     margin: 0;
     padding:0;
-    font-family:'Montserrat';
+    font-family:'Roboto';
 }
 
 :root{
@@ -17,7 +17,7 @@
 
 html{
     scroll-behavior: smooth;
-    background: #232323
+    background: #131313
 }
 
 ::-webkit-scrollbar {
@@ -27,13 +27,17 @@ html{
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--background);
+    background: rgb(13,13,13);
   }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--background);
+    background: rgb(14,14,14);
   }
+
+p{
+    font-weight: 300;
+}
 
 .white{
     background: -webkit-linear-gradient(#fff, #686868);
@@ -49,9 +53,9 @@ html{
 
 nav{
     display: flex;
+    padding-top: 2rem;
     justify-content: center;
-    padding: 2rem;
-    background:var(--background);
+    background:rgb(15, 15, 15);
 }
 
 ::selection{
@@ -93,15 +97,16 @@ nav ul li .home{
 
 header{
     width:100%;
-    height: 40.5vh;
-    background:var(--background);
-    padding-top: 13rem;
+    height: 75vh;
+    background:rgb(15, 15, 15);
+    
 }
 
 .heading-name{
     font-size:6rem;
     display: flex;
     justify-content:center;
+    padding-top: 13rem;
 }
 
 .heading-type{
@@ -135,9 +140,15 @@ header{
     color:var(--background);
 }
 
+.transition{
+    width:100%;
+    height: 6vh;
+    background: linear-gradient(rgb(12,12,12),rgb(13,13,13),rgb(14,14,14), rgb(15,15,15),rgb(16,16,16),rgb(17,17,17),rgb(18,18,18), var(--background));
+}
+
 section{
-    padding-left: 7rem;
-    padding-right: 7rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
     background: var(--background);
     color: #a5a5a5;
     letter-spacing: 0.07rem;
@@ -147,9 +158,9 @@ section{
 
 section .title{
     color: #fff;
-    font-weight: 500;
-    font-size: 1.5rem;
-    padding-bottom: 3rem;
+    font-weight: 400;
+    font-size: 1.3rem;
+    padding-bottom: 1.5rem;
     padding-top: 4rem;
 }
 
@@ -158,7 +169,7 @@ section .title{
 }
 
 .experience ul .date{
-    width: 60rem;
+    width: 40rem;
 }
 
 section .subtitle{
@@ -250,6 +261,11 @@ section .subtitle{
     margin-left: 1.5rem;
 }
 
+.tech-stack{
+    position: absolute;
+    top: 85%;
+}
+
 .tech-stack ul{
     display: flex;
     flex-wrap: wrap;
@@ -257,7 +273,12 @@ section .subtitle{
     list-style-type: none;
     font-size: 0.8rem;
     color: #a5a5a5;
+    transition: 0.5s ease;
 
+}
+
+.card .tech-stack ul:hover {
+    color: #fff;
 }
 
 .tech-stack ul li a{
@@ -292,7 +313,6 @@ section .subtitle{
 .skills ul{
     display: flex;
     flex-wrap: wrap;
-
     list-style-type: none;
 
 }
@@ -365,7 +385,59 @@ section .subtitle{
     }
   }
 
+  .footer{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    justify-content:space-between;
+    flex-direction:column-reverse;
+    padding:30px 0;
+    border-top:1px solid #2d2d2d;
+    margin-top:30px
+}
 
+.footer span{
+    font-size:12px
+}
 
+.footer-link:hover{
+    text-decoration:underline
+}
 
+.footer-social{
+    display:flex;
+    gap:30px;
+    font-size:16px; 
+    color: #a5a5a5;
+    text-decoration: none;
+}
 
+.footer-social *{
+    transition:all .1s ease;
+}
+
+.footer-social *:hover{
+    color:var(--hover-green)
+}
+
+@media screen and (min-width: 650px){
+    
+    .footer{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        flex-direction:row;
+        padding:30px 0;
+        border-top:1px solid #2d2d2d;
+        margin-top:30px}
+        
+        .footer-social{
+            display:flex;
+            gap:20px;
+            font-size:18px;
+        }
+    }
+
+  .footer-social .top{
+    font-size: 0.7rem;
+  }
