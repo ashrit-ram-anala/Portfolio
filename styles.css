@@ -538,8 +538,8 @@ section .subtitle{
     position: absolute;
     list-style-type: none;
     display: flex;
-    top: 10%;
-    left: 85.5%
+    top: 8%;
+    left: 75.5%
 }
 
 .links1 li a{
@@ -724,10 +724,10 @@ section .subtitle{
   
   .carousel__slide {
     position: relative;
-    flex: 0 0 100%;
+    flex: 0 0 50%;
     width: 50%;
     
-    margin: 0 1rem 0 1rem;
+    margin: 0 30rem 0 30rem;
     height: 15rem;
     counter-increment: item;
   }
