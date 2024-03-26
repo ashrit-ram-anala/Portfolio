@@ -510,7 +510,7 @@ section .subtitle{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 1.3rem;
     position: relative;
     color: white;
     padding: 0 5rem 0 5rem;
@@ -771,6 +771,16 @@ section .subtitle{
 
     left: 0;
     text-align: center;
+  }
+
+  .text{
+position: absolute;
+right: 36%;
+  }
+
+  .text1{
+    position: absolute;
+    left: 36%;
   }
   
   .carousel__navigation-list,
