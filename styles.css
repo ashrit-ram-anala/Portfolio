@@ -640,7 +640,7 @@ li {
 
 .carousel {
   position: relative;
-  padding-top: 22%;
+  padding-top: 25%;
 }
 
 .carousel__viewport {
@@ -699,7 +699,7 @@ li {
 .carousel__navigation {
   position: absolute;
   right: 0;
-
+bottom: 22px;
   left: 0;
   text-align: center;
 }
@@ -708,6 +708,7 @@ li {
   position: absolute;
   right: 36%;
   transition: 0.5s ease;
+  bottom: 28px;
 }
 
 .text:hover {
@@ -726,14 +727,17 @@ li {
   position: absolute;
   left: 36%;
   transition: 0.5s ease;
+  bottom: 28px;
 }
 
 .text1 span {
   transition: 0.5s ease;
+
 }
 
 .text1:hover {
   color: white;
+  bottom: 2px;
 }
 
 .text1 span:hover {
