@@ -307,14 +307,6 @@ header .blob {
   font-weight: 300;
 }
 
-.hero-stars {
-  top: -1px;
-  width: 100%;
-  max-width: 1400px;
-  position: absolute;
-  z-index: 1;
-}
-
 /* Header Ends */
 
 /* About Starts */
