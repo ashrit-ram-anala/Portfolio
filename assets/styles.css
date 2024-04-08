@@ -1,5 +1,11 @@
+/* Font Imports Start */
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
+
+/* Fonts Imports End */
+
+/* General Page CSS Starts */
 
 * {
   margin: 0;
@@ -42,6 +48,28 @@ p {
   font-weight: 300;
 }
 
+section {
+  padding-left: 6rem;
+  padding-right: 6rem;
+  background: var(--background);
+  color: #a5a5a5;
+  letter-spacing: 0.07rem;
+
+  line-height: 1.4rem;
+}
+
+section .title {
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.4rem;
+  padding-bottom: 1.5rem;
+  padding-top: 4rem;
+}
+
+/* General Page CSS Ends */
+
+/* Header Starts */
+
 .white {
   background: -webkit-linear-gradient(#fff, #d4d4d4);
   -webkit-background-clip: text;
@@ -65,7 +93,7 @@ header .blob {
   position: absolute;
   top: 17%;
   left: 35.5%;
-  filter: opacity(20%) drop-shadow(0px 0px 110px #858585);
+  filter: opacity(20%) drop-shadow(0px 40px 80px #858585);
   width: 26rem;
 }
 
@@ -83,29 +111,111 @@ header .blob {
   margin-bottom: 1rem;
 }
 
-img {
-  position: absolute;
-  max-width: 1440px;
-  height: auto;
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  max-width: 19000px;
+  margin-top: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.nav-links,
+.nav-links-filled {
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-section {
-  padding-left: 6rem;
-  padding-right: 6rem;
-  background: var(--background);
-  color: #a5a5a5;
-  letter-spacing: 0.07rem;
+.nav-links-filled {
+  background: rgba(114, 114, 114, 0.2);
+  backdrop-filter: blur(10px);
 
-  line-height: 1.4rem;
+  border: 1px solid #404040b5;
+  box-shadow: 0 2px 10px #0000001a;
 }
-
-section .title {
+.nav-links-filled .nav-links-item,
+.nav-links-filled .nav-links-item.contact {
   color: #fff;
-  font-weight: 400;
-  font-size: 1.4rem;
-  padding-bottom: 1.5rem;
-  padding-top: 4rem;
+  font-weight: 100;
 }
+.nav-links-filled .nav-slider {
+  background: rgba(79, 79, 79, 0.4);
+}
+
+.nav-links-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 17px;
+  z-index: 2;
+  padding: 18px 30px;
+  margin: 0.1rem;
+  font-weight: 300;
+}
+
+.hero-stars {
+  top: -1px;
+  width: 100%;
+  max-width: 1400px;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Header Ends */
+
+/* About Starts */
+
+.bolded{
+  color: var(--blue);
+  font-weight: 600;
+}
+
+
+/* About Ends */
+
+/* Skills Starts */
+
+.skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.skills ul li {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: rgba(55, 52, 52, 0.26);
+}
+
+.skills ul li {
+  padding: 0.313rem;
+  border-radius: 2px;
+  transition: 0.3s ease;
+  border: 1px solid #333333;
+  background-color: #232323;
+  box-shadow: 0 2px 3px #0000003d;
+}
+
+.skills ul li:hover {
+  box-shadow: 0 2px 3px #2d2d2d;
+  color: #fff;
+}
+
+.skills ul li a {
+  font-size: 0.8rem;
+}
+
+/* Skills Ends */
+
+/* Experience Starts */
 
 .work ul {
   display: flex;
@@ -116,7 +226,7 @@ section .title {
 }
 
 section .subtitle {
-  color: #e8e8e8;
+  color: #fff;
   font-weight: 500;
   font-size: 1rem;
   padding-bottom: 1rem;
@@ -153,6 +263,19 @@ section .subtitle {
   box-shadow: 1px 1px 5px var(--blue);
 }
 
+.experience a .bolded-link{
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.experience a {
+  text-decoration: none;
+}
+
+/* Experience Ends */
+
+/* Projects Starts */
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -184,6 +307,7 @@ section .subtitle {
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 7px rgba(163, 163, 163, 0.9);
 }
+
 /*
 .card-gradient{
     position: absolute;
@@ -255,35 +379,6 @@ section .subtitle {
   fill: var(--hover-green);
 }
 
-.skills ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-}
-
-.skills ul li {
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  background: rgba(55, 52, 52, 0.26);
-}
-
-.skills ul li {
-  padding: 0.313rem;
-  border-radius: 2px;
-  transition: 0.3s ease;
-  border: 1px solid #333333;
-  background-color: #232323;
-  box-shadow: 0 2px 3px #0000003d;
-}
-
-.skills ul li:hover {
-  box-shadow: 0 2px 3px #2d2d2d;
-}
-
-.skills ul li a {
-  font-size: 0.8rem;
-}
-
 .pulsating-circle-green {
   position: absolute;
   left: 95.5%;
@@ -330,6 +425,19 @@ section .subtitle {
     opacity: 0;
   }
 }
+
+.project-description {
+  color: #a5a5a5;
+  font-size: 0.8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+/* Projects Ends */
+
+/* Footer Starts */
 
 .footer {
   display: flex;
@@ -390,13 +498,9 @@ section .subtitle {
   font-size: 0.7rem;
 }
 
-.hero-stars {
-  top: -1px;
-  width: 100%;
-  max-width: 1400px;
-  position: absolute;
-  z-index: 1;
-}
+/* Footer Ends */
+
+/* Side Projects Starts */
 
 .row1 {
   display: flex;
@@ -477,64 +581,6 @@ section .subtitle {
 
 .tech-stack ul li a {
   margin-left: 0.5rem;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 3;
-  display: flex;
-  max-width: 19000px;
-  margin-top: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.nav-links,
-.nav-links-filled {
-  display: flex;
-  align-items: center;
-  border-radius: 30px;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.nav-links-filled {
-  background: rgba(114, 114, 114, 0.2);
-  backdrop-filter: blur(10px);
- 
-  border: 1px solid #404040b5;
-  box-shadow: 0 2px 10px #0000001a;
-}
-.nav-links-filled .nav-links-item,
-.nav-links-filled .nav-links-item.contact {
-  color: #fff;
-}
-.nav-links-filled .nav-slider {
-  background: rgba(79, 79, 79, 0.4);
-}
-
-.nav-links-item {
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 17px;
-  z-index: 2;
-  padding: 18px 30px;
-  margin: 0.1rem;
-  font-weight: 300;
-}
-
-.project-description {
-  color: #a5a5a5;
-  font-size: 0.8rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-  font-weight: 300;
 }
 
 @keyframes tonext {
@@ -758,6 +804,10 @@ li {
   right: -1rem;
 }
 
+/* Side Projects Ends */
+
+/* Honors Starts */
+
 .honors {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -773,43 +823,10 @@ li {
   filter: drop-shadow(0px 0 3px rgba(183, 183, 181, 0.5));
 }
 
-.about-grid {
-  display: flex;
-}
-
-.image {
-  width: 128px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 5%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
-  mix-blend-mode: luminosity;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.image:hover {
-  mix-blend-mode: normal;
-}
-
-.about-text .vandy{
-  color: var(--blue);
-  font-weight: 600;
-  transition: 0.5s ease;
-}
-
-
-.about-text .vandy-degree{
-  color: var(--blue);
-  font-weight: 600;
-}
-
-.award-title{
+.award-title {
   color: #fff;
   font-weight: 500;
   font-size: 1.1rem;
 }
 
-
-
-
+/* Honors Ends */
