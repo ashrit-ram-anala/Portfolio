@@ -1,4 +1,4 @@
-<img width="1439" alt="Screenshot 2024-04-11 at 2 44 27 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/f88bc548-f79b-4882-a41a-769f4fda4d82"># Portfolio-Website
+
 This is my Portfolio Website showcasing my projects, skills, and information about me. Welcome!
 
 <a href="https://ashrit-ram-anala.github.io/Portfolio-Website/" target="_blank">**Click Here To Visit**</a>
