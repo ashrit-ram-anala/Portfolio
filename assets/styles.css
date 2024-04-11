@@ -665,7 +665,7 @@ section .subtitle {
 }
 
 .award-type {
-  padding: 0.1rem;
+  padding: 0rem 0.5rem 0rem 0.5rem;
   color: var(--blue);
   font-size: 0.8rem;
   background: rgba(10, 161, 255, 0.05);
@@ -680,6 +680,11 @@ section .subtitle {
 
 .honors li:hover {
   box-shadow: 1px 1px 5px var(--blue);
+}
+
+.award-container{
+  display:flex;
+  flex-wrap: wrap;
 }
 
 /* Honors Ends */
