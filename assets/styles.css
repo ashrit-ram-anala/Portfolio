@@ -42,11 +42,17 @@ Start of site CSS
   --background: #131313;
   --hover-green: #4ce29e;
   --black-color: #131313;
+  --white-color:#989898;
 }
 
 html {
   background: #131313;
   scroll-behavior: smooth;
+}
+
+::selection{
+  background: var(--blue);
+  color: #000;
 }
 
 ::-webkit-scrollbar {
@@ -180,33 +186,6 @@ section .title {
   box-shadow: 233px 1976px #fff, 1196px 1119px #fff, 646px 740px #fff, 335px 645px #fff, 1119px 1452px #fff, 176px 1870px #fff, 639px 1711px #fff, 647px 1388px #fff, 1516px 1108px #fff, 464px 66px #fff, 331px 344px #fff, 772px 1189px #fff, 1516px 1850px #fff, 1500px 1463px #fff, 1275px 876px #fff, 1107px 645px #fff, 977px 478px #fff, 583px 1179px #fff, 284px 395px #fff, 1220px 461px #fff, 1160px 249px #fff, 196px 865px #fff, 670px 1915px #fff, 1449px 382px #fff, 1191px 546px #fff, 1329px 605px #fff, 1945px 458px #fff, 995px 749px #fff, 1495px 861px #fff, 708px 1731px #fff, 348px 653px #fff, 548px 1298px #fff, 1606px 990px #fff, 1049px 1204px #fff, 253px 1501px #fff, 1154px 166px #fff, 1087px 104px #fff, 1034px 1161px #fff, 1681px 462px #fff, 577px 1897px #fff, 193px 1901px #fff, 1701px 1755px #fff, 864px 1297px #fff, 800px 1289px #fff, 676px 28px #fff, 185px 1341px #fff, 379px 1151px #fff, 1224px 1725px #fff, 280px 541px #fff, 473px 1196px #fff, 921px 1628px #fff, 969px 432px #fff, 1475px 758px #fff, 1195px 993px #fff, 876px 1840px #fff, 1274px 1689px #fff, 1977px 1101px #fff, 837px 527px #fff, 1785px 1610px #fff, 1650px 1843px #fff, 1127px 1508px #fff, 401px 1050px #fff, 51px 1105px #fff, 545px 880px #fff, 1786px 1672px #fff, 318px 260px #fff, 568px 254px #fff, 1026px 1527px #fff, 1242px 852px #fff, 1785px 982px #fff, 1318px 1071px #fff, 398px 1061px #fff, 1509px 257px #fff, 599px 928px #fff, 1195px 1800px #fff, 1254px 906px #fff, 141px 26px #fff, 1384px 1502px #fff
 }
 
-@-webkit-keyframes animStar {
-  from {
-      -webkit-transform: translateY(0px);
-  }
-  to {
-      -webkit-transform: translateY(-2000px);
-  }
-}
-
-@-moz-keyframes animStar {
-  from {
-      -moz-transform: translateY(0px);
-  }
-  to {
-      -moz-transform: translateY(-2000px);
-  }
-}
-
-@-ms-keyframes animStar {
-  from {
-      -ms-transform: translateY(0px);
-  }
-  to {
-      -ms-transform: translateY(-2000px);
-  }
-}
-
 @keyframes animStar {
   from {
       transform: translateY(0px);
@@ -230,7 +209,7 @@ section .title {
 
 header {
   width: 100%;
-  height: 70vh;
+  height: 77vh;
   background-repeat: no-repeat;
   position: relative;
 }
@@ -239,8 +218,9 @@ header .blob {
   position: absolute;
   top: 17%;
   left: 35.5%;
-  filter: opacity(20%) drop-shadow(0px 40px 80px #858585);
+  filter: opacity(20%) drop-shadow(0px 40px 25px #858585);
   width: 26rem;
+  z-index: -1;
 }
 
 .heading-name {
@@ -249,12 +229,66 @@ header .blob {
   justify-content: center;
   padding-top: 13rem;
 }
-
+/*
+.heading-subtitle{
+  display: flex;
+  color: white;
+  font-weight: 200;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+*/
 .heading-type {
   display: flex;
   justify-content: center;
   font-size: 4.688rem;
   margin-bottom: 1rem;
+}
+
+.social-header ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-header ul li{
+  margin-left: 1rem;
+}
+
+.github-header{
+  transition: 0.5s ease;
+}
+
+.github-header:hover{
+  fill: var(--blue);
+}
+
+.linkedin-header{
+  transition: 0.5s ease;
+}
+
+.linkedin-header:hover{
+  fill: var(--blue);
+}
+
+.contact-header{
+  transition: 0.5s ease;
+}
+
+.contact-header:hover{
+  fill: var(--blue);
+}
+
+.resume{
+  background:-webkit-linear-gradient(250deg, #414141,#000);
+  padding: 0.6rem;
+  border-radius: 100px;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+.resume:hover{
+    scale: 1.05;
 }
 
 .nav {
@@ -429,7 +463,7 @@ section .subtitle {
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(30,30,30);
   border-radius: 4px;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
   margin-right: 1rem;
   margin-bottom: 1rem;
   display: flex;
@@ -617,7 +651,7 @@ section .subtitle {
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(30,30,30);
   border-radius: 4px;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
   margin-right: 1rem;
   margin-bottom: 1rem;
   display: flex;
@@ -904,7 +938,7 @@ li {
   justify-content: space-between;
   flex-direction: column-reverse;
   padding: 30px 0;
-  border-top: 1px solid #2d2d2d;
+  border-top: solid 1px rgba(108, 108, 108, 0.5);
   margin-top: 30px;
 }
 
