@@ -1,0 +1,221 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Ashrit Ram Anala} \\ \vspace{1pt}
+    \small 978-387-5028 $|$ \href{mailto:ashritramanala@yahoo.com}{\underline{Contact}} $|$ 
+    \href{https://linkedin.com/in/...}{\underline{Linkedin}} $|$
+    \href{https://github.com/...}{\underline{Github}} $|$
+    \href{https://ashrit-ram-anala.github.io/Portfolio-Website}{\underline{Portfolio Website}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Vanderbilt University}{Nashville, TN}
+      {Bachelor of Science in Computer Science, Minor in Business}{August 2024 -- June 2028}
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{ProdML} $|$ \emph{Python, React, Node, PostgreSQL, Firebase, Tensorflow }}{June 2024 -- March 2025}
+          \resumeItemListStart
+        
+            \resumeItem{Developed a full-stack web application using Node and Firebase backend \newline and React frontend \newline}
+            
+            \resumeItem{Visualizes productivity using machine learning algorithm to detect whether or not \newline you are focused \newline}
+            \resumeItem{Implemented authentication for user accounts \newline}
+            \resumeItem{Displays and tracks statistics long term with year end report }
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{SpotiStats} $|$ \emph{Spotify API, React, Node}}{April 2025 - Present}
+          \resumeItemListStart
+            \resumeItem{Developed a Spotify statistics tracker }
+
+          \resumeItemListEnd
+                \resumeProjectHeading
+          {\textbf{Netflix Clone} $|$ \emph{React, Node, MongoDB, REST API}}{April 2024 - May 2025}
+          \resumeItemListStart
+            \resumeItem{Developed a Netflix Clone with user authentication \newline}
+
+          \resumeItemListEnd
+             \resumeProjectHeading
+         {\textbf{YTSave} $|$ \emph{Javascript}}{August 2023 - October 2023}
+          \resumeItemListStart
+            \resumeItem{Developed a Chrome extension that saves YouTube video timestamps to \newline come back to \newline}
+            \resumeItem{Has 110+ users in 22+  countries internationally}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+          \resumeSubheading
+      {CTO @ Silverline Educational Advisory Services}{April 2023 -- Present}
+      {Silverline Educational Advisory Services | React, Python, OpenAI API, Git, Docker, Render}{}
+      \resumeItemListStart
+        \resumeItem{Assembled and led a team of 10+ developers}
+        \resumeItem{Converted Silverline website from Vanilla JS to a React.JS based web app}
+        \resumeItem{Wrote the code for the Silverline AI, a chatbot powered by ChatGPT specifically tailored to aid current students access information easily}
+          \resumeItem{Collected fine tuning data and trained the model on the fine tuned data to ensure the accuracy and precision of information (ChatGPT 3.5 model Turbo was last updated in 2021 by OpenAI}
+      \resumeItemListEnd
+      
+    \resumeSubheading
+      {Research Assistant}{July 2022 -- February 2023}
+      {University of Massachusetts Lowell | C++, Python, Solidworks, CAD, Git, JSON}{Lowell, MA}
+      \resumeItemListStart
+        \resumeItem{Researched and documented effects of silicones and rigid 3D printed plastics on functionality of exoskeletons}
+        \resumeItem{Programmed robotic exoskeleton gripper in C++ to identify objects and respond to interface inputs to grab an item}
+        \resumeItem{Contributed to the following research paper: "Fabric-Embedded Dynamic Sensing for Adaptive Exoskeleton Assistance"  with NSF award number 1955979 which earned a 680,000 Dollar NSF Grant Award}
+      \resumeItemListEnd
+
+
+      
+% -----------Multiple Positions Heading-----------
+%    \resumeSubSubheading
+%     {Software Engineer I}{Oct 2014 - Sep 2016}
+%     \resumeItemListStart
+%        \resumeItem{Apache Beam}
+%          {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
+%     \resumeItemListEnd
+%    \resumeSubHeadingListEnd
+%-------------------------------------------
+
+
+
+  \resumeSubHeadingListEnd
+
+
+
+
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Java, Python, C++, Postgres SQL, JavaScript, HTML/CSS, R} \\
+     \textbf{Frameworks}{: React.js, Next.js, Node.js, Flask, Spring, FastAPI} \\
+     \textbf{Developer Tools}{: Git, Docker, VS Code, Anaconda, Jupyter Notebook, Eclipse} \\
+     \textbf{Libraries}{: pandas, NumPy, Matplotlib}
+    }}
+ \end{itemize}
+
+
+%-------------------------------------------
+\end{document}
