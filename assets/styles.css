@@ -20,7 +20,7 @@ Start of site CSS
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
 /* Fonts Imports End */
 
 /* General Page CSS Starts */
@@ -377,9 +377,9 @@ header .blob {
   fill: var(--blue);
 }
 
-.resume{
-  width:30px;
-  height:30px;
+.resume {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   color: #303030;
   font-weight: 700;
@@ -390,11 +390,11 @@ header .blob {
   transition: 0.5s ease;
 }
 
-.resume:hover{
+.resume:hover {
   background: var(--blue);
 }
 
-.social-header li a{
+.social-header li a {
   text-decoration: none;
 }
 
@@ -782,20 +782,19 @@ section .subtitle {
   background: rgba(8, 203, 80, 0.05);
 }
 
-.honors li .award-type{
+.honors li .award-type {
   margin-left: 0.5rem;
   border: 1px solid var(--blue);
   border-radius: 2px;
   transition: 0.5s ease;
 }
 
-.honors li .award-type-main{
+.honors li .award-type-main {
   margin-left: 0.5rem;
   border: 1px solid var(--green);
   border-radius: 2px;
   transition: 0.5s ease;
 }
-
 
 .honors li .award-type:hover {
   box-shadow: 1px 1px 5px var(--blue);
