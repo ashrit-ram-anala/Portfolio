@@ -20,7 +20,7 @@ Start of site CSS
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap');
 /* Fonts Imports End */
 
 /* General Page CSS Starts */
@@ -31,9 +31,7 @@ Start of site CSS
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  font-family: __inter_Fallback_20b187, ui-sans-serif, system-ui, -apple-system,
-    "system-ui", Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  font-family: "Noto Sans";
 }
 
 :root {
@@ -775,15 +773,34 @@ section .subtitle {
   background: rgba(10, 161, 255, 0.05);
 }
 
-.honors li {
+.award-type-main {
+  padding: 0rem 0.5rem 0rem 0.5rem;
+  color: var(--green);
+  font-size: 0.8rem;
+  background: rgba(8, 203, 80, 0.05);
+}
+
+.honors li .award-type{
   margin-left: 0.5rem;
   border: 1px solid var(--blue);
-  border-radius: 5px;
+  border-radius: 2px;
   transition: 0.5s ease;
 }
 
-.honors li:hover {
+.honors li .award-type-main{
+  margin-left: 0.5rem;
+  border: 1px solid var(--green);
+  border-radius: 2px;
+  transition: 0.5s ease;
+}
+
+
+.honors li .award-type:hover {
   box-shadow: 1px 1px 5px var(--blue);
+}
+
+.honors li .award-type-main:hover {
+  box-shadow: 1px 1px 5px var(--green);
 }
 
 .award-container {
