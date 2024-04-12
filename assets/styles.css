@@ -452,6 +452,11 @@ header .blob {
   padding: 18px 30px;
   margin: 0.1rem;
   font-weight: 300;
+  transition: 0.5s ease;
+}
+
+.nav-item:hover{
+  filter:drop-shadow(1px 1px 3px #fff);
 }
 
 /* Header Ends */
@@ -461,7 +466,7 @@ header .blob {
 .about-grid {
   display: flex;
   column-gap: 5rem;
-  padding-right: 10rem;
+  padding-right: 5rem;
   padding-left: 10rem;
 }
 
@@ -801,7 +806,7 @@ section .subtitle {
 }
 
 .honors li .award-type-main:hover {
-  box-shadow: 1px 1px 5px var(--green);
+  box-shadow: 1px 1px 5px var(--hover-green);
 }
 
 .award-container {
