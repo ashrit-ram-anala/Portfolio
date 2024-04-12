@@ -16,12 +16,10 @@ I also used other technologies like:
 
 Typed.js, AOS, and SVG
 
-
-
 ## Preview 
 <br>
-<img width="1439" alt="Screenshot 2024-04-11 at 2 44 27 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/20492b82-341a-4b48-a9b6-183f8f8a5acd">
-<img width="1440" alt="Screenshot 2024-04-11 at 2 41 01 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/391b01c2-90a7-4385-b208-e388d6e87588">
+<img width="1440" alt="Screenshot 2024-04-12 at 11 33 02 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/e3869f3d-06f8-4fb6-b645-9dd5744aa998">
+<img width="1440" alt="Screenshot 2024-04-12 at 11 37 37 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/0be20a0b-ad5c-4faa-8ae5-27ae2cd7dd62">
 <img width="1440" alt="Screenshot 2024-04-11 at 2 41 10 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/fc79dcec-8aa5-4787-96de-bd37afc1c9bc">
 <img width="1440" alt="Screenshot 2024-04-11 at 2 41 20 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/6df84b3e-ebdd-4c1b-ba50-032085798688">
 <img width="1440" alt="Screenshot 2024-04-11 at 2 41 29 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/8bad8c0b-db02-48c0-a38c-288de17903cf">
