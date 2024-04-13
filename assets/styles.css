@@ -76,8 +76,7 @@ section {
   background: var(--background);
   color: #a5a5a5;
   letter-spacing: 0.07rem;
-
-  line-height: 1.4rem;
+  line-height: 1.6rem;
 }
 
 section .title {
@@ -449,7 +448,7 @@ header .blob {
   transition: all 0.2s ease;
   font-size: 17px;
   z-index: 2;
-  padding: 18px 30px;
+  padding: 18px 22px;
   margin: 0.1rem;
   font-weight: 300;
   transition: 0.5s ease;
@@ -466,8 +465,6 @@ header .blob {
 .about-grid {
   display: flex;
   column-gap: 5rem;
-  padding-right: 5rem;
-  padding-left: 10rem;
 }
 
 .about-me-me {
@@ -484,7 +481,6 @@ header .blob {
 
 .about-text-container {
   margin-top: 1.5rem;
-  text-align: center;
 }
 
 .bolded {
@@ -493,6 +489,38 @@ header .blob {
 }
 
 /* About Ends */
+
+/* Education Starts */
+
+.gap{
+  margin-bottom: 0.5rem;
+}
+
+.gap1{
+  margin-bottom: 2rem;
+}
+
+.college{
+  font-size: 1.17rem;
+  color: var(--blue);
+  margin-top: 1rem;
+}
+
+.education-subtitle{
+  color: white;
+}
+
+.education{
+  border-top: 1px solid #303030;
+}
+
+.ed1{
+  border-bottom: 1px solid #303030;
+}
+
+
+
+/* Education Ends */
 
 /* Skills Starts */
 
