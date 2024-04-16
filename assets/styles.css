@@ -1170,7 +1170,7 @@ li {
   text-decoration: none;
 }
 
-.footer-social * {
+.footer-social{
   transition: all 0.1s ease;
 }
 
@@ -1198,6 +1198,11 @@ li {
 
 .footer-social .top {
   font-size: 0.7rem;
+  transition: 0.1s ease;
+}
+
+.footer-social .top:hover{
+  color: var(--hover-green);
 }
 
 /* Footer Ends */
