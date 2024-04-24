@@ -618,7 +618,7 @@ section .subtitle {
 }
 
 .op-card {
-  width: 20rem;
+  width: 25rem;
   height: 20rem;
   border-radius: 20px;
   background: rgb(30,30,30);
