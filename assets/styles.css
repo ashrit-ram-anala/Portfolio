@@ -91,7 +91,6 @@ section .title {
 /* General Page CSS Ends */
 
 /* Header Starts */
-/**/
 
 .bg-animation {
   position: fixed;
@@ -327,15 +326,7 @@ header .blob {
   justify-content: center;
   padding-top: 13rem;
 }
-/*
-.heading-subtitle{
-  display: flex;
-  color: white;
-  font-weight: 200;
-  justify-content: center;
-  padding-bottom: 0.5rem;
-}
-*/
+
 .heading-type {
   display: flex;
   justify-content: center;
@@ -355,6 +346,7 @@ header .blob {
 
 .github-header {
   transition: 0.5s ease;
+  position: relative;
 }
 
 .github-header:hover {
@@ -363,6 +355,7 @@ header .blob {
 
 .linkedin-header {
   transition: 0.5s ease;
+  position: relative;
 }
 
 .linkedin-header:hover {
@@ -371,6 +364,7 @@ header .blob {
 
 .contact-header {
   transition: 0.5s ease;
+  position: relative;
 }
 
 .contact-header:hover {
@@ -388,6 +382,7 @@ header .blob {
   justify-content: center;
   align-items: center;
   transition: 0.5s ease;
+  position: relative;
 }
 
 .resume:hover {
@@ -400,6 +395,7 @@ header .blob {
 
 .phone {
   transition: 0.5s ease;
+  position: relative;
 }
 
 .phone:hover {
@@ -537,6 +533,7 @@ header .blob {
   border: 1px solid #333333;
   background-color: #232323;
   box-shadow: 0 2px 3px #0000003d;
+  position: relative;
 }
 
 .skills ul li:hover {
@@ -791,15 +788,6 @@ section .subtitle {
 
 /* Side Projects Starts */
 
-.row1 {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.row1 > div {
-  flex: 40%;
-}
-
 .card1 {
   width: 100%;
   height: 15rem;
@@ -826,39 +814,17 @@ section .subtitle {
   box-shadow: 0 0 7px rgba(93, 92, 92, 0.9);
 }
 
-.links1 {
-  position: absolute;
-  list-style-type: none;
-  display: flex;
-  top: 8%;
-  left: 70.5%;
-}
-
-.links1 li a {
-  margin-left: 1.5rem;
-}
-
-.tech-stack {
-  position: absolute;
-  top: 85%;
-}
-
-.tech-stack ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
-  list-style-type: none;
-  font-size: 0.8rem;
-  color: #a5a5a5;
-  transition: 0.5s ease;
-}
-
-.card1 .tech-stack ul:hover {
+.card1 .op-tech-stack ul:hover {
   color: #fff;
 }
 
-.tech-stack ul li a {
+.op-tech-stack ul li a {
   margin-left: 0.5rem;
+}
+
+.card1:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
 }
 
 @keyframes tonext {
@@ -997,16 +963,17 @@ li {
 .carousel__navigation {
   position: absolute;
   right: 0;
-  bottom: 22px;
+  bottom: 5px;
   left: 0;
   text-align: center;
+  z-index: 0;
 }
 
 .text {
   position: absolute;
   right: 36%;
   transition: 0.5s ease;
-  bottom: 28px;
+  bottom: 12px;
 }
 
 .text:hover {
@@ -1025,7 +992,7 @@ li {
   position: absolute;
   left: 36%;
   transition: 0.5s ease;
-  bottom: 28px;
+  bottom: 12px;
 }
 
 .text1:hover {
@@ -1162,5 +1129,5 @@ End of the site CSS
  ╬═╬ ☻/
  ╬═╬/▌
  ╬═╬/\
--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__
+-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎻⎺⎺⎻--⎽__⎽-⎻⎺⎺⎻
 */
