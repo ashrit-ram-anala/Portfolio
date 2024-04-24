@@ -613,13 +613,14 @@ section .subtitle {
 
 .op-grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   place-content: start space-evenly;
 }
 
 .op-card {
-  width: 25rem;
-  height: 20rem;
+
+  height: 15rem;
   border-radius: 20px;
   background: rgb(30,30,30);
   position: relative;
