@@ -31,7 +31,8 @@ Start of site CSS
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 :root {
@@ -438,7 +439,6 @@ header .blob {
   font-weight: 100;
 }
 
-
 .nav-item {
   cursor: pointer;
   transition: all 0.2s ease;
@@ -450,8 +450,8 @@ header .blob {
   transition: 0.5s ease;
 }
 
-.nav-item:hover{
-  filter:drop-shadow(1px 1px 3px #fff);
+.nav-item:hover {
+  filter: drop-shadow(1px 1px 3px #fff);
 }
 
 /* Header Ends */
@@ -488,29 +488,29 @@ header .blob {
 
 /* Education Starts */
 
-.gap{
+.gap {
   margin-bottom: 0.5rem;
 }
 
-.gap1{
+.gap1 {
   margin-bottom: 2rem;
 }
 
-.college{
+.college {
   font-size: 1.17rem;
   color: var(--blue);
   margin-top: 1rem;
 }
 
-.education-subtitle{
+.education-subtitle {
   color: white;
 }
 
-.education{
+.education {
   border-top: 1px solid #303030;
 }
 
-.ed1{
+.ed1 {
   border-bottom: 1px solid #303030;
 }
 
@@ -611,35 +611,33 @@ section .subtitle {
 
 /* Open Source Projects Starts */
 
-.op-grid{
+.projects-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  place-content: start space-evenly;
 }
 
 .op-card {
-
   height: 15rem;
   border-radius: 20px;
-  background: rgb(30,30,30);
+  background: rgb(30, 30, 30);
   position: relative;
   padding: 1.8rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   transition: 0.3s ease;
   overflow: visible;
- }
- 
- .card-details {
+}
+
+.card-details {
   color: #fff;
   height: 100%;
-  gap: .5em;
+  gap: 0.5em;
   display: grid;
-  place-content: start;
- }
- 
- .card-button {
+  place-content: center;
+}
+
+.card-button {
   transform: translate(-50%, 125%);
   width: 60%;
   border-radius: 1rem;
@@ -647,74 +645,54 @@ section .subtitle {
   background: #dcdcdc;
   color: #000;
   font-size: 1rem;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   position: absolute;
   left: 50%;
   bottom: 0;
   opacity: 0;
   transition: 0.3s ease-out;
- }
- 
- .text-body {
-  color: rgb(134, 134, 134);
+}
+
+.text-body {
+  color: #a5a5a5;
   text-align: center;
- }
- 
- .text-title {
+  font-size: 0.8rem;
+}
+
+.text-title {
   font-size: 1.5em;
-  
- }
- 
- .op-card:hover {
+}
+
+.op-card:hover {
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 7px rgba(163, 163, 163, 0.9);
- }
- 
- .op-card:hover .card-button {
+}
+
+.op-card:hover .card-button {
   transform: translate(-50%, 50%);
   opacity: 1;
- }
+}
+
+.op-tech-stack {
+  font-size: 0.8rem;
+  color: #a5a5a5;
+  transition: 0.3s ease;
+}
+
+.op-tech-stack:hover {
+  color: #fff;
+}
 
 /* Open Source Projects Ends */
 
 /* Personal Projects Starts */
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.row > div {
-  flex: 40%;
-}
-
 .card {
-  width: 50%;
   height: 15rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(30, 30, 30);
   border-radius: 4px;
   transition: 0.3s ease;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  position: relative;
-  color: white;
-}
-
-.card2 {
-  width: 50%;
-  height: 15rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(30, 30, 30);
-  border-radius: 4px;
-  transition: 0.3s ease;
-
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -847,12 +825,8 @@ section .subtitle {
 .card:hover .card-button {
   transform: translate(-50%, 50%);
   opacity: 1;
- }
+}
 
- .card2:hover .card-button {
-  transform: translate(-50%, 50%);
-  opacity: 1;
- }
 /* Projects Ends */
 
 /* Honors Starts */
@@ -1247,7 +1221,7 @@ li {
   text-decoration: none;
 }
 
-.footer-social{
+.footer-social {
   transition: all 0.1s ease;
 }
 
@@ -1278,7 +1252,7 @@ li {
   transition: 0.1s ease;
 }
 
-.footer-social .top:hover{
+.footer-social .top:hover {
   color: var(--hover-green);
 }
 
