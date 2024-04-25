@@ -21,6 +21,7 @@ Start of site CSS
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share+Tech+Mono&display=swap");
+
 /* Fonts Imports End */
 
 /* General Page CSS Starts */
@@ -638,16 +639,21 @@ section .subtitle {
   transform: translate(-50%, 125%);
   width: 60%;
   border-radius: 1rem;
-  border: none;
-  background: #dcdcdc;
-  color: #000;
+  background: rgb(30, 30, 30);
+  border: 0.5px solid #fff;
+  color: #fff;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   position: absolute;
   left: 50%;
   bottom: 0;
   opacity: 0;
-  transition: 0.3s ease-out;
+  transition: 0.3s ease;
+}
+
+.card-button:hover {
+  background: #fff;
+  color: rgb(30, 30, 30);
 }
 
 .text-body {
@@ -1115,6 +1121,19 @@ li {
 
 .footer-social .top:hover {
   color: var(--hover-green);
+}
+
+.footer-social .github,
+.linkedin {
+  transition: 0.2s ease;
+}
+
+.footer-social .github:hover {
+  stroke: var(--hover-green);
+}
+
+.footer-social .linkedin:hover {
+  fill: var(--hover-green);
 }
 
 /* Footer Ends */
