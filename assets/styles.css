@@ -15,6 +15,7 @@ Start of site CSS
  ╬═╬
  ╬═╬
 */
+/* Add media queries, 950px */
 
 /* Font Imports Start */
 
@@ -451,6 +452,14 @@ header .blob {
   filter: drop-shadow(1px 1px 3px #fff);
 }
 
+@media screen and (max-width: 850px) {
+  .nav-item {
+    font-size: 13px;
+    padding: 14px 18px;
+    margin: 0rem;
+  }
+}
+
 /* Header Ends */
 
 /* About Starts */
@@ -479,6 +488,33 @@ header .blob {
 .bolded {
   color: var(--blue);
   font-weight: 600;
+}
+
+@media screen and (max-width: 1100px) {
+  .about-grid {
+    display: grid;
+  }
+
+  .about-me-me {
+    width: 13rem;
+    height: auto;
+    border-radius: 15px;
+    filter: grayscale(1);
+    transition: all 0.5s ease;
+  }
+
+  .about-me-me:hover {
+    filter: grayscale(0);
+  }
+
+  .about-text-container {
+    margin-top: 1.5rem;
+  }
+
+  .bolded {
+    color: var(--blue);
+    font-weight: 600;
+  }
 }
 
 /* About Ends */
@@ -690,24 +726,11 @@ section .subtitle {
 
 /* Personal Projects Starts */
 
-.card {
-  height: 15rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(30, 30, 30);
-  border-radius: 4px;
-  transition: 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  position: relative;
-  color: white;
-}
-
-.card:hover {
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 7px rgba(163, 163, 163, 0.9);
+.projects-grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .project-description {
@@ -719,12 +742,79 @@ section .subtitle {
   font-weight: 300;
 }
 
-.card:hover .card-button {
-  transform: translate(-50%, 50%);
-  opacity: 1;
+/* Projects Ends */
+
+/* Popup Begins */
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: rgb(30, 30, 30);
+  height: 35rem;
+  width: 35rem;
+  border-radius: 20px;
+  background: rgb(30, 30, 30);
+  padding: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
 }
 
-/* Projects Ends */
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #303030;
+  color: white;
+}
+
+.modal-header .title {
+  font-size: 1.25rem;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  color: white;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.21);
+  pointer-events: none;
+  backdrop-filter: blur(1px);
+  z-index: 2;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+/* Popup Ends */
 
 /* Honors Starts */
 

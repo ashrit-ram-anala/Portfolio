@@ -287,14 +287,13 @@
         <div class="projects-grid">
         <div class="op-card">
             <div class="card-details">
-                <nav></nav>
             <p class="text-title">EX 1</p>
               <p class="text-body">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit odit atque et exercitationem ipsam dolores soluta. Nam officiis providic vue similique.</p>
               <div class="op-tech-stack">
                 JAVASCRIPT GIT
             </div>
             </div>
-            <button class="card-button">Click For More</button>
+            <button data-modal-target="#modal" class="card-button">Click For More</button>
           </div>
 
           <div class="op-card">
@@ -305,80 +304,68 @@
                 JAVASCRIPT GIT
             </div>
             </div>
-            
-            <button class="card-button">Click For More</button>
+            <button data-modal-target="#modal" class="card-button">Click For More</button>
           </div>
         </div>
     </section>
-
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Example Modal</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quod alias ut illo doloremque eum ipsum obcaecati distinctio debitis reiciendis quae quia soluta totam doloribus quos nesciunt necessitatibus, consectetur quisquam accusamus ex, dolorum, dicta vel? Nostrum voluptatem totam, molestiae rem at ad autem dolor ex aperiam. Amet assumenda eos architecto, dolor placeat deserunt voluptatibus tenetur sint officiis perferendis atque! Voluptatem maxime eius eum dolorem dolor exercitationem quis iusto totam! Repudiandae nobis nesciunt sequi iure! Eligendi, eius libero. Ex, repellat sapiente!
+      </div>
+    </div>
+    <div id="overlay"></div>
     <section>
         <p class="title"  id="projects">Personal Projects</p>
-        <div class="projects">
-            <div class="projects-grid">
-                <div class="card">
+
+        <div class="projects-grid1">
+            <div class="op-card">
+                <div class="card-details">
+                <p class="text-title">LOAN DEFAULT PREDICTOR</p>
+                <div class="text-body">Machine Learning program written in R trained on bank user data with a logistic regression algorithm to predict whether or not a new user will default on a loan</div>
+                  <div class="op-tech-stack">
+                    JAVASCRIPT GIT
+                </div>
+                </div>
+                <button data-modal-target="#modal" class="card-button">Click For More</button>
+              </div>
+    
+              <div class="op-card">
+                <div class="card-details">
+                    <p class="text-title">ML PRODUCTIVITY TRACKER</p>
+        <div class="text-body">Makes use of your camera to track the amount of time you are focused through a Tensorflow.js algorithm with results shown in a UI with authentication</div>
+                  <div class="op-tech-stack">
+                    JAVASCRIPT GIT
+                </div>
+                </div>
+                <button data-modal-target="#modal" class="card-button">Click For More</button>
+              </div>
+            </div>  <div class="projects-grid">
+                <div class="op-card">
                     <div class="card-details">
-                    <p style="margin-bottom: 0.5rem; color: #e9e9e9">LOAN DEFAULT PREDICTOR</p> 
-                    <div class="project-description">Machine Learning program written in R trained on bank user data with a logistic regression algorithm to predict whether or not a new user will default on a loan</div>
-  
-                    <div class="op-tech-stack">
-                        R LaTeX
+                        <p class="text-title">TECH BLOG</p>
+                        <div class="text-body">A blog discussing everything new in the rapidly changing tech landscape. Has a built in summary extension for quick reading and a weekly newsletter</div>
+                      <div class="op-tech-stack">
+                        JAVASCRIPT GIT
                     </div>
-                </div>
-                    <button class="card-button">Click For More</button>
-                </div>
-                <div class="card">
-                    <div class="card-details">
-                    <p style="margin-bottom: 0.5rem; color: #e9e9e9">ML PRODUCTIVITY TRACKER</p>
-                    <div class="project-description">Makes use of your camera to track the amount of time you are focused through a Tensorflow.js algorithm with results shown in a UI with authentication</div>
-                   
-                    
-                    <div class="op-tech-stack">
-                      
-                            FIREBASE
-                            TAILWIND
-                            REACT.JS
-                            MONGODB
-                        
                     </div>
-                </div>
-                    <button class="card-button">Click For More</button>
-                </div>
-                <div class="card">
+                    <button data-modal-target="#modal" class="card-button">Click For More</button>
+                  </div>
+        
+                  <div class="op-card">
                     <div class="card-details">
-                    <p style="margin-bottom: 0.5rem; color: #e9e9e9">TECH BLOG</p>
-                    <div class="project-description">A blog discussing everything new in the rapidly changing tech landscape. Has a built in summary extension for quick reading and a weekly newsletter</div>
-                   
-                    <div class="op-tech-stack">
-                      
-                        FIREBASE
-                        TAILWIND
-                        REACT.JS
-                        MONGODB
-                    
+                        <p class="text-title">KHAN ACADEMY EXTENSION</p>
+                        <div class="text-body">Google Classroom like platform for Khan Academy students going through the same course to connect with each other by registering their account</div>
+                      <div class="op-tech-stack">
+                        JAVASCRIPT GIT
+                    </div>
+                    </div>
+                    <button data-modal-target="#modal" class="card-button">Click For More</button>
+                  </div>
                 </div>
-            </div>
-                    <button class="card-button">Click For More</button>
-                </div>
-                <div class="card">
-                    <div class="card-details">
-                    <p style="margin-bottom: 0.5rem; color: #e9e9e9">KHAN ACADEMY EXTENSION</p>
-                    <div class="project-description">Google Classroom like platform for Khan Academy students going through the same course to connect with each other by registering their account</div>
-                   
-                    <div class="op-tech-stack">
-                      
-                        FIREBASE
-                        TAILWIND
-                        REACT.JS
-                        MONGODB
-                    
-                </div>
-            </div>
-                    <button class="card-button">Click For More</button>
-                </div>
-            </div>
-            </div>
-              
-        </div>
     </section>
 
     <section id="honors">
@@ -404,7 +391,6 @@
                 <li><a><div class="award-type">E-Book</div></a></li>
                 <li><a><div class="award-type">Amazon Self-Publishing</div></a></li>
                 </div>
-         
                 <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, officiis dolorem necessitatibus, aliquid labore vitae, facilis molestias voluptas libero voluptatum reprehenderit repellendus dolores quis eos modi. Ea quis est aperiam.</div>
                 <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, officiis dolorem necessitatibus, aliquid labore vitae, facilis molestias voluptas libero voluptatum reprehenderit repellendus dolores quis eos modi. Ea quis est aperiam.</div>
                 <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, officiis dolorem necessitatibus, aliquid labore vitae, facilis molestias voluptas libero voluptatum reprehenderit repellendus dolores quis eos modi. Ea quis est aperiam.</div>
@@ -542,4 +528,4 @@
   AOS.init();
 </script>
 </body>
-</html>
+</html>          
