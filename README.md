@@ -18,12 +18,14 @@ Typed.js, AOS, and SVG
 
 ## Preview 
 <br>
-<img width="1440" alt="Screenshot 2024-04-12 at 11 33 02 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/e3869f3d-06f8-4fb6-b645-9dd5744aa998">
-<img width="1440" alt="Screenshot 2024-04-12 at 11 37 37 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/0be20a0b-ad5c-4faa-8ae5-27ae2cd7dd62">
-<img width="1440" alt="Screenshot 2024-04-11 at 2 41 10 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/fc79dcec-8aa5-4787-96de-bd37afc1c9bc">
-<img width="1440" alt="Screenshot 2024-04-11 at 2 41 20 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/6df84b3e-ebdd-4c1b-ba50-032085798688">
-<img width="1440" alt="Screenshot 2024-04-11 at 2 41 29 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/8bad8c0b-db02-48c0-a38c-288de17903cf">
-<img width="1440" alt="Screenshot 2024-04-11 at 2 38 20 PM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/00ddc650-119d-4622-bace-f010fe39adab">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 32 27 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/50da16f4-710c-4102-a621-21eb43a9bcb2">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 32 50 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/f4f6808e-52da-4c96-bb51-5624999cf416">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 33 01 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/21bd91fc-6602-4d0c-9434-6ad5ec242850">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 33 12 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/f3910231-ff75-40d2-ac2c-243e54c1e0ef">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 33 44 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/ff5d57f8-9e22-41cb-ab43-824d54935dd8">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 33 52 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/f289dfea-847f-40d9-8a59-4be65f3b0fd1">
+<img width="1440" alt="Screenshot 2024-05-04 at 12 34 01 AM" src="https://github.com/ashrit-ram-anala/Portfolio/assets/160569979/b021b7c7-9de9-4087-a94a-709f72419376">
+
 
 
 
