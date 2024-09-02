@@ -1,8 +1,6 @@
 
 This is my Portfolio Website showcasing my projects, skills, and information about me. Welcome!
 
-<a href="https://ashrit-ram-anala.github.io/Portfolio-Website/" target="_blank">**Click Here To Visit**</a>
-
 
 ## 💻 Tech Stack
 ![HTML](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white)
@@ -14,7 +12,7 @@ This is my Portfolio Website showcasing my projects, skills, and information abo
 ## Other
 I also used other technologies like:
 
-Typed.js, AOS, and SVG
+Typed.js, AOS
 
 ## Preview 
 <br>
