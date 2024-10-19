@@ -74,14 +74,20 @@ p {
 }
 
 section {
-  padding-left: 6rem;
-  padding-right: 6rem;
   background: var(--background);
   color: #a5a5a5;
   letter-spacing: 0.07rem;
   line-height: 1.6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
+@media (min-width: 768px) {
+  section {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
 section .title {
   color: #fff;
   font-weight: 500;
@@ -459,6 +465,20 @@ header .blob {
     font-size: 13px;
     padding: 14px 18px;
     margin: 0rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-item {
+    font-size: 11px;
+    padding: 8px 8px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav-item {
+    font-size: 11px;
+    padding: 6px 6px;
   }
 }
 
