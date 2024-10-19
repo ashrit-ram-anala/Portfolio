@@ -608,7 +608,7 @@ function App() {
       <a href="https://github.com/ashrit-ram-anala/GeoBet-WebApp" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
-          <p className="text-title">GEO-BET</p>
+          <p className="text-title" style={{textAlign:"center"}}>GEO-BET</p>
           <div className="text-body">
            Geo-Bet is a Full Stack web application that allows uers to answer Geography Trivia with a Casino-esque twist. The WebApp currently has 200+ organic users with the top 25 displayed on the in game leaderboard. The frontend is programmed in React + Vite with Firebase login and Authentication and the backend is programmed in Node and Express with a MongoDB database for the leaderboard of best trivia rounds.
           </div>
@@ -622,7 +622,7 @@ function App() {
       <a href="https://github.com/ashrit-ram-anala/VandyHacks-XI-Project" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
-          <p className="text-title">SMART STOCK</p>
+          <p className="text-title" style={{textAlign:"center"}}>SMART STOCK</p>
           <div className="text-body">
           Smart-Stock is a web application made for VandyHacks XI that allows users to enter specific stock tickers (AAPL, AMZN, etc.) and see the public sentiment for those stocks at that very moment as well as historical sentiment from over 20K+ posts. Smart-Stock utilizes the Reddit API and performs sentiment analysis with the Perplexity LLM and Python TextBlob. The sentiments are displayed and graphed with Chart.JS.
           </div>
@@ -637,7 +637,7 @@ function App() {
       <a href="https://github.com/ashrit-ram-anala/ML-Projects" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
-          <p className="text-title">LOAN DEFAULT PREDICTOR</p>
+          <p className="text-title" style={{textAlign:"center"}}>LOAN DEFAULT PREDICTOR</p>
           <div className="text-body">
           I Developed a Machine Learning Logistic Regression model to allow banks to determine if a user will default on a loan based on 20+ attributes. Programmed in R and has final C-Statistic &gt; 0.8, indicating a strong model, with potential savings of $1,000,000+ for the dataset company when implemented.
           </div>
@@ -649,7 +649,7 @@ function App() {
       <a style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
-          <p className="text-title">VANDERBILT SCHEDULER</p>
+          <p className="text-title" style={{textAlign:"center"}}>VANDERBILT SCHEDULER</p>
           <div className="text-body">
             This is a current work in progress application that utilizes a web scraper to scrape the Vanderbilt University finals schedule PDF and generate a table in PostgreSQL. The WebApp allows students to search a course and see the time of their final and add it to their calender without having to manually and tediously search through the given PDF.
           </div>
