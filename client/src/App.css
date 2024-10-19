@@ -344,6 +344,22 @@ header .blob {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 768px) {
+  .heading-name {
+    font-size: 2.8rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 19rem;
+  }
+  .heading-type {
+    display: flex;
+    justify-content: center;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+}
+
 .social-header ul {
   display: flex;
   justify-content: center;
