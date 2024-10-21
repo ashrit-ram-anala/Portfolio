@@ -325,7 +325,7 @@ header .blob {
   left: 50%; 
   transform: translate(-50%, -50%); 
   filter: opacity(20%) drop-shadow(10px 3px 25px #858585);
-  width: 22rem;
+  width: 26rem;
   z-index: -1;
   max-width: 600px; 
 
@@ -365,7 +365,7 @@ header .blob {
     left: 50%; 
     transform: translate(-50%, -50%); 
     filter: opacity(20%) drop-shadow(10px 3px 25px #858585);
-    width: 26rem;
+    width: 22rem;
     z-index: -1;
     max-width: 600px; 
   
