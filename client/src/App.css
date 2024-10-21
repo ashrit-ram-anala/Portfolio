@@ -349,8 +349,7 @@ header .blob {
     font-size: 2.8rem;
     display: flex;
     justify-content: center;
-    padding-top: 14
-     rem;
+    padding-top: 14rem;
   }
   .heading-type {
     display: flex;
@@ -359,13 +358,13 @@ header .blob {
     margin-bottom: 1rem;
   }
 
-   header .blob {
+  header .blob {
     position: absolute;
     top: 50%;  
     left: 50%; 
     transform: translate(-50%, -50%); 
     filter: opacity(20%) drop-shadow(10px 3px 25px #858585);
-    width: 26rem;
+    width: 22rem;
     z-index: -1;
     max-width: 600px; 
   
@@ -730,6 +729,21 @@ header .blob {
 
 .skills ul li a {
   font-size: 0.8rem;
+}
+
+.specifics {
+  font-size: 1.17rem;
+  color: var(--blue);
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.7rem;
+}
+.specifics1 {
+  font-size: 1.17rem;
+  color: var(--blue);
+  font-weight: 500;
+  margin-top: 0.3rem;
+  margin-bottom: 0.8rem;
 }
 
 /* Medium screens (tablets, small desktops) */
