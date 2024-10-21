@@ -321,7 +321,7 @@ header {
 
 header .blob {
   position: absolute;
-  top: 54%;  
+  top: 58%;  
   left: 50%; 
   transform: translate(-50%, -50%); 
   filter: opacity(20%) drop-shadow(10px 3px 25px #858585);
