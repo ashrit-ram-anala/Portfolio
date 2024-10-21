@@ -15,7 +15,6 @@ function App() {
     });
 
     return () => {
-      // Destroy Typed instance during cleanup to stop animation
       typed.destroy();
     };
   }, []);
@@ -175,13 +174,6 @@ function App() {
           <li>
             <a href="#work">
             <svg fill="#00000" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-76.81 -76.81 665.66 665.66" xml:space="preserve" stroke="#000000" stroke-width="0.0051204"><g  id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"><rect className="phone" x="-76.81" y="-76.81" width="665.66" height="665.66" rx="332.83" fill="#a5a5a5" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="2.04816"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M508.933,146.807l-42.347-42.347c-4.267-4.053-10.88-4.053-15.147,0L256.027,300.193L60.507,104.46 c-4.267-4.053-10.88-4.053-15.147,0L3.12,146.807c-4.16,4.16-4.16,10.88,0,15.04L248.453,407.5c4.16,4.16,10.88,4.16,15.04,0 l245.333-245.653C513.093,157.687,513.093,150.967,508.933,146.807z M256.027,384.887L25.733,154.38l27.2-27.307l195.52,195.733 c4.267,4.053,10.88,4.053,15.147,0l195.52-195.733l27.2,27.307L256.027,384.887z"></path> </g> </g> </g></svg>
-
-         
-
-
-
-
-
             </a>
           </li>
         </ul>
@@ -331,8 +323,10 @@ function App() {
   <section>
     <div className="skills">
       <p className="title">Skills &amp; Technologies</p>
+ 
+      <p className="specifics1">Languages & Frameworks</p>
       <ul>
-        <li>
+      <li>
           <a>Java</a>
         </li>
         <li>
@@ -342,10 +336,16 @@ function App() {
           <a>Typescript</a>
         </li>
         <li>
+          <a>Angular</a>
+        </li>
+        <li>
           <a>Javascript</a>
         </li>
         <li>
           <a>React.JS</a>
+        </li>
+        <li>
+          <a>Node.JS</a>
         </li>
         <li>
           <a>Express.JS</a>
@@ -360,7 +360,7 @@ function App() {
           <a>Python</a>
         </li>
         <li>
-          <a>Machine Learning</a>
+          <a>Flask</a>
         </li>
         <li>
           <a>C++</a>
@@ -378,6 +378,13 @@ function App() {
           <a>DaisyUI</a>
         </li>
         <li>
+          <a>R</a>
+        </li>
+      </ul>
+
+      <p className="specifics">Technologies</p>
+      <ul>
+        <li>
           <a>PostgreSQL</a>
         </li>
         <li>
@@ -387,19 +394,47 @@ function App() {
           <a>Firebase</a>
         </li>
         <li>
-          <a>R</a>
-        </li>
-        <li>
           <a>AWS</a>
         </li>
         <li>
-          <a>Git</a>
+          <a>Azure</a>
         </li>
         <li>
           <a>Docker</a>
         </li>
         <li>
+          <a>Kubernetes</a>
+        </li>
+        <li>
           <a>Vercel</a>
+        </li>
+        <li>
+          <a>Heroku</a>
+        </li>
+      </ul>
+
+      <p className="specifics">Skills</p>
+      <ul>
+        <li>
+          <a>Logistic Regression</a>
+        </li>
+        <li>
+          <a>NLP</a>
+        </li>
+        <li>
+          <a>Sentiment Analysis</a>
+        </li>
+        <li>
+          <a>RESTful APIs</a>
+        </li>
+        <li>
+          <a>Git</a>
+        </li>
+        <li>
+          <a>Agile Methodologies (Scrum)</a>
+        </li>
+        <li>
+          <a>Responsive Design</a>
         </li>
         <li>
           <a>Figma</a>
@@ -409,6 +444,12 @@ function App() {
         </li>
         <li>
           <a>Thunder Client</a>
+        </li>
+        <li>
+          <a>Public Speaking</a>
+        </li>
+        <li>
+          <a>Collaboration</a>
         </li>
       </ul>
     </div>
@@ -651,7 +692,7 @@ function App() {
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>VANDERBILT SCHEDULER</p>
           <div className="text-body">
-            This is a current work in progress application that utilizes a web scraper to scrape the Vanderbilt University finals schedule PDF and generate a table in PostgreSQL. The WebApp allows students to search a course and see the time of their final and add it to their calender without having to manually and tediously search through the given PDF.
+            This is a current work in progress application that utilizes a web scraper to scrape the Vanderbilt University finals schedule PDF and generate a table in PostgreSQL. The WebApp allows students to search a course and see the time of their final and add it to their calendar without having to manually and tediously search through the given PDF.
           </div>
           <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>JAVA SPRING ANGULAR TYPESCRIPT POSTGRESQL FIREBASE TAILWIND</div>
         </div>
@@ -905,6 +946,7 @@ function App() {
     <footer className="footer">
       <span>© 2024 Ashrit Ram Anala</span>
       <div className="footer-social">
+       
         <a href="https://github.com/ashrit-ram-anala" target="_blank">
           <svg
             className="github"
