@@ -411,6 +411,9 @@ function App() {
         <li>
           <a>Heroku</a>
         </li>
+        <li>
+          <a>Render</a>
+        </li>
       </ul>
 
       <p className="specifics">Skills</p>
@@ -558,16 +561,13 @@ function App() {
             <div className="tech">
               <ul>
                 <li>
-                  <a>HTML</a>
+                  <a>React.JS</a>
                 </li>
                 <li>
                   <a>CSS</a>
                 </li>
                 <li>
                   <a>Python</a>
-                </li>
-                <li>
-                  <a>Javascript</a>
                 </li>
                 <li>
                   <a>OpenAI API</a>
