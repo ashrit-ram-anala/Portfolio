@@ -363,6 +363,9 @@ function App() {
           <a>Flask</a>
         </li>
         <li>
+          <a>R</a>
+        </li>
+        <li>
           <a>C++</a>
         </li>
         <li>
@@ -376,9 +379,6 @@ function App() {
         </li>
         <li>
           <a>DaisyUI</a>
-        </li>
-        <li>
-          <a>R</a>
         </li>
       </ul>
 
