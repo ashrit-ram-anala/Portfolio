@@ -17,10 +17,12 @@ Typed.js, AOS
 ## Preview
 
 <img width="1440" alt="Screenshot 2024-10-21 at 2 37 15 AM" src="https://github.com/user-attachments/assets/b8d14229-92f6-4f16-96d0-7681b60592f4">
-<img width="1432" alt="Screenshot 2024-10-21 at 2 37 26 AM" src="https://github.com/user-attachments/assets/bca41c61-4f82-4ed9-8b79-25440dffbbbe">
+<img width="1440" alt="Screenshot 2024-10-21 at 5 38 08 PM" src="https://github.com/user-attachments/assets/5f02b968-27d2-49b0-a8b0-68b230de4be4">
+<img width="1440" alt="Screenshot 2024-10-21 at 5 38 16 PM" src="https://github.com/user-attachments/assets/b6f4dca9-74dc-4be2-b2d2-ed21f59c867c">
 <img width="1440" alt="Screenshot 2024-10-21 at 2 37 47 AM" src="https://github.com/user-attachments/assets/49871605-8be3-4b1e-9778-17cbde519932">
 <img width="1440" alt="Screenshot 2024-10-21 at 2 37 58 AM" src="https://github.com/user-attachments/assets/43345f3d-a765-402a-b885-3e8291e165af">
 <img width="1440" alt="Screenshot 2024-10-21 at 2 38 06 AM" src="https://github.com/user-attachments/assets/31ab87d8-8184-4b30-9bf9-47ba88d0e66f">
+
 
 
 
