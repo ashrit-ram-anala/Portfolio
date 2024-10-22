@@ -1085,6 +1085,8 @@ section .subtitle {
   margin-bottom: 1.5rem;
   border-radius: 30px;
   color: white;
+   display: flex;
+  justify-content: center;
   font-size: 0.8rem;
   background: rgb(30,30,30);
   border: 1px solid rgba(255, 255, 255, 0.3);
