@@ -1081,17 +1081,17 @@ section .subtitle {
 }
 
 .btn{
-  padding: 1rem 1rem;
+  padding: 0.8rem 0.8rem;
   margin-bottom: 1.5rem;
   border-radius: 30px;
-  color: white;
-   display: flex;
+  display: flex;
   justify-content: center;
- align-items: center;
+  align-items: center;
+  color: white;
   font-size: 0.8rem;
   background: rgb(30,30,30);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: 0.5s ease
+  transition: 0.3s ease
 }
 
 .btn:hover{
