@@ -836,7 +836,7 @@ function App() {
         </svg>
       </div>
       <div className="award-title">Wesleyan Book Award</div>
-      <div className="award-title">National Science Foundation Grant Award</div>
+      <div className="award-title">NSF Grant Award</div>
       <div className="award-title">Published Author</div>
       <div className="award-container">
         <li>
@@ -876,11 +876,6 @@ function App() {
         <li>
           <a>
             <div className="award-type">E-Book</div>
-          </a>
-        </li>
-        <li>
-          <a>
-            <div className="award-type">Amazon Self-Publishing</div>
           </a>
         </li>
       </div>
