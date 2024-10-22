@@ -858,6 +858,40 @@ section .subtitle {
   text-decoration: none;
 }
 
+@media (max-width: 768px) {
+  .work ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; 
+  }
+
+  section .subtitle {
+    font-size: 0.9rem; 
+    padding-bottom: 0.8rem; 
+  }
+
+  .description .summary {
+    font-size: 0.9rem;
+    padding-bottom: 1rem;
+  }
+
+  .description .tech ul {
+    justify-content: flex-start; 
+    padding: 0;
+  }
+
+  .description .tech ul li a {
+    font-size: 0.75rem;
+  }
+
+  .experience a .bolded-link {
+    font-size: 0.85rem; 
+  }
+
+  .tech {
+    padding-bottom: 1rem; 
+  }
+}
 /* Experience Ends */
 
 /* Personal Projects Starts */
@@ -931,7 +965,7 @@ section .subtitle {
 
 .op-tech-stack {
   font-size: 0.8rem;
-  color: "white"; 
+  color: "white";
   text-align: 'center'; 
   transition: 0.3s ease;
 }
@@ -1040,7 +1074,7 @@ section .subtitle {
 }
 
 /* Medium screens (tablets, small desktops) */
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1410px) {
   .projects-grid1 {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1051,6 +1085,17 @@ section .subtitle {
     padding-left: 0.8rem;
     padding-right: 0.8rem;
   }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .project-description {
+    font-size: 0.75rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+  
 }
 
 /* Small screens (phones) */
