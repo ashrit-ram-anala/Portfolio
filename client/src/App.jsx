@@ -655,7 +655,7 @@ function App() {
       Personal Projects
     </p>
     <div className="projects-grid1">
-      <a href="https://github.com/ashrit-ram-anala/GeoBet-WebApp" target="_blank" style={{textDecoration: "none"}}>
+      <a href="https://github.com/ashrit-ram-anala/GeoBet-WebApp"target="_blank" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>GEO-BET</p>
@@ -669,7 +669,7 @@ function App() {
        
       </div>
       </a>
-      <a href="https://github.com/ashrit-ram-anala/VandyHacks-XI-Project" target="_blank" style={{textDecoration: "none"}}>
+      <a href="https://github.com/ashrit-ram-anala/VandyHacks-XI-Project"target="_blank" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>SMART STOCK</p>
@@ -684,7 +684,7 @@ function App() {
     </div>
     
     <div className="projects-grid1">
-      <a href="https://github.com/ashrit-ram-anala/ML-Projects" target="_blank" style={{textDecoration: "none"}}>
+      <a href="https://github.com/ashrit-ram-anala/ML-Projects"target="_blank" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>LOAN DEFAULT PREDICTOR</p>
@@ -896,7 +896,98 @@ function App() {
     </div>
     <section>
   </section>
-
+  {/* <section id="extras">
+    <p className="title">Mini Side Projects</p>
+  </section>
+  <section>
+    <div className="carousel" aria-label="Gallery">
+      <ol className="carousel__viewport">
+        <li id="carousel__slide1" tabIndex={0} className="carousel__slide">
+          <div className="carousel__snapper">
+            <div className="card1">
+              <div className="card-details">
+                <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
+                  YTSAVE CHROME EXTENSION
+                </p>
+                <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
+              </div>
+              <button className="card-button">Click For More</button>
+            </div>
+          </div>
+        </li>
+        <li id="carousel__slide2" tabIndex={0} className="carousel__slide">
+          <div className="carousel__snapper" />
+          <div className="card1">
+            <div className="card-details">
+              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
+                HOTKEY CHROME EXTENSION
+              </p>
+              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
+            </div>
+            <button className="card-button">Click For More</button>
+          </div>
+        </li>
+        <li id="carousel__slide3" tabIndex={0} className="carousel__slide">
+          <div className="carousel__snapper" />
+          <div className="card1">
+            <div className="card-details">
+              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
+                NOTION WIDGETS
+              </p>
+              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
+            </div>
+            <button className="card-button">Click For More</button>
+          </div>
+        </li>
+        <li id="carousel__slide4" tabIndex={0} className="carousel__slide">
+          <div className="carousel__snapper" />
+          <div className="card1">
+            <div className="card-details">
+              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
+                LEETCODE SOLUTIONS DOCUMENTATION
+              </p>
+              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
+            </div>
+            <button className="card-button">Click For More</button>
+          </div>
+        </li>
+      </ol>
+      <aside className="carousel__navigation">
+        <ol className="carousel__navigation-list">
+          <li className="carousel__navigation-item">
+            <a
+              href="#carousel__slide1"
+              className="carousel__navigation-button"
+            />
+          </li>
+          <li className="carousel__navigation-item">
+            <a
+              href="#carousel__slide2"
+              className="carousel__navigation-button"
+            />
+          </li>
+          <li className="carousel__navigation-item">
+            <a
+              href="#carousel__slide3"
+              className="carousel__navigation-button"
+            />
+          </li>
+          <li className="carousel__navigation-item">
+            <a
+              href="#carousel__slide4"
+              className="carousel__navigation-button"
+            />
+          </li>
+        </ol>
+      </aside>
+      <div className="text">
+        <span>←</span> Click Me!
+      </div>
+      <div className="text1">
+        Click Me! <span>→</span>
+      </div>
+    </div>
+    </section> */}
     <footer className="footer">
       <span>© 2024 Ashrit Ram Anala</span>
       <div className="footer-social">
