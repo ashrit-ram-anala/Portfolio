@@ -708,13 +708,14 @@ function App() {
       </div>
       </a>
     </div>
+     <div style={{display:"flex",justifyContent:"center"}}>
     <button
         onClick={handleToggle} 
         className = "btn"
-        style={{display: "flex", justifyContent:"center"}}
       >
         {isVisible ? 'View Less' : 'View More'}
       </button>
+      </div>
 
       {isVisible && (
          <div className="projects-grid">
