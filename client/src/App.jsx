@@ -660,9 +660,9 @@ function App() {
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>GEO-BET</p>
           <div className="text-body">
-           Geo-Bet is a Full Stack web application that allows uers to answer Geography Trivia with a Casino-esque twist. The WebApp currently has 200+ organic users with the top 25 displayed on the in game leaderboard. The frontend is programmed in React + Vite with Firebase login and Authentication and the backend is programmed in Node and Express with a MongoDB database for the leaderboard of best trivia rounds.
+           Geo-Bet is a <span style={{color: "white"}}>Full Stack </span> web application that allows uers to answer Geography Trivia with a Casino-esque twist. The WebApp currently has <span style={{color: "white"}}>200+ organic users</span> with the top 25 displayed on the in game leaderboard. The frontend is programmed in React + Vite with Firebase login and Authentication and the backend is programmed in Node and Express with a MongoDB database for the leaderboard of best trivia rounds.
           </div>
-          <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>REACT VITE NODE EXPRESS MONGODB FIREBASE TAILWIND</div>
+          <div className="op-tech-stack">REACT VITE NODE EXPRESS MONGODB FIREBASE TAILWIND</div>
           
         </div>
       
@@ -674,9 +674,9 @@ function App() {
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>SMART STOCK</p>
           <div className="text-body">
-          Smart-Stock is a web application made for VandyHacks XI that allows users to enter specific stock tickers (AAPL, AMZN, etc.) and see the public sentiment for those stocks at that very moment as well as historical sentiment from over 20K+ posts. Smart-Stock utilizes the Reddit API and performs sentiment analysis with the Perplexity LLM and Python TextBlob. The sentiments are displayed and graphed with Chart.JS.
+          Smart-Stock is a web application made for <span style={{color: "white"}}>VandyHacks XI </span> that allows users to enter specific stock tickers (AAPL, AMZN, etc.) and see the public sentiment for those stocks at that very moment as well as historical sentiment from over <span style={{color: "white"}}>20K+ posts </span>. Smart-Stock utilizes the Reddit API and performs <span style={{color: "white"}}>Sentiment Analysis </span> with the Perplexity LLM and Python TextBlob. The sentiments are displayed and graphed with Chart.JS.
           </div>
-          <div className="op-tech-stack" style={{color: "white", textAlign: 'center'}}>REACT VITE NODE EXPRESS MONGODB FLASK TAILWIND</div>
+          <div className="op-tech-stack">REACT VITE NODE EXPRESS MONGODB FLASK TAILWIND</div>
         </div>
        
       </div>
@@ -689,9 +689,9 @@ function App() {
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>LOAN DEFAULT PREDICTOR</p>
           <div className="text-body">
-          I Developed a Machine Learning Logistic Regression model to allow banks to determine if a user will default on a loan based on 20+ attributes. Programmed in R and has final C-Statistic &gt; 0.8, indicating a strong model, with potential savings of $1,000,000+ for the dataset company when implemented.
+          I Developed a Machine Learning Logistic Regression model to allow banks to determine if a user will default on a loan based on <span style={{color: "white"}}>20+ attributes</span>. Programmed in R and has final C-Statistic &gt; <span style={{color: "white"}}>0.8</span>, indicating a strong model, with potential savings of <span style={{color: "white"}}>$1,000,000+ </span> for the dataset company when implemented.
           </div>
-          <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>R LOGISTIC REGRESSION</div>
+          <div className="op-tech-stack">R LOGISTIC REGRESSION</div>
         </div>
        
       </div>
@@ -701,14 +701,14 @@ function App() {
         <div className="card-details">
           <p className="text-title" style={{textAlign:"center"}}>VANDERBILT SCHEDULER</p>
           <div className="text-body">
-            This is a current work in progress application that utilizes a web scraper to scrape the Vanderbilt University finals schedule PDF and generate a table in PostgreSQL. The WebApp allows students to search a course and see the time of their final and add it to their calendar without having to manually and tediously search through the given PDF.
+            This is a current work in progress application that utilizes a web scraper to scrape the <span style={{color: "white"}}>Vanderbilt University </span> finals schedule PDF and generate a table in PostgreSQL. The WebApp allows all <span style={{color: "white"}}>7K+ Vanderbilt undergraduate students </span>to search a course and add the final to their Google Calendar without having to manually and tediously search through the given PDF.
           </div>
-          <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>JAVA SPRING ANGULAR TYPESCRIPT POSTGRESQL FIREBASE TAILWIND</div>
+          <div className="op-tech-stack">JAVA SPRING ANGULAR TYPESCRIPT POSTGRESQL FIREBASE TAILWIND</div>
         </div>
       </div>
       </a>
     </div>
-     <div style={{display:"flex",justifyContent:"center"}}>
+    <div style={{display:"flex",justifyContent:"center"}}>
     <button
         onClick={handleToggle} 
         className = "btn"
@@ -716,7 +716,6 @@ function App() {
         {isVisible ? 'View Less' : 'View More'}
       </button>
       </div>
-
       {isVisible && (
          <div className="projects-grid">
          <a href="https://github.com/ashrit-ram-anala/YTSave-Chrome-Extension" target="_blank" style={{textDecoration: "none"}}>
@@ -724,9 +723,9 @@ function App() {
            <div className="card-details">
              <p className="text-title" style={{textAlign:"center"}}>YTSAVE CHROME EXTENSION</p>
              <div className="text-body">
-             I created YTSave, a Chrome Extension aimed to aid students in the studying process by allowing them to create bookmarks they can come back to and access from anywhere while watching a YouTube video instead of scrolling through the video to find the desired timestamp YTSave has 100+ users in 20+ countries.
+             I created YTSave, a Chrome Extension aimed to aid students in the studying process by allowing them to create bookmarks they can come back to and access from anywhere while watching a YouTube video instead of scrolling through the video to find the desired timestamp YTSave has <span style={{color: "white"}}>100+ users </span> in <span style={{color: "white"}}>20+ countries</span>.
              </div>
-             <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>JAVASCRIPT HTML CSS</div>
+             <div className="op-tech-stack">JAVASCRIPT HTML CSS</div>
            </div>
           
          </div>
@@ -736,9 +735,9 @@ function App() {
            <div className="card-details">
              <p className="text-title" style={{textAlign:"center"}}>THIS WEBSITE!</p>
              <div className="text-body">
-               This very website is another project of mine. The design and layout was created by me using Figma and emulates a professional resumé with my own minimalistic but space themed style to it. The website utilizes React.JS, Tailwind CSS, and DaisyUI to generate all that you see here. Keep scrolling for more!
+               This very website is another project of mine. The design and layout was created by me using Figma and emulates a <span style={{color: "white"}}>professional resumé </span> with my own <span style={{color: "white"}}>minimalistic </span> but <span style={{color: "white"}}>space themed style</span> to it. The website utilizes React.JS, Tailwind CSS, and DaisyUI to generate all that you see here. Keep scrolling for more!
              </div>
-             <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>REACT TAILWIND DAISYUI FIGMA</div>
+             <div className="op-tech-stack">REACT TAILWIND DAISYUI FIGMA</div>
            </div>
          </div>
          </a>
