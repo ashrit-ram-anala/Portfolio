@@ -1,9 +1,15 @@
 import './App.css'
-import React from 'react';
+import React, { useState } from 'react';
 import Typed from 'typed.js';
 
 function App() {
   const el = React.useRef(null);
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleToggle = () => {
+    setIsVisible(!isVisible);
+  };
 
   React.useEffect(() => {
     const typed = new Typed(el.current, {
@@ -173,7 +179,10 @@ function App() {
           </li>
           <li>
             <a href="#work">
-            <svg fill="#00000" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-76.81 -76.81 665.66 665.66" xml:space="preserve" stroke="#000000" stroke-width="0.0051204"><g  id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"><rect className="phone" x="-76.81" y="-76.81" width="665.66" height="665.66" rx="332.83" fill="#a5a5a5" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="2.04816"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M508.933,146.807l-42.347-42.347c-4.267-4.053-10.88-4.053-15.147,0L256.027,300.193L60.507,104.46 c-4.267-4.053-10.88-4.053-15.147,0L3.12,146.807c-4.16,4.16-4.16,10.88,0,15.04L248.453,407.5c4.16,4.16,10.88,4.16,15.04,0 l245.333-245.653C513.093,157.687,513.093,150.967,508.933,146.807z M256.027,384.887L25.733,154.38l27.2-27.307l195.52,195.733 c4.267,4.053,10.88,4.053,15.147,0l195.52-195.733l27.2,27.307L256.027,384.887z"></path> </g> </g> </g></svg>
+            <svg fill="#2f3030" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-76.81 -76.81 665.66 665.66" xml:space="preserve" stroke="#000000" stroke-width="0.0051204"><g  id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"><rect className="phone" x="-76.81" y="-76.81" width="665.66" height="665.66" rx="332.83" fill="#a5a5a5" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="2.04816"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M508.933,146.807l-42.347-42.347c-4.267-4.053-10.88-4.053-15.147,0L256.027,300.193L60.507,104.46 c-4.267-4.053-10.88-4.053-15.147,0L3.12,146.807c-4.16,4.16-4.16,10.88,0,15.04L248.453,407.5c4.16,4.16,10.88,4.16,15.04,0 l245.333-245.653C513.093,157.687,513.093,150.967,508.933,146.807z M256.027,384.887L25.733,154.38l27.2-27.307l195.52,195.733 c4.267,4.053,10.88,4.053,15.147,0l195.52-195.733l27.2,27.307L256.027,384.887z"></path> </g> </g> </g></svg>
+
+
+           
             </a>
           </li>
         </ul>
@@ -674,7 +683,7 @@ function App() {
       </a>
     </div>
     
-    <div className="projects-grid">
+    <div className="projects-grid1">
       <a href="https://github.com/ashrit-ram-anala/ML-Projects" style={{textDecoration: "none"}}>
       <div className="op-card">
         <div className="card-details">
@@ -699,6 +708,42 @@ function App() {
       </div>
       </a>
     </div>
+    <button
+        onClick={handleToggle} 
+        className = "btn"
+        style={{display: "flex", justifyContent:"center"}}
+      >
+        {isVisible ? 'View Less' : 'View More'}
+      </button>
+
+      {isVisible && (
+         <div className="projects-grid">
+         <a href="https://github.com/ashrit-ram-anala/ML-Projects" style={{textDecoration: "none"}}>
+         <div className="op-card">
+           <div className="card-details">
+             <p className="text-title" style={{textAlign:"center"}}>YTSAVE CHROME EXTENSION</p>
+             <div className="text-body">
+             I created YTSave, a Chrome Extension aimed to aid students in the studying process by allowing them to create bookmarks they can come back to and access from anywhere while watching a YouTube video instead of scrolling through the video to find the desired timestamp YTSave has 100+ users in 20+ countries.
+             </div>
+             <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>JAVASCRIPT HTML CSS</div>
+           </div>
+          
+         </div>
+         </a>
+         <a style={{textDecoration: "none"}}>
+         <div className="op-card">
+           <div className="card-details">
+             <p className="text-title" style={{textAlign:"center"}}>THIS WEBSITE!</p>
+             <div className="text-body">
+               This very website is another project of mine. The design and layout was created by me using Figma and emulates a professional resumé with my own minimalistic but space themed style to it. The website utilizes React.JS, Tailwind CSS, and DaisyUI to generate all that you see here. Keep scrolling for more!
+             </div>
+             <div className="op-tech-stack" style={{color: "white", textAlign: 'center' }}>REACT TAILWIND DAISYUI FIGMA</div>
+           </div>
+         </div>
+         </a>
+       </div>
+      )}
+   
   </section>
   <section id="honors">
     <p className="title">Honors</p>
