@@ -931,12 +931,13 @@ section .subtitle {
 
 .op-tech-stack {
   font-size: 0.8rem;
-  color: #a5a5a5;
+  color: "white"; 
+  text-align: 'center'; 
   transition: 0.3s ease;
 }
 
 .op-tech-stack:hover {
-  color: #fff;
+  color: var(--blue);
 }
 
 /* Medium screens (tablets, small desktops) */
