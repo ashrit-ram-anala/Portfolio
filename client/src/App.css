@@ -956,6 +956,7 @@ section .subtitle {
 .op-card:hover {
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 7px rgba(163, 163, 163, 0.9);
+  transform: scale(1.015)
 }
 
 .op-card:hover .card-button {
