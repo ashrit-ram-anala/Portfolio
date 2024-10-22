@@ -1285,6 +1285,24 @@ section .subtitle {
   flex-wrap: wrap;
 }
 
+@media screen and (max-width: 600px){
+  .honors .img svg {
+    width: 75px;
+    height:75px;
+  }
+  .award-title {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+  .award-type {
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    color: var(--blue);
+    font-size: 0.5rem;
+    background: rgba(10, 161, 255, 0.05);
+  }
+}
+
 /* Honors Ends */
 
 /* Side Projects Starts */
