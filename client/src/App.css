@@ -1087,6 +1087,7 @@ section .subtitle {
   color: white;
    display: flex;
   justify-content: center;
+ align-items: center;
   font-size: 0.8rem;
   background: rgb(30,30,30);
   border: 1px solid rgba(255, 255, 255, 0.3);
