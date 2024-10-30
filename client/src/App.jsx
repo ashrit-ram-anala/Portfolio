@@ -1,9 +1,6 @@
-import './App.css'
-import React, { useState } from 'react';
-import Typed from 'typed.js';
-
 function App() {
   const el = React.useRef(null);
+  const cursorRef = React.useRef(null);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -24,9 +21,42 @@ function App() {
       typed.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+
+    const handleMouseMove = (e) => {
+      cursor.style.top = `${e.clientY}px`;
+      cursor.style.left = `${e.clientX}px`;
+      
+    };
+    const handleMouseEnter = () => {
+      cursor.classList.add('cursor-hover');
+    };
+
+    const handleMouseLeave = () => {
+      cursor.classList.remove('cursor-hover');
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.querySelectorAll('a, .link, button, img').forEach((el) => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.querySelectorAll('a, .link, button, img').forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, []);
+
   return (
    
     <>
+  <div ref={cursorRef} className="cursor"></div>
   <header id="home">
     <div className="bg-animation">
       <div id="stars" />
