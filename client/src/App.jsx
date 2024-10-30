@@ -332,7 +332,7 @@ function App() {
         </div>
         <div className="activities gap1">
           <p>
-            <span style={{ color: "white" }}>Clubs &amp; Organizations:</span> Change++, Vanderbilt Blockchain, Vanderbilt Data Science Club 
+            <span style={{ color: "white" }}>Clubs &amp; Organizations:</span> Change++, Vanderbilt Asian Pre-Professional Society (VAPS), Vanderbilt Blockchain, Vanderbilt Data Science Club, Google Developer Group (GDG)
           </p>
         </div>
       </div>
