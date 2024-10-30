@@ -534,16 +534,7 @@ function App() {
                <a>
                 <span className="bolded-link"> new LMS </span>
               </a>
-              (Learning Management System) to allow for easier learning, restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to yield a 
-              <a>
-                <span className="bolded-link"> 60% increase </span>
-              </a>
-               in revenue from registered members due to improved payment systems and a 
-               <a>
-                <span className="bolded-link">  75% increase </span>
-              </a>
-              
-                in family registration from the new LMS and design{" "}
+              (Learning Management System) to allow for easier learning, restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions.
              
             </p>
             <div className="tech">
