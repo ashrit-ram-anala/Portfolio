@@ -1,3 +1,7 @@
+import './App.css'
+import React, { useState, useEffect} from 'react';
+import Typed from 'typed.js';
+
 function App() {
   const el = React.useRef(null);
   const cursorRef = React.useRef(null);
