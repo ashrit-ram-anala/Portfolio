@@ -5,9 +5,7 @@ import Typed from 'typed.js';
 function App() {
   const el = React.useRef(null);
   const cursorRef = React.useRef(null);
-
   const [isVisible, setIsVisible] = useState(false);
-
   const handleToggle = () => {
     setIsVisible(!isVisible);
   };
@@ -157,6 +155,14 @@ function App() {
             </a>
           </li>
           <li>
+            <a href="https://app.cal.com/ashrit-anala" target="_blank">
+
+
+ <svg fill="#303030" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="-146.88 -146.88 905.76 905.76" xml:space="preserve" stroke="#303030"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect className="phone" x="-146.88" y="-146.88" width="905.76" height="905.76" rx="452.88" fill="#a5a5a5" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M612,463.781c0-70.342-49.018-129.199-114.75-144.379c-10.763-2.482-21.951-3.84-33.469-3.84 c-3.218,0-6.397,0.139-9.562,0.34c-71.829,4.58-129.725,60.291-137.69,131.145c-0.617,5.494-0.966,11.073-0.966,16.734 c0,10.662,1.152,21.052,3.289,31.078C333.139,561.792,392.584,612,463.781,612C545.641,612,612,545.641,612,463.781z M463.781,561.797c-54.133,0-98.016-43.883-98.016-98.016s43.883-98.016,98.016-98.016s98.016,43.883,98.016,98.016 S517.914,561.797,463.781,561.797z"></path> <polygon points="482.906,396.844 449.438,396.844 449.438,449.438 396.844,449.438 396.844,482.906 482.906,482.906 482.906,449.438 482.906,449.438 "></polygon> <path d="M109.969,0c-9.228,0-16.734,7.507-16.734,16.734v38.25v40.641c0,9.228,7.506,16.734,16.734,16.734h14.344 c9.228,0,16.734-7.507,16.734-16.734V54.984v-38.25C141.047,7.507,133.541,0,124.312,0H109.969z"></path> <path d="M372.938,0c-9.228,0-16.734,7.507-16.734,16.734v38.25v40.641c0,9.228,7.507,16.734,16.734,16.734h14.344 c9.228,0,16.734-7.507,16.734-16.734V54.984v-38.25C404.016,7.507,396.509,0,387.281,0H372.938z"></path> <path d="M38.25,494.859h236.672c-2.333-11.6-3.572-23.586-3.572-35.859c0-4.021,0.177-7.999,0.435-11.953H71.719 c-15.845,0-28.688-12.843-28.688-28.688v-229.5h411.188v88.707c3.165-0.163,6.354-0.253,9.562-0.253 c11.437,0,22.61,1.109,33.469,3.141V93.234c0-21.124-17.126-38.25-38.25-38.25h-31.078v40.641c0,22.41-18.23,40.641-40.641,40.641 h-14.344c-22.41,0-40.641-18.231-40.641-40.641V54.984H164.953v40.641c0,22.41-18.231,40.641-40.641,40.641h-14.344 c-22.41,0-40.641-18.231-40.641-40.641V54.984H38.25C17.126,54.984,0,72.111,0,93.234v363.375 C0,477.733,17.126,494.859,38.25,494.859z"></path> <circle cx="134.774" cy="260.578" r="37.954"></circle> <circle cx="248.625" cy="260.578" r="37.954"></circle> <circle cx="362.477" cy="260.578" r="37.954"></circle> <circle cx="248.625" cy="375.328" r="37.953"></circle> <circle cx="134.774" cy="375.328" r="37.953"></circle> </g> </g> </g></svg>
+           
+            </a>
+          </li>
+          <li>
             <a href="mailto:ashritramanala@yahoo.com">
               <svg
                 className="contact-header"
@@ -209,14 +215,6 @@ function App() {
                 </g>
                 <g id="Layer_2"></g>
               </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#work">
-            <svg fill="#2f3030" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-76.81 -76.81 665.66 665.66" xml:space="preserve" stroke="#000000" stroke-width="0.0051204"><g  id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"><rect className="phone" x="-76.81" y="-76.81" width="665.66" height="665.66" rx="332.83" fill="#a5a5a5" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="2.04816"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M508.933,146.807l-42.347-42.347c-4.267-4.053-10.88-4.053-15.147,0L256.027,300.193L60.507,104.46 c-4.267-4.053-10.88-4.053-15.147,0L3.12,146.807c-4.16,4.16-4.16,10.88,0,15.04L248.453,407.5c4.16,4.16,10.88,4.16,15.04,0 l245.333-245.653C513.093,157.687,513.093,150.967,508.933,146.807z M256.027,384.887L25.733,154.38l27.2-27.307l195.52,195.733 c4.267,4.053,10.88,4.053,15.147,0l195.52-195.733l27.2,27.307L256.027,384.887z"></path> </g> </g> </g></svg>
-
-
-           
             </a>
           </li>
         </ul>
@@ -303,9 +301,9 @@ function App() {
       <div className="about-text-container">
         <p className="about-text">
           My name is Ashrit Ram Anala and I am a freshman at{" "}
-          <span className="bolded">Vanderbilt University</span> working towards
+          <a><span className="bolded">Vanderbilt University</span></a> working towards
           a{" "}
-          <span className="bolded">Bachelor's Degree in Computer Science</span>{""}
+          <a><span className="bolded">Bachelor's Degree in Computer Science</span></a>{""}
         . I have
           experience in Full Stack development and am currently very interested
           in databases and developing web applications using technologies like
@@ -534,7 +532,16 @@ function App() {
                <a>
                 <span className="bolded-link"> new LMS </span>
               </a>
-              (Learning Management System) to allow for easier learning, restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions.
+              (Learning Management System) to allow for easier learning, restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to yield a 
+              <a>
+                <span className="bolded-link"> 60% increase </span>
+              </a>
+               in revenue from registered members due to improved payment systems and a 
+               <a>
+                <span className="bolded-link">  75% increase </span>
+              </a>
+              
+                in family registration from the new LMS and design{" "}
              
             </p>
             <div className="tech">
@@ -644,7 +651,9 @@ function App() {
                 <span className="bolded">NSF Grant Award</span>
               </a>{" "}
               with award number 1955979 totaling to over{" "}
+              <a>
               <span className="bolded">$620,000</span>.
+              </a>
             </p>
             <div className="tech">
               <ul>
@@ -911,103 +920,11 @@ function App() {
         Worked with two graduate students to create a research paper that recieved an NSF Grant totaling over $620,000 the following year.
       </div>
       <div>
-        Wrote and self published a book on Python that has been given to several school and distributed to students throughout Massachusetts.
+        Wrote and self published a book on Python that has been given to several schools and distributed to students throughout Massachusetts.
       </div>
     </div>
     <section>
   </section>
-  {/* <section id="extras">
-    <p className="title">Mini Side Projects</p>
-  </section>
-  <section>
-    <div className="carousel" aria-label="Gallery">
-      <ol className="carousel__viewport">
-        <li id="carousel__slide1" tabIndex={0} className="carousel__slide">
-          <div className="carousel__snapper">
-            <div className="card1">
-              <div className="card-details">
-                <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
-                  YTSAVE CHROME EXTENSION
-                </p>
-                <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
-              </div>
-              <button className="card-button">Click For More</button>
-            </div>
-          </div>
-        </li>
-        <li id="carousel__slide2" tabIndex={0} className="carousel__slide">
-          <div className="carousel__snapper" />
-          <div className="card1">
-            <div className="card-details">
-              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
-                HOTKEY CHROME EXTENSION
-              </p>
-              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
-            </div>
-            <button className="card-button">Click For More</button>
-          </div>
-        </li>
-        <li id="carousel__slide3" tabIndex={0} className="carousel__slide">
-          <div className="carousel__snapper" />
-          <div className="card1">
-            <div className="card-details">
-              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
-                NOTION WIDGETS
-              </p>
-              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
-            </div>
-            <button className="card-button">Click For More</button>
-          </div>
-        </li>
-        <li id="carousel__slide4" tabIndex={0} className="carousel__slide">
-          <div className="carousel__snapper" />
-          <div className="card1">
-            <div className="card-details">
-              <p style={{ marginBottom: "0.5rem", color: "#e9e9e9" }}>
-                LEETCODE SOLUTIONS DOCUMENTATION
-              </p>
-              <div className="op-tech-stack">HTML CSS JAVASCRIPT</div>
-            </div>
-            <button className="card-button">Click For More</button>
-          </div>
-        </li>
-      </ol>
-      <aside className="carousel__navigation">
-        <ol className="carousel__navigation-list">
-          <li className="carousel__navigation-item">
-            <a
-              href="#carousel__slide1"
-              className="carousel__navigation-button"
-            />
-          </li>
-          <li className="carousel__navigation-item">
-            <a
-              href="#carousel__slide2"
-              className="carousel__navigation-button"
-            />
-          </li>
-          <li className="carousel__navigation-item">
-            <a
-              href="#carousel__slide3"
-              className="carousel__navigation-button"
-            />
-          </li>
-          <li className="carousel__navigation-item">
-            <a
-              href="#carousel__slide4"
-              className="carousel__navigation-button"
-            />
-          </li>
-        </ol>
-      </aside>
-      <div className="text">
-        <span>←</span> Click Me!
-      </div>
-      <div className="text1">
-        Click Me! <span>→</span>
-      </div>
-    </div>
-    </section> */}
     <footer className="footer">
       <span>© 2024 Ashrit Ram Anala</span>
       <div className="footer-social">
@@ -1064,6 +981,7 @@ function App() {
       </div>
     </footer>
     </section>
+
 
 </>
   )
