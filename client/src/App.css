@@ -70,6 +70,10 @@ html {
   scroll-behavior: smooth;
 }
 
+*{
+  cursor: default;
+}
+
 ::selection {
   background: var(--blue);
   color: #000;
