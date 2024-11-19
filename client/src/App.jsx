@@ -517,7 +517,7 @@ function App() {
             </div>
             <p className="summary">
            
-              Change++ is a Vanderbilt student organization that strives to provide nonprofits with the technical resources and software capabilities to help the community they serve in innovative ways. The current project I work on with 10 other developers is for 
+              Change++ is a Vanderbilt nonprofit organization that strives to provide nonprofits with the technical resources and software capabilities to help the community they serve in innovative ways. The current project I work on with 10 other developers is for 
               <a href="https://fostersource.org/" target="_blank">
                 <span className="bolded-link"> Foster Source</span>
               </a>
