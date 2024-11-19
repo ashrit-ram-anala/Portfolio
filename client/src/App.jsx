@@ -115,7 +115,7 @@ function App() {
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/ashrit-ram-anala-6a73761b7/"
+              href="https://www.linkedin.com/in/ashritramanala/"
               target="_blank"
             >
               <svg
@@ -303,7 +303,7 @@ function App() {
           My name is Ashrit Ram Anala and I am a freshman at{" "}
           <a><span className="bolded">Vanderbilt University</span></a> working towards
           a{" "}
-          <a><span className="bolded">Bachelor's Degree in Computer Science</span></a>{""}
+          <a><span className="bolded">Bachelor's Degree in Computer Science & Minor in Data Science</span></a>{""}
         . I have
           experience in Full Stack development and am currently very interested
           in databases and developing web applications using technologies like
@@ -321,16 +321,16 @@ function App() {
       <div className="college gap bolded">Vanderbilt University</div>
       <div className="education-desc">
         <div className="major-year gap education-subtitle">
-          B.S. In Computer Science | 2024 - (2027)
+          B.S. In Computer Science, Minor In Data Science | 2024 - (2027)
         </div>
         <div className="coursework gap">
           <p>
-            <span style={{ color: "white" }}>Relevant Coursework:</span> CS 1101 (Java), CS 1151 (CS Ethics), CS 2201 (Data Structures & Algorithms), CS 2212 (Discrete Structures), CS 3251 (Intermediate Software Design)
+            <span style={{ color: "white" }}>Relevant Coursework:</span> DS 1000 (Data Science in R), DS 1101 (Data Science in Python), CS 1101 (Java), CS 1151 (CS Ethics), CS 2201 (Data Structures & Algorithms), CS 2212 (Discrete Structures), CS 3251 (Intermediate Software Design)
           </p>
         </div>
         <div className="activities gap1">
           <p>
-            <span style={{ color: "white" }}>Clubs &amp; Organizations:</span> Change++, Vanderbilt Asian Pre-Professional Society (VAPS), Vanderbilt Blockchain, Vanderbilt Data Science Club, Google Developer Group (GDG)
+            <span style={{ color: "white" }}>Clubs &amp; Organizations:</span> Change++, VandyHacks, Vanderbilt Asian Pre-Professional Society (VAPS), Vanderbilt Blockchain, Vanderbilt Data Science Club, Google Developer Group (GDG)
           </p>
         </div>
       </div>
@@ -438,13 +438,7 @@ function App() {
           <a>AWS</a>
         </li>
         <li>
-          <a>Azure</a>
-        </li>
-        <li>
           <a>Docker</a>
-        </li>
-        <li>
-          <a>Kubernetes</a>
         </li>
         <li>
           <a>Vercel</a>
@@ -454,6 +448,15 @@ function App() {
         </li>
         <li>
           <a>Render</a>
+        </li>
+        <li>
+          <a>Postman</a>
+        </li>
+        <li>
+          <a>Thunder Client</a>
+        </li>
+        <li>
+          <a>Jest</a>
         </li>
       </ul>
 
@@ -475,19 +478,13 @@ function App() {
           <a>Git</a>
         </li>
         <li>
-          <a>Agile Methodologies (Scrum)</a>
+          <a>Agile Methodologies</a>
         </li>
         <li>
           <a>Responsive Design</a>
         </li>
         <li>
           <a>Figma</a>
-        </li>
-        <li>
-          <a>Postman</a>
-        </li>
-        <li>
-          <a>Thunder Client</a>
         </li>
         <li>
           <a>Public Speaking</a>
@@ -528,21 +525,23 @@ function App() {
               <a>
                 <span className="bolded-link"> 4,000+ Families </span>
               </a>
-               in learning materials necessary when taking on a foster child. We are creating a 
+              in 
+              <a>
+                <span className="bolded-link"> 49 states </span>
+              </a>
+               to provide necessary learning materials to foster parents when taking on a foster child. We are creating a new
                <a>
                 <span className="bolded-link"> new LMS </span>
               </a>
-              (Learning Management System) to allow for easier learning, restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to yield a 
+              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), and restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to reduce query time by 
               <a>
-                <span className="bolded-link"> 60% increase </span>
+                <span className="bolded-link"> 70% </span>
               </a>
-               in revenue from registered members due to improved payment systems and a 
+              through the implementation of optimized endpoints and schemas and increase security heavily through JWT and Firebase, handling 
                <a>
-                <span className="bolded-link">  75% increase </span>
+                <span className="bolded-link"> 1,000+ </span>
               </a>
-              
-                in family registration from the new LMS and design{" "}
-             
+              authenticated users per day{" "}
             </p>
             <div className="tech">
               <ul>
@@ -652,7 +651,7 @@ function App() {
               </a>{" "}
               with award number 1955979 totaling to over{" "}
               <a>
-              <span className="bolded">$620,000</span>.
+              <span className="bolded">$620,000</span>
               </a>
             </p>
             <div className="tech">
