@@ -514,7 +514,7 @@ function App() {
             </div>
             <p className="summary">
            
-              Through Change++, a Vanderbilt nonprofit organization that partners with other local and national nonprofits to provide them with pro bono software, I am 1 of 8 developers for Foster Source
+              Through Change++, a Vanderbilt nonprofit organization that partners with other local and national nonprofits to provide them with pro bono software, I am 1 of 8 developers for
               <a href="https://fostersource.org/" target="_blank">
                 <span className="bolded-link"> Foster Source</span>
               </a>
@@ -526,20 +526,41 @@ function App() {
               <a>
                 <span className="bolded-link"> 49 states </span>
               </a>
-               to provide necessary learning materials to foster parents when taking on a foster child. We are creating a new
+               to provide necessary learning materials for foster parents when taking on a foster child. We are designing and improving the 
                <a>
-                <span className="bolded-link"> new LMS </span>
+                <span className="bolded-link"> LMS </span>
               </a>
-              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to reduce query time by 
+              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to 
+              <a>
+                <span className="bolded-link"> reduce query time </span>
+              </a>
+               by 
               <a>
                 <span className="bolded-link"> 70% </span>
               </a>
-              through the implementation of optimized endpoints and schemas and increase security heavily through JWT and Firebase, handling 
-               <a>
+              through the implementation of optimized endpoints and schemas, 
+              <a>
+                <span className="bolded-link"> increase revenue </span>
+              </a>
+              by              
+              <a>
+                <span className="bolded-link"> 20% </span>
+              </a> through more efficient and user friendly Stripe Payment integration, and increase security heavily through JWT and Firebase to handle 
+              <a>
                 <span className="bolded-link"> 1,000+ </span>
               </a>
-              authenticated users per day{" "}
+              authenticated 
+              <a>
+                <span className="bolded-link"> users </span>
+              </a>
+              daily
+              and add an extra layer of security with middleware for the
+            <a>
+                <span className="bolded-link"> $1,000,000+ </span>
+              </a>
+             revenue Foster Source generates annually{" "}
             </p>
+
             <div className="tech">
               <ul>
                 <li>
