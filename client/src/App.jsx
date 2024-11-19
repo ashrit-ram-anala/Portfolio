@@ -514,7 +514,7 @@ function App() {
             </div>
             <p className="summary">
            
-              I am a developer for Foster Source made possible through Change++, a Vanderbilt nonprofit organization that strives to provide nonprofits with the technical resources and software capabilities to help the community they serve in innovative ways. I work with 8 other developers for
+              Through Change++, a Vanderbilt nonprofit organization that partners with other local and national nonprofits to provide them with pro bono software, I am 1 of 8 developers for Foster Source
               <a href="https://fostersource.org/" target="_blank">
                 <span className="bolded-link"> Foster Source</span>
               </a>
