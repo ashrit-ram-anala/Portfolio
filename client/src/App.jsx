@@ -533,7 +533,7 @@ function App() {
                <a>
                 <span className="bolded-link"> new LMS </span>
               </a>
-              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), and restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to reduce query time by 
+              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to reduce query time by 
               <a>
                 <span className="bolded-link"> 70% </span>
               </a>
