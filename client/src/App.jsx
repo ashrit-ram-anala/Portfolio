@@ -377,22 +377,19 @@ function App() {
           <a>Typescript</a>
         </li>
         <li>
-          <a>Angular</a>
-        </li>
-        <li>
           <a>Javascript</a>
         </li>
         <li>
-          <a>React.JS</a>
+          <a>React</a>
         </li>
         <li>
-          <a>Node.JS</a>
+          <a>Node</a>
         </li>
         <li>
-          <a>Express.JS</a>
+          <a>Express</a>
         </li>
         <li>
-          <a>Next.JS</a>
+          <a>Next</a>
         </li>
         <li>
           <a>JQuery</a>
@@ -511,13 +508,13 @@ function App() {
               Developer @{" "}
               <span className="bolded">
               <a href="https://www.changeplusplus.org/" target="_blank">
-                <span className="bolded-link">Change++ </span>
+                <span className="bolded-link">Foster Source </span>
               </a>
               </span>
             </div>
             <p className="summary">
            
-              Change++ is a Vanderbilt nonprofit organization that strives to provide nonprofits with the technical resources and software capabilities to help the community they serve in innovative ways. The current project I work on with 10 other developers is for 
+              I am a developer for Foster Source made possible through Change++, a Vanderbilt nonprofit organization that strives to provide nonprofits with the technical resources and software capabilities to help the community they serve in innovative ways. I work with 8 other developers for
               <a href="https://fostersource.org/" target="_blank">
                 <span className="bolded-link"> Foster Source</span>
               </a>
@@ -546,19 +543,25 @@ function App() {
             <div className="tech">
               <ul>
                 <li>
-                  <a>React.JS</a>
-                </li>
-                <li>
-                  <a>Node.JS</a>
-                </li>
-                <li>
-                  <a>Express.JS</a>
-                </li>
-                <li>
                   <a>Typescript</a>
                 </li>
                 <li>
+                  <a>React</a>
+                </li>
+                <li>
+                  <a>Node</a>
+                </li>
+                <li>
+                  <a>Express</a>
+                </li>
+                <li>
                   <a>MongoDB</a>
+                </li>
+                <li>
+                  <a>Firebase Authentication</a>
+                </li>
+                <li>
+                  <a>JSON Web Token (JWT)</a>
                 </li>
                 <li>
                   <a>Stripe Payments</a>
@@ -601,7 +604,7 @@ function App() {
             <div className="tech">
               <ul>
                 <li>
-                  <a>React.JS</a>
+                  <a>React</a>
                 </li>
                 <li>
                   <a>CSS</a>
