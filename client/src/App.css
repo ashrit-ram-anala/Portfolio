@@ -119,6 +119,19 @@ section .title {
   padding-top: 4rem;
 }
 
+/* html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+} */
+
 /* General Page CSS Ends */
 
 /* Header Starts */
