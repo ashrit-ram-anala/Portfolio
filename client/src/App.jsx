@@ -12,7 +12,7 @@ function App() {
 
   React.useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ["I'm Interested In... ", "Full Stack", "Database Design", "Machine Learning", "LLMs", "Data Science", "And...","Tech, In General", "Scroll For More!"],
+      strings: ["I'm Interested In... ", "Full Stack", "Database Design", "Machine Learning", "Security With JWT", "Data Science", "And...","Tech, In General", "Scroll For More!"],
     loop: true,
     typeSpeed: 40,
     backSpeed: 25,
@@ -308,7 +308,7 @@ function App() {
           experience in Full Stack development and am currently very interested
           in databases and developing web applications using technologies like
           Java Spring, MongoDB, and Firebase. I am also interested in machine
-          learning and am exploring how I can implement it into my own projects.
+          learning and security with JWT and am exploring how I can implement them into my own projects and projects for organizations I am a part of.
           Outside of the tech sphere I love to swim casually, make meaningful
           connections, and explore the world around me.
         </p>
@@ -524,13 +524,9 @@ function App() {
               </a>
               in 
               <a>
-                <span className="bolded-link"> 49 states </span>
+                <span className="bolded-link"> 48 states </span>
               </a>
-               to provide necessary learning materials for foster parents when taking on a foster child. We are designing and improving the 
-               <a>
-                <span className="bolded-link"> LMS </span>
-              </a>
-              (Learning Management System) to allow for easier learning through better structured courses, improving security with Firebase Authentication and JSON Web Tokens (JWT), restructuring the database with MongoDB and creating and defining new Schemas, and implementing Stripe payments to allow for transactions. Final results are projected to 
+               to provide necessary learning materials for foster parents when taking on a foster child. Final results are projected to 
               <a>
                 <span className="bolded-link"> reduce query time </span>
               </a>
@@ -545,7 +541,7 @@ function App() {
               by              
               <a>
                 <span className="bolded-link"> 20% </span>
-              </a> through more efficient and user friendly Stripe Payment integration, and increase security heavily through JWT and Firebase to handle 
+              </a> throughthe implementation of more efficient and user friendly Stripe Payment integration, increase security heavily through JWT and Firebase to handle 
               <a>
                 <span className="bolded-link"> 1,000+ </span>
               </a>
@@ -553,8 +549,11 @@ function App() {
               <a>
                 <span className="bolded-link"> users </span>
               </a>
-              daily
-              and add an extra layer of security with middleware for the
+              daily, save 
+              <a>
+                <span className="bolded-link"> $23K+ </span>
+              </a>
+              with the new LMS (Learning Model System) we are making, and add an extra layer of security with middleware for the
             <a>
                 <span className="bolded-link"> $1,000,000+ </span>
               </a>
