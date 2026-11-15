@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#f2efe9"/><text x="32" y="45" text-anchor="middle" font-family="Georgia, serif" font-size="38" fill="#6b655c">A</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <path fill="#163e49" d="M2 0h12v1h1v1h1v12h-1v1h-1v1H2v-1H1v-1H0V2h1V1h1z"/>
+  <path fill="#15303a" d="M12 4h1v1H12z"/>
+  <path fill="#f27b4c" d="M10 4h1v1H10z M11 4h1v1H11z M10 5h1v1H10z M11 5h1v1H11z M8 6h1v1H8z M9 6h1v1H9z M7 7h1v1H7z M7 8h1v1H7z M6 9h1v1H6z M7 9h1v1H7z"/>
+  <path fill="#82b8ac" d="M2 6h1v1H2z M11 12h1v1H11z"/>
+  <path fill="#fff0cc" d="M10 3h1v1H10z M11 3h1v1H11z M12 3h1v1H12z M5 4h1v1H5z M9 4h1v1H9z M13 4h1v1H13z M9 5h1v1H9z M5 5h1v1H5z M7 5h1v1H7z M8 5h1v1H8z M12 5h1v1H12z M13 5h1v1H13z M6 6h1v1H6z M7 6h1v1H7z M10 6h1v1H10z M11 6h1v1H11z M12 6h1v1H12z M6 7h1v1H6z M8 7h1v1H8z M9 7h1v1H9z M10 7h1v1H10z M11 7h1v1H11z M5 8h1v1H5z M6 8h1v1H6z M8 8h1v1H8z M9 8h1v1H9z M10 8h1v1H10z M5 9h1v1H5z M8 9h1v1H8z M9 9h1v1H9z M4 10h1v1H4z M5 10h1v1H5z M6 10h1v1H6z M7 10h1v1H7z M5 11h1v1H5z M6 11h1v1H6z"/>
+  <path fill="#e6b679" d="M6 5h1v1H6z M12 7h1v1H12z M1 9h1v1H1z M1 10h1v1H1z M2 10h1v1H2z M3 10h1v1H3z M2 11h1v1H2z M3 11h1v1H3z M4 11h1v1H4z M1 12h1v1H1z M2 12h1v1H2z"/>
+</svg>
