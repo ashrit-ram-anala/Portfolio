@@ -5,6 +5,7 @@ import {
   Fraunces,
   Inter_Tight,
   Instrument_Serif,
+  Pixelify_Sans,
   Space_Grotesk,
   Titillium_Web,
 } from "next/font/google";
@@ -23,13 +24,15 @@ const winter = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "500"], 
 // soft, rounded 70s California serif for the golden-hour boulevard
 const cali = Fraunces({ subsets: ["latin"], style: ["italic"], axes: ["SOFT", "WONK"], preload: false, variable: "--font-cali" });
 
+const pixel = Pixelify_Sans({ subsets: ["latin"], variable: "--font-pixel", preload: false });
+
 export const metadata: Metadata = {
   title: "Ashrit Anala | Portfolio",
   description: "Software engineer and student at Vanderbilt University.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const fonts = [sans, serif, f1, monster, space, winter, cali].map((f) => f.variable).join(" ");
+  const fonts = [sans, serif, f1, monster, space, winter, cali, pixel].map((f) => f.variable).join(" ");
   return (
     <html lang="en" className={fonts}>
       <body>

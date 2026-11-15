@@ -1,3 +1,4 @@
+import type { LakeWhirlpool } from "../whirlpool";
 /**
  * The shared world every animal lives in: a population that crosses the
  * screen along one course, re-entering upstream once it leaves downstream.
@@ -183,6 +184,8 @@ export class Flock<C extends Creature = Creature> {
   width = 0;
   height = 0;
   time = 0;
+  lakeWhirlpool?: LakeWhirlpool;
+  onReenter?: (creature: C) => void;
   creatures: C[] = [];
   events: WorldEvent[] = [];
   /** Size of the nearest individuals at size 1, px. */
@@ -351,6 +354,7 @@ export class Flock<C extends Creature = Creature> {
     c.vy = sin * cruise;
     c.bias = rand(-1, 1);
     this.animal.enter?.(c, this);
+    this.onReenter?.(c);
   }
 
   /** Past the downstream edges (done crossing), or lost far off any edge. */

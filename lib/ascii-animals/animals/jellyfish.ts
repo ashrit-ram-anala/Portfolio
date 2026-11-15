@@ -43,6 +43,7 @@ const DEFAULTS = {
   pulseRate: 1,
   pulsePower: 1,
   pulseGlow: 1,
+  ambientGlow: 0,
   tentacles: 1,
 };
 
@@ -188,11 +189,11 @@ function drawJelly(j: Jelly, pen: Pen, flock: Flock<Jelly>) {
 
   // A faint halo where the glow spills into the water, brighter and wider while the pulse glows.
   const out = pen.ink;
-  const h = 1.3 * (1 + 0.18 * flash);
+  const h = 1.3 * (1 + 0.18 * flash + 0.3 * k.ambientGlow);
   pen.shape(pose, 0.32 * h + 0.1, (u, v) => {
     const r = Math.hypot((u - u0) / (a * h), v / (b * h));
     return r < 1 && u > u0 - 0.08 && ink(out, ...RIM, INK_GLOW, ".");
-  }, { fog: clamp(base + 0.55 - 0.3 * flash, 0, 0.95) });
+  }, { fog: clamp(base + 0.55 - 0.3 * flash - 0.46 * k.ambientGlow, 0, 0.95) });
 
   // The bell, lit from within.
   pen.shape(pose, 0.42, (u, v) => {
@@ -222,7 +223,7 @@ function drawJelly(j: Jelly, pen: Pen, flock: Flock<Jelly>) {
     const glow = 0.75 + 0.25 * Math.max(clamp(du, 0, 1), r * r);
     const c = mix(BODY, CROWN, clamp(du, 0, 1) * 0.8);
     return ink(out, c[0] * glow, c[1] * glow, c[2] * glow, INK_LIT, " .");
-  }, { light: (0.92 + 0.18 * sq) * (1 + 0.6 * flash) });
+  }, { light: (0.92 + 0.18 * sq) * (1 + 0.6 * flash + 0.22 * k.ambientGlow) });
 }
 
 /** Marine snow: glowing specks that drift slowly up through the water and twinkle. */

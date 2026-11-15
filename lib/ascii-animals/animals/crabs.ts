@@ -14,6 +14,7 @@ import { SHARED_TUNING, type Animal, type Creature } from "../flock";
 import { INK_DARK, INK_SCALE, ink, type RGB } from "../ink";
 import { angleDiff, rand, TAU } from "../math";
 import { inEllipse, spotted, toSegment } from "./shapes";
+import { CRAB_CANVAS_TOP, shoreHeight, shoreBend } from "../../shoreline";
 
 /** Glossy black eyes with a white glint. */
 const EYE: RGB = [14, 10, 10];
@@ -33,6 +34,7 @@ interface Crab extends Creature {
   fleeDir: number;
   fleeSpeed: number;
   fleeFrom: number;
+  footprintGait: number;
 }
 
 const DEFAULTS = {
@@ -54,6 +56,8 @@ const DEFAULTS = {
   rest: 1,
   legSpeed: 1,
   scare: 0.55,
+  walksNearSurf: false,
+
 };
 
 const SHELL: [number, number, number] = [204, 82, 52];
@@ -84,12 +88,15 @@ export const crabs: Animal<Crab> = {
   speed: 95,
   trail: { light: [176, 146, 104], dark: [206, 178, 136] },
 
-  create: (c) => ({ ...c, running: true, until: 0, facing: Math.random() < 0.5 ? 1 : -1, gait: rand(0, TAU), alarm: 0, fleeDir: 0, fleeSpeed: 0, fleeFrom: 0 }),
+  create: (c) => ({ ...c, running: true, until: 0, facing: Math.random() < 0.5 ? 1 : -1, gait: rand(0, TAU), alarm: 0, fleeDir: 0, fleeSpeed: 0, fleeFrom: 0, footprintGait: -1 }),
 
   enter(c, flock) {
     c.running = true;
     c.until = flock.time + rand(0.3, 1.2);
     c.heading = flock.course - (c.facing * Math.PI) / 2;
+    if (flock.tuning.walksNearSurf && c.id === 1) {
+      c.y = Math.max(18, shoreHeight(flock.width) * .62 - CRAB_CANVAS_TOP + shoreBend(c.x));
+    }
   },
 
   update(c, flock, dt) {
@@ -104,10 +111,12 @@ export const crabs: Animal<Crab> = {
     const fleeing = t < c.startledUntil;
     // Bolting: run away from the tap, easing from full speed back down as it calms.
     const calm = fleeing ? (t - c.fleeFrom) / (c.startledUntil - c.fleeFrom) : 1;
-    const walk = fleeing ? c.fleeDir : course;
+    const bySurf = k.walksNearSurf && c.id === 1 && !fleeing;
+    const tideLine = shoreHeight(flock.width) * .62 + shoreBend(c.x) - CRAB_CANVAS_TOP;
+    const walk = fleeing ? c.fleeDir : bySurf ? Math.atan2((tideLine - c.y) * .32, 12) : course;
     flock.begin();
-    if (fleeing) flock.steer(c, c.fleeDir, Math.max(cruise, c.fleeSpeed * (1 - calm * calm)), 8);
-    else flock.steer(c, course, c.running ? cruise : 0, k.grip * 2);
+    if (fleeing) flock.steer(c, walk, Math.max(cruise, c.fleeSpeed * (1 - calm * calm)), 8);
+    else flock.steer(c, walk, c.running ? cruise : 0, k.grip * 2);
     flock.separate(c);
     const speed = flock.move(c, dt, fleeing ? Math.max(cruise * 2, c.fleeSpeed) : cruise * 2);
     if (flock.passed(c)) flock.reenter(c);
@@ -143,6 +152,9 @@ export const crabs: Animal<Crab> = {
     const pose = { x: c.x, y: c.y, heading: c.heading, span: S, depth: c.depth, id: c.id };
     const at = { x: 0, y: 0 };
 
+    const leavePrint = c.gait - c.footprintGait > .8 && Math.hypot(c.vx, c.vy) > 5;
+    if (leavePrint) c.footprintGait = c.gait;
+
     // Legs first, so the shell covers their roots. Alternate legs step together.
     for (const side of [-1, 1]) {
       HIPS.forEach((hu, i) => {
@@ -160,6 +172,7 @@ export const crabs: Animal<Crab> = {
         if (lift < 0.05 && Math.cos(ph) > 0.9) {
           pen.toWorld(pose, tipU, tipV, at);
           pen.shed(at.x, at.y, 0.12 * c.depth);
+          if (leavePrint) pen.footprint(at.x, at.y);
         }
       });
     }

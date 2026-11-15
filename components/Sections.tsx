@@ -1,4 +1,5 @@
 import { education, experience, profile, projects, stack } from "./data";
+import { OctopusRock } from "./OctopusRock";
 import { ExperienceRow } from "./ExperienceRow";
 import { Logo } from "./Logo";
 import { ProjectRow } from "./ProjectRow";
@@ -94,6 +95,7 @@ export function Stack() {
       <div className="wrap">
         <SectionHead title="Stack" />
         <div className="stack">
+          <OctopusRock />
           {stack.map((g) => (
             <div className="stack-group water-glass" key={g.group} data-wildlife-glass>
               <h3 className="stack-label">{g.group}</h3>

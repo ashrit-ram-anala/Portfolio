@@ -4,10 +4,11 @@ import { useEffect, useRef } from "react";
 
 type Painter = (ctx: CanvasRenderingContext2D, width: number, height: number, time: number, tint: string) => void;
 
-export function LandscapeCanvas({ className, paint, tintProperty }: {
+export function LandscapeCanvas({ className, paint, tintProperty, animate = true }: {
   className: string;
   paint: Painter;
   tintProperty?: string;
+  animate?: boolean;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -38,7 +39,7 @@ export function LandscapeCanvas({ className, paint, tintProperty }: {
       cancelAnimationFrame(frame);
       last = 0;
       draw();
-      if (visible && !motion.matches) frame = requestAnimationFrame(tick);
+      if (animate && visible && !motion.matches) frame = requestAnimationFrame(tick);
     };
     const resize = () => {
       width = element.clientWidth;
@@ -67,7 +68,7 @@ export function LandscapeCanvas({ className, paint, tintProperty }: {
       viewport.disconnect();
       motion.removeEventListener("change", syncMotion);
     };
-  }, [paint, tintProperty]);
+  }, [animate, paint, tintProperty]);
 
   return <canvas ref={canvas} className={className} aria-hidden="true" />;
 }

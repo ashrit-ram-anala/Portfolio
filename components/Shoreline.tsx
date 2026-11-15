@@ -1,11 +1,16 @@
 "use client";
 
+import { useCallback, useEffect, useRef } from "react";
+import { shoreBend, waveEdge, type CrabFootprint } from "@/lib/shoreline";
+import { InterestNotes, placeInterestTargets } from "./InterestNotes";
+import { createBeachFinds } from "./BeachFinds";
 import { LandscapeCanvas } from "./LandscapeCanvas";
 
 const CELL = 7;
 const ROW = 9;
 const FOAM = [".", ":", "~", "*", "o"];
 const WHITE_FOAM = "#fffef7";
+type Mark = CrabFootprint & { born: number };
 const WATER = ["#294f58", "#3a6970", "#508284", "#6b9995"];
 
 function noise(column: number, row: number) {
@@ -13,7 +18,7 @@ function noise(column: number, row: number) {
   return value - Math.floor(value);
 }
 
-function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number, time: number, deep: string) {
+function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number, time: number, deep: string, marks: Mark[], paintBeachFinds: ReturnType<typeof createBeachFinds>) {
   ctx.clearRect(0, 0, width, height);
   const sea = ctx.createLinearGradient(0, 0, 0, height * .62);
   sea.addColorStop(0, deep || "#101f2c");
@@ -26,9 +31,8 @@ function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number
 
   const tide = time * 1.24;
   for (let x = 0, col = 0; x < width; x += CELL, col++) {
-    const bend = Math.sin(x / 111 + .6) * 10 + Math.sin(x / 37 - .4) * 4;
-    const wash = Math.sin(tide - x / 160) * 12 + Math.sin(tide * 2 - x / 58) * 3;
-    const edge = Math.round((height * .55 + bend + wash) / 3) * 3;
+    const bend = shoreBend(x);
+    const edge = waveEdge(x, height, tide);
     const wetEdge = Math.round((height * .71 + bend) / 3) * 3;
     ctx.fillStyle = "#ae9571";
     ctx.fillRect(x, 0, CELL, Math.max(wetEdge, edge + 6));
@@ -78,8 +82,52 @@ function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number
       ctx.fillRect(x + 3, edge - 11, 2, 2);
     }
   }
+
+  const targets = paintBeachFinds(ctx, width, height, tide, CELL);
+
+  // A print can only survive in the exposed part of the wet sand.
+  for (let i = marks.length - 1; i >= 0; i--) {
+    const { x, y, born } = marks[i];
+    const column = Math.floor(x / CELL) * CELL;
+    const edge = waveEdge(column, height, tide);
+    const wetEdge = height * .71 + shoreBend(column);
+    const age = (performance.now() - born) / 1000;
+    if (x < 0 || x >= width || y <= edge + 2 || y > wetEdge + 1 || age > 18) {
+      marks.splice(i, 1);
+      continue;
+    }
+    ctx.globalAlpha = .7 * (1 - age / 18);
+    ctx.fillStyle = "#664d3d";
+    ctx.fillRect(x, y, 2, 2);
+    ctx.fillRect(x + 2, y - 1, 1, 1);
+  }
+  ctx.globalAlpha = 1;
+  return targets;
 }
 
 export function Shoreline() {
-  return <LandscapeCanvas className="shoreline" paint={paintShore} tintProperty="--deep-water-floor" />;
+  const marker = useRef<HTMLSpanElement>(null);
+  const prints = useRef<Mark[]>([]);
+  const finds = useRef(createBeachFinds());
+  const notes = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const beach = marker.current?.parentElement;
+    if (!beach) return;
+    const addMark = (event: Event) => {
+      const point = (event as CustomEvent<CrabFootprint>).detail;
+      if (point.y < 52 || point.y > 139) return;
+      prints.current.push({ x: Math.round(point.x), y: Math.round(point.y), born: performance.now() });
+      if (prints.current.length > 300) prints.current.shift();
+    };
+    beach.addEventListener("crab-footprint", addMark);
+    return () => beach.removeEventListener("crab-footprint", addMark);
+  }, []);
+  const paint = useCallback((ctx: CanvasRenderingContext2D, w: number, h: number, time: number, tint: string) => {
+    placeInterestTargets(notes.current, paintShore(ctx, w, h, time, tint, prints.current, finds.current));
+  }, []);
+  return <>
+    <span ref={marker} hidden aria-hidden="true" />
+    <LandscapeCanvas className="shoreline" paint={paint} tintProperty="--deep-water-floor" />
+    <InterestNotes host={notes} names={["paddle", "monster", "hat"]} />
+  </>;
 }

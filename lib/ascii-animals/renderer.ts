@@ -204,6 +204,10 @@ export class Pen {
     this.r.shed(x, y, amount);
   }
 
+  footprint(x: number, y: number) {
+    this.r.onFootprint?.(x, y);
+  }
+
   /** Cell index under (x, y), or -1 off screen. */
   cellIndex(x: number, y: number) {
     return this.r.cellIndex(x, y);
@@ -217,6 +221,7 @@ export class AsciiRenderer {
   rows = 0;
   palette = PALETTES.light;
   readonly pen = new Pen(this);
+  onFootprint?: (x: number, y: number) => void;
 
   private ctx: CanvasRenderingContext2D;
   private bg: HTMLCanvasElement;

@@ -97,11 +97,20 @@
   cursor: crosshair;
   mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 77%, transparent 99%);
 }
+.ocean {
+  --sky-fade: 0;
+  --ocean-night: 0;
+  --horizon: color-mix(in oklab, #d4e6e1, #b2c7d8 calc(var(--sky-fade) * 100%));
+  --open-water-surface: color-mix(in oklab, #85b7ae, #719da8 calc(var(--ocean-night) * 100%));
+}
+.below-surface { position: relative; isolation: isolate; }
+.rising-bubbles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
 .sky {
   background:
     linear-gradient(transparent 68%, var(--horizon)),
-    radial-gradient(ellipse at 87% 29%, #f9f3d7 0%, transparent 53%),
-    linear-gradient(165deg, #c2dee6, #e5eee4 76%, var(--horizon));
+    radial-gradient(ellipse at 87% 29%, color-mix(in oklab, #f5e8c8, #bdcbe0 calc(var(--sky-fade) * 100%)) 0%, transparent 53%),
+    linear-gradient(165deg, color-mix(in oklab, #c2dce6, #839bbd calc(var(--sky-fade) * 100%)), #e5eee4 76%, var(--horizon));
 }
 .habitat::before, .open-water::after, .seabed::after {
   content: "";
@@ -158,9 +167,9 @@
   --waterline: calc(var(--ridge-height) * .88);
   background: linear-gradient(in oklab,
     var(--horizon),
-    #cbded7 48px,
+    color-mix(in oklab, #cbded7, #aec3d4 calc(var(--sky-fade) * 100%)) 48px,
     #b4d2c9 var(--waterline),
-    #93c0b9 calc(var(--ridge-height) + 55px),
+    color-mix(in oklab, #93c0b9, #83aeb8 calc(var(--ocean-night) * 100%)) calc(var(--ridge-height) + 55px),
     #bcdccc 54%,
     #9cc9bd calc(100% - 95px),
     var(--open-water-surface));
@@ -171,6 +180,14 @@
   inset: 0 0 auto;
   width: 100%;
   height: calc(var(--ridge-height) + 42px);
+  pointer-events: none;
+}
+.lighthouse-art {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 auto;
+  width: 100%;
+  height: calc(var(--ridge-height) + 119px);
   pointer-events: none;
 }
 .lake .wildlife { top: var(--waterline); }
@@ -314,7 +331,7 @@
   z-index: -3;
   inset: 0 0 auto;
   height: min(100%, 950px);
-  background: conic-gradient(from 150deg at 49% -26%, transparent 5deg, #e7f9cc50 12deg, transparent 16deg 21deg, #d6f5cc33 25deg, transparent 34deg, #e1f9c73c 40deg, transparent 48deg);
+  background: conic-gradient(from 150deg at 49% -26%, transparent 5deg, color-mix(in oklab, #e7f9cc50, #d0d9ff70 calc(var(--ocean-night) * 100%)) 12deg, transparent 16deg 21deg, color-mix(in oklab, #d6f5cc33, #c6d8ff48 calc(var(--ocean-night) * 100%)) 25deg, transparent 34deg, #e1f9c73c 40deg, transparent 48deg);
   mask-image: linear-gradient(transparent 1%, #0002 12%, #000a 29%, #000 42%, #0007 68%, transparent 92%);
 }
 .contact-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
@@ -330,7 +347,7 @@
   --glyph-edge: #172e42;
   --edge-lo: #163349;
   --edge-lo2: #102739;
-  background: linear-gradient(in oklab, var(--deep-water-surface), #102538 55%, var(--deep-water-floor));
+  background: linear-gradient(in oklab, var(--deep-water-surface), color-mix(in oklab, #102538, #171d34 calc(var(--ocean-night) * 100%)) 55%, var(--deep-water-floor));
 }
 .deep-water::before { color: var(--water-grid-ink); }
 .deep-water::after {
@@ -466,7 +483,7 @@
   height: clamp(136px, 13vw, 168px);
   pointer-events: none;
 }
-.seabed .wildlife { top: 117px; height: calc(100% - 117px); }
+.seabed .wildlife { top: 72px; height: calc(100% - 72px); }
 .seabed .sec { padding-top: clamp(174px, 15vw, 192px); padding-bottom: 64px; }
 .seabed .sec-head { margin-bottom: 14px; }
 
@@ -485,4 +502,129 @@
 
 @media (prefers-reduced-motion: reduce) {
   .wildlife { cursor: default; }
+}
+
+
+.surface-world { position: relative; isolation: isolate; }
+.crane-drop-art { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.stack { position: relative; }
+.octopus-rock {
+  position: absolute;
+  z-index: 3;
+  bottom: 100%;
+  transform: translateY(3.5714%);
+  right: 5px;
+  width: clamp(122px, 17vw, 186px);
+  aspect-ratio: 186 / 112;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.octopus-den, .octopus-head {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.octopus-den { z-index: 2; }
+.octopus-head {
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(12%);
+}
+.octopus-rock[data-peeking="true"] .octopus-head {
+  opacity: 1;
+  transform: translateY(-12%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .octopus-head { transition: transform .32s cubic-bezier(.2, .7, .35, 1), opacity .17s ease; }
+}
+
+.octopus-trail {
+  position: absolute;
+  inset: -125px -24px -38px;
+  width: calc(100% + 48px);
+  height: calc(100% + 163px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.octopus-return-target {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 68px;
+  height: 60px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.interest-targets {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.interest-target {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: help;
+  padding: 0;
+  pointer-events: auto;
+}
+.interest-target:has(.interest-bubble) { z-index: 2; }
+.interest-target:focus-visible { outline-color: #fff4d5; }
+.interest-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 16px);
+  display: grid;
+  width: max-content;
+  transform: translateX(calc(-50% + var(--note-shift, 0px)));
+  padding: 6px 9px;
+  background: #f4f4e8;
+  color: #24323b;
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, calc(100% - 5px) 3px, 100% 3px, 100% calc(100% - 3px), calc(100% - 5px) calc(100% - 3px), calc(100% - 5px) 100%, 5px 100%, 5px calc(100% - 3px), 0 calc(100% - 3px), 0 3px, 5px 3px);
+  font: 500 clamp(.57rem, 2.76vw, .82rem)/1.2 var(--font-pixel), Menlo, monospace;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.interest-target[data-note-below="true"] .interest-bubble { bottom: auto; top: calc(50% + 16px); }
+.interest-target:has(.interest-bubble)::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  left: calc(50% - 6px);
+  bottom: calc(50% + 10px);
+  width: 11px;
+  height: 7px;
+  background: #f4f4e8;
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 73% 40%, 73% 70%, 55% 70%, 55% 100%, 38% 100%, 38% 70%, 20% 70%, 20% 40%, 0 40%);
+}
+.interest-target[data-note-below="true"]::after {
+  bottom: auto;
+  top: calc(50% + 10px);
+  transform: scaleY(-1);
+}
+.interest-bubble > span:not(.interest-sr) { grid-area: 1 / 1; }
+.interest-measure { visibility: hidden; }
+.interest-cursor { color: #667c80; }
+.interest-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }

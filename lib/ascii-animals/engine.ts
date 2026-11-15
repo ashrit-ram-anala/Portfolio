@@ -1,3 +1,4 @@
+import type { LakeWhirlpool } from "../whirlpool";
 import { ANIMALS, type AnimalKey } from "./animals";
 import { Flock, type Animal, type Tuning } from "./flock";
 import { AsciiRenderer, type Theme } from "./renderer";
@@ -39,7 +40,8 @@ export class AnimalEngine {
       theme = "light",
       tuning,
       interactionGroup,
-    }: { animal?: AnimalKey | Animal<any>; count?: number; theme?: Theme; tuning?: Partial<Tuning>; interactionGroup?: HTMLElement } = {},
+      onFootprint,
+    }: { animal?: AnimalKey | Animal<any>; count?: number; theme?: Theme; tuning?: Partial<Tuning>; interactionGroup?: HTMLElement; onFootprint?: (x: number, y: number) => void } = {},
   ) {
     this.count = count;
     this.interactionGroup = interactionGroup;
@@ -47,6 +49,7 @@ export class AnimalEngine {
     this.tuning = { ...this.animal.defaults, ...tuning } as Tuning;
     this.flock = new Flock(this.animal, this.tuning, count);
     this.renderer = new AsciiRenderer(canvas, this.tuning);
+    this.renderer.onFootprint = onFootprint;
     this.renderer.setFontFamily(getComputedStyle(canvas).fontFamily);
     this.renderer.setAnimal(this.animal, this.tuning);
     this.renderer.setTheme(theme);
@@ -72,8 +75,29 @@ export class AnimalEngine {
     this.schedule();
   }
 
+  queueCraneCarrier(onEntrance: (position: () => { x: number; y: number } | undefined) => void) {
+    this.flock.onReenter = crane => {
+      if (!this.visible || this.reducedMotion.matches || document.hidden) return;
+      const rect = this.canvas.getBoundingClientRect();
+      const y = rect.top + crane.y;
+      if (crane.x < rect.width || y < 16 || y > window.innerHeight - 20) return;
+
+      this.flock.onReenter = undefined;
+      onEntrance(() => {
+        const bounds = this.canvas.getBoundingClientRect();
+        if (crane.gone || crane.x < 20 || crane.x > bounds.width + crane.span) return undefined;
+        return { x: bounds.left + crane.x, y: bounds.top + crane.y };
+      });
+    };
+  }
+
+  setLakeWhirlpool(vortex: LakeWhirlpool) {
+    this.flock.lakeWhirlpool = vortex;
+  }
+
   destroy() {
     this.disposed = true;
+    this.flock.onReenter = undefined;
     cancelAnimationFrame(this.raf);
     this.resizeObserver.disconnect();
     this.intersectionObserver.disconnect();
