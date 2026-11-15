@@ -8,11 +8,10 @@ import {
   Space_Grotesk,
   Titillium_Web,
 } from "next/font/google";
-import { Cursor } from "@/components/Cursor";
 import { Scrollbar } from "@/components/Scrollbar";
-import { PullChain } from "@/components/PullChain";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
+import "./ocean.css";
 
 const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-sans" });
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif" });
@@ -32,21 +31,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const fonts = [sans, serif, f1, monster, space, winter, cali].map((f) => f.variable).join(" ");
   return (
-    <html lang="en" className={fonts} suppressHydrationWarning>
-      <head>
-        {/* apply a saved theme before first paint (light unless the visitor chose dark) */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="dark"?"dark":"light"}catch(e){}`,
-          }}
-        />
-      </head>
+    <html lang="en" className={fonts}>
       <body>
         <SmoothScroll />
-        <PullChain />
         {children}
         <Scrollbar />
-        <Cursor />
       </body>
     </html>
   );

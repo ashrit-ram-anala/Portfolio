@@ -1,16 +1,12 @@
 import { education, experience, profile, projects, stack } from "./data";
-import { HeroLight } from "./HeroLight";
-import { Coursework } from "./Coursework";
 import { ExperienceRow } from "./ExperienceRow";
 import { Logo } from "./Logo";
 import { ProjectRow } from "./ProjectRow";
-import { SealCoin } from "./SealCoin";
 import { Socials } from "./Socials";
 
-function SectionHead({ num, title }: { num: string; title: string }) {
+function SectionHead({ title }: { title: string }) {
   return (
     <header className="sec-head">
-      <span className="sec-num">{num}</span>
       <h2>{title}</h2>
     </header>
   );
@@ -19,9 +15,8 @@ function SectionHead({ num, title }: { num: string; title: string }) {
 export function Intro() {
   return (
     <section className="sec sec-intro" aria-label="Introduction">
-      <HeroLight />
       <div className="wrap">
-        <h1 className="name raised">{profile.name}</h1>
+        <h1 className="name">{profile.name}</h1>
         <p className="lede">{profile.tagline}</p>
         <Socials />
       </div>
@@ -33,7 +28,7 @@ export function Experience() {
   return (
     <section className="sec" id="experience" aria-label="Experience">
       <div className="wrap">
-        <SectionHead num="01" title="Experience" />
+        <SectionHead title="Experience" />
         <ol className="xp-list">
           {experience.map((e) => (
             <ExperienceRow key={`${e.company}-${e.year}`} e={e} />
@@ -48,7 +43,7 @@ export function Projects() {
   return (
     <section className="sec" id="projects" aria-label="Projects">
       <div className="wrap">
-        <SectionHead num="02" title="Projects" />
+        <SectionHead title="Projects" />
         <ul className="proj">
           {projects.map((p) => (
             <ProjectRow key={p.name} p={p} />
@@ -63,19 +58,29 @@ export function Education() {
   return (
     <section className="sec" id="education" aria-label="Education">
       <div className="wrap">
-        <SectionHead num="03" title="Education" />
-        <div className="edu">
-          <SealCoin />
-          <div className="edu-body">
-            <p className="edu-school">{education.school}</p>
-            <p className="edu-degree">
-              {education.degree} · {education.honors}
-            </p>
-            <p className="edu-college">{education.college}</p>
-            <Coursework items={education.coursework} />
-            <p className="edu-orgs">
-              <span className="edu-label">Involved in</span> {education.organizations.join(" · ")}
-            </p>
+        <SectionHead title="Education" />
+        <div className="edu water-glass" data-wildlife-glass>
+          <header className="edu-identity">
+            <span className="edu-seal" aria-hidden="true" />
+            <div>
+              <h3 className="edu-school">{education.school}</h3>
+              <p className="edu-degree">{education.degree} · {education.honors}</p>
+              <p className="edu-college">{education.college}</p>
+            </div>
+          </header>
+          <div className="edu-details">
+            <div className="edu-entry">
+              <h4 className="edu-label">Coursework</h4>
+              <ul className="edu-courses">
+                {education.coursework.map((course) => <li key={course}>{course}</li>)}
+              </ul>
+            </div>
+            <div className="edu-entry">
+              <h4 className="edu-label">Involved in</h4>
+              <ul className="edu-orgs">
+                {education.organizations.map((organization) => <li key={organization}>{organization}</li>)}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -87,14 +92,14 @@ export function Stack() {
   return (
     <section className="sec" id="stack" aria-label="Stack">
       <div className="wrap">
-        <SectionHead num="04" title="Stack" />
+        <SectionHead title="Stack" />
         <div className="stack">
           {stack.map((g) => (
-            <div key={g.group}>
-              <p className="stack-label">{g.group}</p>
+            <div className="stack-group water-glass" key={g.group} data-wildlife-glass>
+              <h3 className="stack-label">{g.group}</h3>
               <ul className="stack-grid">
                 {g.items.map((it) => (
-                  <li key={it.name} title={it.name}>
+                  <li key={it.name}>
                     <Logo name={it.logo} layer="base" className="stack-logo" />
                     <span className="stack-name">{it.name}</span>
                   </li>
@@ -112,12 +117,10 @@ export function Contact() {
   return (
     <section className="sec" id="contact" aria-label="Contact">
       <div className="wrap">
-        <SectionHead num="05" title="Contact" />
-        <p className="contact-big raised">Let&rsquo;s talk.</p>
+        <SectionHead title="Let’s talk." />
         <p className="contact-links">
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
         </p>
-        <p className="footer">© 2026 {profile.name}</p>
       </div>
     </section>
   );

@@ -3,103 +3,127 @@
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
 
-/**
- * A scrollbar pressed into the paper. The native one is hidden because the browser paints it above
- * the page, where the paper cursor can't reach; this one is an ordinary fixed element under it.
- * No track: the thumb itself is the groove. It shows while scrolling, then fades; it can be dragged.
- */
+function lineOutline(length: number) {
+  // Step the line a pixel at a time, returning it to the hook's eye at the end.
+  const offsets = [0, 0, 1, 1, 0, 0, -1, -1];
+  const points = [{ x: 4, y: 0 }];
+  for (let y = 0; y < length - 14; y += 19) {
+    const x = 4 + offsets[(y / 19) % offsets.length];
+    const end = Math.min(y + 19, length - 14);
+    points.push({ x, y }, { x, y: end });
+  }
+  points.push({ x: 4, y: Math.max(0, length - 14) }, { x: 4, y: length });
+
+  const left = points.map(({ x, y }) => `${x}px ${y}px`);
+  const right = points.reverse().map(({ x, y }) => `${x + 2}px ${y}px`);
+  return `polygon(${[...left, ...right].join(",")})`;
+}
+
 export function Scrollbar() {
   const bar = useRef<HTMLDivElement>(null);
   const thumb = useRef<HTMLDivElement>(null);
+  const line = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
 
   useEffect(() => {
-    const b = bar.current;
-    const t = thumb.current;
-    if (!b || !t) return;
+    const track = bar.current;
+    const hook = thumb.current;
+    const cord = line.current;
+    if (!track || !hook || !cord) return;
 
     const doc = document.documentElement;
+    const desktop = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const limit = () => Math.max(0, doc.scrollHeight - window.innerHeight);
+    const travel = () => Math.max(1, track.clientHeight - hook.offsetHeight);
 
     const update = () => {
-      const view = window.innerHeight;
-      const full = doc.scrollHeight;
-      const track = b.clientHeight;
-      if (full <= view + 1) {
-        b.dataset.hidden = "true";
-        return;
-      }
-      b.dataset.hidden = "false";
-      const h = Math.max(32, (view / full) * track);
-      const y = (window.scrollY / (full - view)) * (track - h);
-      t.style.height = `${h}px`;
-      t.style.transform = `translate3d(0, ${y}px, 0)`;
+      const max = limit();
+      track.toggleAttribute("data-ready", desktop.matches && max > 0);
+      const progress = max ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      const offset = Math.round(progress * travel());
+      track.style.setProperty("--hook-y", `${offset}px`);
+      cord.style.clipPath = lineOutline(offset + 8);
+      hook.setAttribute("aria-valuenow", String(Math.round(progress * 100)));
     };
 
-    // shown on scroll, faded after a moment of stillness (held open while hovered or dragged)
-    let idle: ReturnType<typeof setTimeout> | undefined;
-    const rest = () => {
-      clearTimeout(idle);
-      idle = setTimeout(() => {
-        if (b.dataset.drag !== "true" && !t.matches(":hover")) b.dataset.active = "false";
-      }, 900);
-    };
-    const onScroll = () => {
-      update();
-      b.dataset.active = "true";
-      rest();
-    };
-
-    let startY = 0;
-    let startScroll = 0;
-    const onDown = (e: PointerEvent) => {
-      e.preventDefault();
-      t.setPointerCapture(e.pointerId);
-      startY = e.clientY;
-      startScroll = window.scrollY;
-      b.dataset.drag = "true";
-    };
-    const onMove = (e: PointerEvent) => {
-      if (b.dataset.drag !== "true") return;
-      const view = window.innerHeight;
-      const full = doc.scrollHeight;
-      const room = b.clientHeight - t.offsetHeight;
-      const y = startScroll + ((e.clientY - startY) / room) * (full - view);
+    const scroll = (top: number) => {
+      const y = Math.min(limit(), Math.max(0, top));
       if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
       else window.scrollTo(0, y);
+      update();
     };
-    const onUp = (e: PointerEvent) => {
-      if (t.hasPointerCapture(e.pointerId)) t.releasePointerCapture(e.pointerId);
-      b.dataset.drag = "false";
-      rest();
+
+    let drag: { pointer: number; y: number; scroll: number } | undefined;
+    const onDown = (e: PointerEvent) => {
+      if (e.button !== 0 || !e.isPrimary) return;
+      e.preventDefault();
+      hook.focus({ preventScroll: true });
+      drag = { pointer: e.pointerId, y: e.clientY, scroll: window.scrollY };
+    };
+    const onMove = (e: PointerEvent) => {
+      if (drag?.pointer !== e.pointerId) return;
+      if ((e.buttons & 1) === 0) {
+        drag = undefined;
+        return;
+      }
+      scroll(drag.scroll + (e.clientY - drag.y) * limit() / travel());
+    };
+    const onEnd = (e: PointerEvent) => {
+      if (drag?.pointer === e.pointerId) drag = undefined;
+    };
+    const onKey = (e: KeyboardEvent) => {
+      const y = window.scrollY;
+      const page = window.innerHeight * .9;
+      const targets: Record<string, number> = {
+        ArrowUp: y - 40, ArrowDown: y + 40,
+        PageUp: y - page, PageDown: y + page,
+        Home: 0, End: limit(),
+      };
+      if (!Object.hasOwn(targets, e.key)) return;
+      e.preventDefault();
+      scroll(targets[e.key]);
     };
 
     update();
-    const ro = new ResizeObserver(update);
-    ro.observe(document.body);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(document.body);
+    desktop.addEventListener("change", update);
+    window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
-    t.addEventListener("pointerdown", onDown);
-    t.addEventListener("pointermove", onMove);
-    t.addEventListener("pointerup", onUp);
-    t.addEventListener("pointercancel", onUp);
-    t.addEventListener("pointerleave", rest);
+    hook.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onEnd);
+    window.addEventListener("pointercancel", onEnd);
+    hook.addEventListener("keydown", onKey);
     return () => {
-      clearTimeout(idle);
-      ro.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+      desktop.removeEventListener("change", update);
+      window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
-      t.removeEventListener("pointerdown", onDown);
-      t.removeEventListener("pointermove", onMove);
-      t.removeEventListener("pointerup", onUp);
-      t.removeEventListener("pointercancel", onUp);
-      t.removeEventListener("pointerleave", rest);
+      hook.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onEnd);
+      window.removeEventListener("pointercancel", onEnd);
+      hook.removeEventListener("keydown", onKey);
     };
   }, [lenis]);
 
   return (
-    <div ref={bar} className="scrollbar" aria-hidden="true" data-hidden="true">
-      <div ref={thumb} className="scrollbar-thumb">
-        <span />
+    <div ref={bar} className="fishing-scrollbar">
+      <div ref={line} className="fishing-line" aria-hidden="true" />
+      <div
+        ref={thumb}
+        className="fishing-thumb"
+        role="scrollbar"
+        aria-label="Page scroll"
+        aria-controls="top"
+        aria-orientation="vertical"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={0}
+        tabIndex={0}
+      >
+        <span className="fishing-hook" aria-hidden="true" />
       </div>
     </div>
   );

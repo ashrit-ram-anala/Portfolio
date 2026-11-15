@@ -3,13 +3,13 @@
 import type { Project } from "./data";
 import { useTilt } from "./useTilt";
 
-/** A project link; on hover its screenshot floats into the empty space and tilts with the cursor. */
+/** A project card with a screenshot preview that tilts toward the pointer. */
 export function ProjectRow({ p }: { p: Project }) {
-  const { ref, onPointerMove, reset } = useTilt<HTMLAnchorElement>({ x: 14, y: 10 });
+  const { ref, onPointerMove, reset } = useTilt<HTMLAnchorElement>({ x: 6, y: 2.5 });
 
   return (
     <li>
-      <a ref={ref} href={p.href} target="_blank" rel="noreferrer" onPointerMove={onPointerMove} onPointerLeave={reset}>
+      <a className="water-glass" ref={ref} href={p.href} target="_blank" rel="noreferrer" onPointerMove={onPointerMove} onPointerLeave={reset}>
         <span className="proj-main">
           <span className="proj-name">{p.name}</span>
           <span className="proj-context">{p.context}</span>
