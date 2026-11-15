@@ -234,6 +234,11 @@ export class AsciiRenderer {
 
   private energy = new Float32Array(0);
   private energyTmp = new Float32Array(0);
+  private activeTrail = new Set<number>();
+  private nextTrail = new Set<number>();
+  private trailNeighbors = new Set<number>();
+  private firstRow = 0;
+  private lastRow = 0;
   private trailStyles: string[] = [];
   private hue = hueMatrix(0);
   private hueOn = false;
@@ -269,6 +274,7 @@ export class AsciiRenderer {
     this.animal = animal;
     this.tuning = tuning;
     this.energy.fill(0);
+    this.activeTrail.clear();
     this.restyle();
   }
 
@@ -317,6 +323,7 @@ export class AsciiRenderer {
 
     const n = this.cols * this.rows;
     if (this.cols !== prevCols || this.rows !== prevRows) {
+      this.activeTrail.clear();
       this.energy = new Float32Array(n);
       this.energyTmp = new Float32Array(n);
       this.cellFlag = new Uint8Array(n);
@@ -329,7 +336,7 @@ export class AsciiRenderer {
 
   private paintBackground() {
     const g = this.bg.getContext("2d");
-    if (!g) return;
+    if (!g || this.tuning.grid <= 0) return;
     const { width: W, height: H, dpr, cw, ch } = this;
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, W, H);
@@ -337,23 +344,32 @@ export class AsciiRenderer {
     paintGrid(g, W, H, cw, ch, dpr, `rgba(${gr},${gg},${gb},${(ga * this.tuning.grid).toFixed(3)})`);
   }
 
-  render(flock: Flock<any>, dt: number) {
+  render(flock: Flock<any>, dt: number, visibleTop = 0, visibleBottom = this.height) {
     const { ctx, dpr, cols, ch } = this;
     if (cols === 0) return;
+    // Include adjacent rows for glyph edges and the cards' backdrop blur.
+    this.firstRow = Math.max(0, Math.floor(visibleTop / ch) - 2);
+    this.lastRow = Math.min(this.rows, Math.ceil(visibleBottom / ch) + 2);
+    if (this.firstRow >= this.lastRow) return;
     this.pen.t = flock.time;
 
     for (const e of flock.events) this.stamp(e.x, e.y, e.radius, e.amount);
     flock.events.length = 0;
     this.diffuse(dt);
 
-    this.cellFlag.fill(CELL_NONE);
+    this.cellFlag.fill(CELL_NONE, this.firstRow * cols, this.lastRow * cols);
     const animal = flock.animal;
     if (animal.drawAll) animal.drawAll(flock, this.pen);
     else if (animal.draw) for (const c of flock.creatures) animal.draw(c, this.pen, flock);
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    if (this.tuning.grid > 0) ctx.drawImage(this.bg, 0, 0);
+    const top = Math.round(this.firstRow * ch * dpr);
+    const bottom = Math.min(this.canvas.height, Math.round(this.lastRow * ch * dpr));
+    const height = bottom - top;
+    ctx.clearRect(0, top, this.canvas.width, height);
+    if (this.tuning.grid > 0) {
+      ctx.drawImage(this.bg, 0, top, this.canvas.width, height, 0, top, this.canvas.width, height);
+    }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     this.drawTrail(flock.time);
@@ -375,11 +391,15 @@ export class AsciiRenderer {
 
   shed(x: number, y: number, amount: number) {
     const i = this.cellIndex(x, y);
-    if (i >= 0) this.energy[i] = Math.min(1.6, this.energy[i] + amount * this.tuning.trail);
+    if (i >= 0 && this.tuning.trail > 0) this.addTrail(i, amount * this.tuning.trail);
+  }
+
+  private addTrail(index: number, amount: number) {
+    this.energy[index] = Math.min(1.6, this.energy[index] + amount);
+    this.activeTrail.add(index);
   }
 
   private stamp(x: number, y: number, radius: number, amount: number) {
-    const field = this.energy;
     const c0 = Math.floor(x / this.cw);
     const r0 = Math.floor(y / this.ch);
     for (let r = r0 - radius; r <= r0 + radius; r++) {
@@ -388,45 +408,66 @@ export class AsciiRenderer {
         const d = Math.hypot(c - c0, (r - r0) * 1.4);
         if (d > radius + 0.5) continue;
         const i = r * this.cols + c;
-        field[i] = Math.min(1.6, field[i] + amount * (1 - d / (radius + 1)));
+        this.addTrail(i, amount * (1 - d / (radius + 1)));
       }
     }
   }
 
   /** Blur + decay so the trail drifts outward and fades. */
   private diffuse(dt: number) {
-    const { cols, rows, energy, energyTmp: tmp } = this;
+    const { cols, energy, energyTmp, activeTrail, nextTrail, trailNeighbors } = this;
+    if (!activeTrail.size) return;
     const decay = Math.exp(-dt * this.tuning.trailFade);
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const i = r * cols + c;
-        const l = c > 0 ? energy[i - 1] : energy[i];
-        const rt = c < cols - 1 ? energy[i + 1] : energy[i];
-        const u = r > 0 ? energy[i - cols] : energy[i];
-        const d = r < rows - 1 ? energy[i + cols] : energy[i];
-        tmp[i] = (energy[i] * 4 + l + rt + u + d) * 0.125 * decay;
-      }
+
+    for (const i of activeTrail) {
+      const col = i % cols;
+      trailNeighbors.add(i);
+      if (col > 0) trailNeighbors.add(i - 1);
+      if (col < cols - 1) trailNeighbors.add(i + 1);
+      if (i >= cols) trailNeighbors.add(i - cols);
+      if (i + cols < energy.length) trailNeighbors.add(i + cols);
     }
-    this.energy = tmp;
+    for (const i of trailNeighbors) {
+      const col = i % cols;
+      const l = col > 0 ? energy[i - 1] : energy[i];
+      const rt = col < cols - 1 ? energy[i + 1] : energy[i];
+      const u = i >= cols ? energy[i - cols] : energy[i];
+      const d = i + cols < energy.length ? energy[i + cols] : energy[i];
+      const value = (energy[i] * 4 + l + rt + u + d) * 0.125 * decay;
+      // Keep faint neighbors for diffusion and retire them well below the draw threshold.
+      if (value < 0.01) continue;
+      energyTmp[i] = value;
+      nextTrail.add(i);
+    }
+    for (const i of activeTrail) energy[i] = 0;
+    activeTrail.clear();
+    trailNeighbors.clear();
+    this.energy = energyTmp;
     this.energyTmp = energy;
+    this.activeTrail = nextTrail;
+    this.nextTrail = activeTrail;
   }
 
   private drawTrail(t: number) {
-    const { ctx, cols, cw, ch, energy, cellFlag } = this;
+    const { ctx, cols, cw, ch, energy, cellFlag, firstRow, lastRow } = this;
+    const firstCell = firstRow * cols;
+    const endCell = lastRow * cols;
     const small = Math.max(2, Math.round(cw * 0.19));
-    for (let level = 0; level < ALPHA_LEVELS; level++) {
-      ctx.fillStyle = this.trailStyles[level];
-      for (let i = 0; i < energy.length; i++) {
-        const e = energy[i];
-        if (e < 0.12 || cellFlag[i] === CELL_SOLID) continue;
-        const col = i % cols;
-        const row = (i / cols) | 0;
-        // Each grain twinkles on its own clock.
-        const twinkle = 0.75 + 0.25 * Math.sin(t * 5 + hash3(col, row, 3) * 40);
-        if (clamp(Math.floor(e * twinkle * 4 * ALPHA_LEVELS) - 1, 0, ALPHA_LEVELS - 1) !== level) continue;
-        const size = e > 0.6 ? small + 1 : small;
-        ctx.fillRect(Math.round(col * cw + cw * 0.5 - size / 2), Math.round(row * ch + ch * 0.6 - size / 2), size, size);
+    let previousLevel = -1;
+    for (const i of this.activeTrail) {
+      if (i < firstCell || i >= endCell) continue;
+      const e = energy[i];
+      if (e < 0.12 || cellFlag[i] === CELL_SOLID) continue;
+      const col = i % cols;
+      const row = (i / cols) | 0;
+      const twinkle = 0.75 + 0.25 * Math.sin(t * 5 + hash3(col, row, 3) * 40);
+      const level = clamp(Math.floor(e * twinkle * 4 * ALPHA_LEVELS) - 1, 0, ALPHA_LEVELS - 1);
+      if (level !== previousLevel) {
+        ctx.fillStyle = this.trailStyles[level];
+        previousLevel = level;
       }
+      const size = e > 0.6 ? small + 1 : small;
+      ctx.fillRect(Math.round(col * cw + cw * 0.5 - size / 2), Math.round(row * ch + ch * 0.6 - size / 2), size, size);
     }
   }
 
@@ -451,7 +492,7 @@ export class AsciiRenderer {
    * glyphs, which never cover anything solid.
    */
   shape(p: Pose, reach: number, sample: Sampler, { light = 1, tilt = 0, fog = (1 - p.depth) * this.tuning.fog }: ShapeOptions) {
-    const { cellFlag, cellFill, cellColor, cellGlyph, cw, ch, cols, rows } = this;
+    const { cellFlag, cellFill, cellColor, cellGlyph, cw, ch, cols, firstRow, lastRow } = this;
     const ink = this.pen.ink;
     const t = this.pen.t;
     const { shimmer, sparkle } = this.tuning;
@@ -461,8 +502,8 @@ export class AsciiRenderer {
     const R = reach * S;
     const c0 = Math.max(0, Math.floor((p.x - R) / cw));
     const c1 = Math.min(cols - 1, Math.floor((p.x + R) / cw));
-    const r0 = Math.max(0, Math.floor((p.y - R) / ch));
-    const r1 = Math.min(rows - 1, Math.floor((p.y + R) / ch));
+    const r0 = Math.max(firstRow, Math.floor((p.y - R) / ch));
+    const r1 = Math.min(lastRow - 1, Math.floor((p.y + R) / ch));
 
     for (let r = r0; r <= r1; r++) {
       for (let c = c0; c <= c1; c++) {
@@ -622,9 +663,9 @@ export class AsciiRenderer {
   }
 
   private drawCells() {
-    const { ctx, cols, rows, cw, ch, cellFlag, cellFill, cellColor, cellGlyph } = this;
-    const n = cols * rows;
-    for (let i = 0; i < n; i++) {
+    const { ctx, cols, firstRow, lastRow, cw, ch, cellFlag, cellFill, cellColor, cellGlyph } = this;
+    const end = cols * lastRow;
+    for (let i = cols * firstRow; i < end; i++) {
       const flag = cellFlag[i];
       if (!flag) continue;
       const x = (i % cols) * cw;

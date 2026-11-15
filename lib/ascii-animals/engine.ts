@@ -129,7 +129,7 @@ export class AnimalEngine {
   private resize() {
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     this.renderer.resize(rect.width, rect.height, dpr);
     this.flock.resize(rect.width, rect.height);
     if (this.reducedMotion.matches) this.drawStill();
@@ -153,7 +153,8 @@ export class AnimalEngine {
       steps++;
     }
     if (steps === MAX_STEPS) this.acc = 0;
-    this.renderer.render(this.flock, dt);
+    const { top } = this.canvas.getBoundingClientRect();
+    this.renderer.render(this.flock, dt, -top, window.innerHeight - top);
     this.raf = requestAnimationFrame(this.frame);
   };
 

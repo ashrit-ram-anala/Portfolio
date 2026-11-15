@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { LandscapeCanvas } from "./LandscapeCanvas";
 
 const STREAMS = [
@@ -35,40 +34,4 @@ function paintBubbles(ctx: CanvasRenderingContext2D, width: number, height: numb
 
 export function RisingBubbles() {
   return <LandscapeCanvas className="rising-bubbles" paint={paintBubbles} />;
-}
-
-export function DuskLighting() {
-  const marker = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const ocean = marker.current?.parentElement;
-    const hero = ocean?.querySelector(".sky");
-    const depth = ocean?.querySelector(".deep-water");
-    if (!ocean || !hero || !depth) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const traveled = -ocean.getBoundingClientRect().top;
-      const skyFade = Math.max(0, Math.min(1, traveled / (hero.clientHeight * .92)));
-      const night = Math.max(0, Math.min(1, traveled / Math.max(1, depth.getBoundingClientRect().top + traveled)));
-      ocean.style.setProperty("--sky-fade", skyFade.toFixed(3));
-      ocean.style.setProperty("--ocean-night", night.toFixed(3));
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    const size = new ResizeObserver(schedule);
-    size.observe(ocean);
-    window.addEventListener("scroll", schedule, { passive: true });
-    return () => {
-      cancelAnimationFrame(frame);
-      size.disconnect();
-      window.removeEventListener("scroll", schedule);
-    };
-  }, []);
-
-  return <span ref={marker} hidden aria-hidden="true" />;
 }

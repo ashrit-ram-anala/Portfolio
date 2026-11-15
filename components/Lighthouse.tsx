@@ -11,7 +11,6 @@ function block(ctx: CanvasRenderingContext2D, color: string, x: number, y: numbe
 
 function paintLighthouse(ctx: CanvasRenderingContext2D, width: number, height: number, time: number) {
   ctx.clearRect(0, 0, width, height);
-  const night = Number(getComputedStyle(ctx.canvas).getPropertyValue("--ocean-night")) || 0;
   const ridge = height - 119;
   const water = Math.round(ridge * .87 / PIXEL) * PIXEL;
   const x = Math.round(width * (width < 640 ? .84 : .9) / PIXEL) * PIXEL;
@@ -19,7 +18,7 @@ function paintLighthouse(ctx: CanvasRenderingContext2D, width: number, height: n
   const left = Math.sin(time * .58) * .5 + .5;
   const throwLength = x * (.22 + left * .61);
   const targetY = water + 31 + left * 21;
-  const glow = (.29 + night * .63) * (.75 + left * .25);
+  const glow = .29 * (.75 + left * .25);
 
   // Long, tapered strips keep the beam stepped even as it sweeps.
   for (let distance = 0; distance < throwLength; distance += PIXEL) {
