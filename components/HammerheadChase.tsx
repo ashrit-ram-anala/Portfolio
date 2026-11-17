@@ -369,7 +369,7 @@ export function HammerheadChase() {
         event.ctrlKey || event.altKey || event.metaKey) return;
       begin();
     };
-    if (process.env.NODE_ENV === "development") window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
     motion.addEventListener("change", stop);
     document.addEventListener("visibilitychange", stop);
     return () => {
