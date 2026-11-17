@@ -1,6 +1,6 @@
-import type { LakeWhirlpool } from "../whirlpool";
 import { ANIMALS, type AnimalKey } from "./animals";
-import { Flock, type Animal, type Tuning } from "./flock";
+import { Flock, type Animal, type Creature, type Tuning } from "./flock";
+import { angleDiff, clamp } from "./math";
 import { AsciiRenderer, type Theme } from "./renderer";
 
 const STEP = 1 / 60;
@@ -15,6 +15,12 @@ const MAX_STEPS = 4;
  * prefers-reduced-motion.
  */
 export class AnimalEngine {
+  private static readonly instances = new WeakMap<HTMLCanvasElement, AnimalEngine>();
+
+  static forCanvas(canvas: HTMLCanvasElement) {
+    return this.instances.get(canvas);
+  }
+
   /** The current animal's live knobs; change them through set() so resizes and repaints happen. */
   tuning: Tuning;
   animal: Animal<any>;
@@ -43,6 +49,7 @@ export class AnimalEngine {
       onFootprint,
     }: { animal?: AnimalKey | Animal<any>; count?: number; theme?: Theme; tuning?: Partial<Tuning>; interactionGroup?: HTMLElement; onFootprint?: (x: number, y: number) => void } = {},
   ) {
+    AnimalEngine.instances.set(canvas, this);
     this.count = count;
     this.interactionGroup = interactionGroup;
     this.animal = resolve(animal);
@@ -91,11 +98,68 @@ export class AnimalEngine {
     };
   }
 
-  setLakeWhirlpool(vortex: LakeWhirlpool) {
-    this.flock.lakeWhirlpool = vortex;
+  swimmersOnCanvas() {
+    const bounds = this.canvas.getBoundingClientRect();
+    if (this.disposed) return [];
+    return this.flock.creatures.flatMap(fish => {
+      const x = bounds.left + fish.x;
+      const y = bounds.top + fish.y;
+      if (fish.gone || this.flock.borrowed.has(fish) || fish.x < 0 || fish.x > bounds.width ||
+        fish.y < 0 || fish.y > bounds.height) return [];
+      return [{ fish, x, y, vx: fish.vx, vy: fish.vy, engine: this }];
+    });
+  }
+
+  borrowSwimmer(fish: Creature, yOffset: number) {
+    const origin = this.flock;
+    const animal = origin.animal;
+    if (!animal.draw || !animal.steerPanic || !origin.creatures.includes(fish) || origin.borrowed.has(fish)) return;
+    origin.borrowed.add(fish);
+    const original = { x: fish.x, y: fish.y, vx: fish.vx, vy: fish.vy, heading: fish.heading };
+    const tuning = { ...this.tuning, grid: 0, trail: 0 };
+    const flock = new Flock({ ...animal, drawAll: undefined }, tuning, 0);
+    flock.creatures.push(fish);
+    flock.time = origin.time;
+    const canvas = document.createElement("canvas");
+    const renderer = new AsciiRenderer(canvas, tuning);
+    renderer.setTheme("dark");
+    renderer.setAnimal(animal, tuning);
+    renderer.setFontFamily(getComputedStyle(this.canvas).fontFamily);
+    fish.y += yOffset;
+    animal.shiftPanicOrigin?.(fish, yOffset);
+    return {
+      canvas,
+      paint: (width: number, height: number, top: number, bottom: number, dt: number) => {
+        if (canvas.width !== width || canvas.height !== height) renderer.resize(width, height, 1);
+        flock.time += dt;
+        renderer.render(flock, dt, top, bottom);
+      },
+      steer: (x: number, y: number, dt: number) => {
+        fish.vx = (x - fish.x) / dt;
+        fish.vy = (y - fish.y) / dt;
+        fish.x = x;
+        fish.y = y;
+        if (Math.hypot(fish.vx, fish.vy) > 1) {
+          const desired = Math.atan2(fish.vy, fish.vx);
+          fish.heading += clamp(angleDiff(fish.heading, desired), -5 * dt, 5 * dt);
+        }
+        animal.steerPanic?.(fish, flock, dt);
+        return { fish, x, y, vx: fish.vx, vy: fish.vy, engine: this };
+      },
+      release: (exited: boolean) => {
+        origin.borrowed.delete(fish);
+        if (fish.gone || this.disposed || this.flock !== origin) return;
+        if (exited) origin.reenter(fish);
+        else {
+          Object.assign(fish, original);
+          animal.enter?.(fish, origin);
+        }
+      },
+    };
   }
 
   destroy() {
+    AnimalEngine.instances.delete(this.canvas);
     this.disposed = true;
     this.flock.onReenter = undefined;
     cancelAnimationFrame(this.raf);

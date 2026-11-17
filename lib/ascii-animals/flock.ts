@@ -1,4 +1,3 @@
-import type { LakeWhirlpool } from "../whirlpool";
 /**
  * The shared world every animal lives in: a population that crosses the
  * screen along one course, re-entering upstream once it leaves downstream.
@@ -158,6 +157,8 @@ export interface Animal<C extends Creature = Creature> {
   tap?(x: number, y: number, flock: Flock<C>): void;
   /** React to a click; (dx, dy) points away from it and strength fades 1 → 0 with distance. */
   startle?(c: C, dx: number, dy: number, strength: number, flock: Flock<C>): void;
+  shiftPanicOrigin?(c: C, dy: number): void;
+  steerPanic?(c: C, flock: Flock<C>, dt: number): void;
   /** Draw one creature. */
   draw?(c: C, pen: Pen, flock: Flock<C>): void;
   /** Draw the whole flock at once instead, for animals drawn as a crowd. */
@@ -184,9 +185,9 @@ export class Flock<C extends Creature = Creature> {
   width = 0;
   height = 0;
   time = 0;
-  lakeWhirlpool?: LakeWhirlpool;
   onReenter?: (creature: C) => void;
   creatures: C[] = [];
+  readonly borrowed = new Set<C>();
   events: WorldEvent[] = [];
   /** Size of the nearest individuals at size 1, px. */
   base = 120;
@@ -255,6 +256,7 @@ export class Flock<C extends Creature = Creature> {
     }
     this.events.push({ x, y, radius: 6, amount: 1.4 });
     for (const c of this.creatures) {
+      if (this.borrowed.has(c)) continue;
       const dx = c.x - x;
       const dy = c.y - y;
       const d = Math.hypot(dx, dy) || 1;
@@ -279,7 +281,7 @@ export class Flock<C extends Creature = Creature> {
       c.span = this.base * c.depth * this.tuning.size;
     }
     this.animal.prepare?.(this, dt);
-    for (const c of this.creatures) this.animal.update(c, this, dt);
+    for (const c of this.creatures) if (!this.borrowed.has(c)) this.animal.update(c, this, dt);
   }
 
   /** Add or remove individuals until the population matches the tuning. */
@@ -389,6 +391,7 @@ export class Flock<C extends Creature = Creature> {
   separate(c: Creature, strength = this.tuning.separation, range = 0.42) {
     if (strength <= 0) return;
     for (const o of this.creatures) {
+      if (this.borrowed.has(o)) continue;
       if (o === c || Math.abs(o.depth - c.depth) > 0.18) continue;
       const ox = c.x - o.x;
       const oy = c.y - o.y;

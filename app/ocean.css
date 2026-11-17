@@ -98,6 +98,7 @@
   mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 77%, transparent 99%);
 }
 .below-surface { position: relative; isolation: isolate; }
+.hammerhead-chase { position: absolute; inset: 0 0 auto; width: 100%; z-index: -1; pointer-events: none; }
 .rising-bubbles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
 .sky {
@@ -559,66 +560,4 @@
   background: transparent;
   cursor: pointer;
   pointer-events: auto;
-}
-
-.interest-targets {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
-.interest-target {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  cursor: help;
-  padding: 0;
-  pointer-events: auto;
-}
-.interest-target:has(.interest-bubble) { z-index: 2; }
-.interest-target:focus-visible { outline-color: #fff4d5; }
-.interest-bubble {
-  position: absolute;
-  left: 50%;
-  bottom: calc(50% + 16px);
-  display: grid;
-  width: max-content;
-  transform: translateX(calc(-50% + var(--note-shift, 0px)));
-  padding: 6px 9px;
-  background: #f4f4e8;
-  color: #24323b;
-  clip-path: polygon(5px 0, calc(100% - 5px) 0, calc(100% - 5px) 3px, 100% 3px, 100% calc(100% - 3px), calc(100% - 5px) calc(100% - 3px), calc(100% - 5px) 100%, 5px 100%, 5px calc(100% - 3px), 0 calc(100% - 3px), 0 3px, 5px 3px);
-  font: 500 clamp(.57rem, 2.76vw, .82rem)/1.2 var(--font-pixel), Menlo, monospace;
-  text-align: left;
-  white-space: nowrap;
-  pointer-events: none;
-}
-.interest-target[data-note-below="true"] .interest-bubble { bottom: auto; top: calc(50% + 16px); }
-.interest-target:has(.interest-bubble)::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  left: calc(50% - 6px);
-  bottom: calc(50% + 10px);
-  width: 11px;
-  height: 7px;
-  background: #f4f4e8;
-  clip-path: polygon(0 0, 100% 0, 100% 40%, 73% 40%, 73% 70%, 55% 70%, 55% 100%, 38% 100%, 38% 70%, 20% 70%, 20% 40%, 0 40%);
-}
-.interest-target[data-note-below="true"]::after {
-  bottom: auto;
-  top: calc(50% + 10px);
-  transform: scaleY(-1);
-}
-.interest-bubble > span:not(.interest-sr) { grid-area: 1 / 1; }
-.interest-measure { visibility: hidden; }
-.interest-cursor { color: #667c80; }
-.interest-sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
 }

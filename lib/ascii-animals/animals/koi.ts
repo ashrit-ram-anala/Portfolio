@@ -20,7 +20,7 @@ import type { Pen } from "../renderer";
 import { INK_DARK, INK_GLASS, INK_LIT, INK_SHIMMER, ink } from "../ink";
 import { angleDiff, clamp, hash3, lerp, rand, smoothstep, TAU } from "../math";
 
-const NODES = 14;
+import { alignSwimSpine, followSwimSpine, swimTailPhase, waveSwimSpine, SWIM_NODES as NODES } from "../swim-spine";
 
 interface Koi extends Creature {
   /** Spine, head first: [x0, y0, x1, y1, …]. */
@@ -149,11 +149,7 @@ export const koi: Animal<Koi> = {
 
   /** Lay the spine out straight behind the head. */
   enter(f) {
-    const seg = f.span / (NODES - 1);
-    for (let k = 0; k < NODES; k++) {
-      f.nodes[k * 2] = f.x - Math.cos(f.heading) * seg * k;
-      f.nodes[k * 2 + 1] = f.y - Math.sin(f.heading) * seg * k;
-    }
+    alignSwimSpine(f.nodes, f.x, f.y, f.heading, f.span);
   },
 
   /** Pellets drift slowly on the surface and fade away if nobody eats them. */
@@ -204,21 +200,8 @@ export const koi: Animal<Koi> = {
     f.vy = Math.sin(f.heading) * speed;
     f.x += f.vx * dt;
     f.y += f.vy * dt;
-    f.phase += dt * (2 + speed / 25) * k.tailBeat;
-
-    // Follow-the-leader spine with a stiffness limit per joint.
-    const n = f.nodes;
-    const seg = f.span / (NODES - 1);
-    n[0] = f.x;
-    n[1] = f.y;
-    let prev = f.heading + Math.PI;
-    for (let i = 1; i < NODES; i++) {
-      let a = Math.atan2(n[i * 2 + 1] - n[i * 2 - 1], n[i * 2] - n[i * 2 - 2]);
-      a = prev + clamp(angleDiff(prev, a), -0.22, 0.22);
-      n[i * 2] = n[i * 2 - 2] + Math.cos(a) * seg;
-      n[i * 2 + 1] = n[i * 2 - 1] + Math.sin(a) * seg;
-      prev = a;
-    }
+    f.phase = swimTailPhase(f.phase, dt, speed, k.tailBeat);
+    followSwimSpine(f.nodes, f.x, f.y, f.heading, f.span);
     // Gulp: the head reaches a pellet.
     if (meal && Math.hypot(meal.x - f.x, meal.y - f.y) < f.span * 0.1 + 6) {
       const food = pantry(flock);
@@ -229,10 +212,19 @@ export const koi: Animal<Koi> = {
   },
 
 
+  draw: drawKoi,
+  shiftPanicOrigin(f, dy) {
+    for (let i = 1; i < f.nodes.length; i += 2) f.nodes[i] += dy;
+  },
+  steerPanic(f, flock, dt) {
+    f.phase = swimTailPhase(f.phase, dt, Math.hypot(f.vx, f.vy), (flock.tuning as typeof DEFAULTS).tailBeat);
+    followSwimSpine(f.nodes, f.x, f.y, f.heading, f.span);
+  },
+
   drawAll(flock, pen) {
     // Food first, so a koi swimming over a pellet covers it.
     drawFood(flock, pen);
-    for (const f of flock.creatures) drawKoi(f, pen, flock);
+    for (const f of flock.creatures) if (!flock.borrowed.has(f)) drawKoi(f, pen, flock);
   },
 };
 
@@ -249,7 +241,6 @@ function drawFood(flock: Flock<Koi>, pen: Pen) {
 function drawKoi(f: Koi, pen: Pen, flock: Flock<Koi>) {
   const k = flock.tuning as typeof DEFAULTS;
   const L = f.span;
-  const n = f.nodes;
   const out = pen.ink;
   const variety = VARIETIES[f.variety];
   const seed = f.id * 1.37;
@@ -260,19 +251,9 @@ function drawKoi(f: Koi, pen: Pen, flock: Flock<Koi>) {
   // The rendered spine: the sim spine plus a travelling wave that grows toward the tail.
   const spine = new Float32Array(NODES * 2);
   const arc = new Float32Array(NODES);
-  for (let i = 0; i < NODES; i++) {
-    const s = i / (NODES - 1);
-    const a = Math.max(0, i - 1);
-    const b = Math.min(NODES - 1, i + 1);
-    let tx = n[a * 2] - n[b * 2];
-    let ty = n[a * 2 + 1] - n[b * 2 + 1];
-    const tl = Math.hypot(tx, ty) || 1;
-    tx /= tl;
-    ty /= tl;
-    const off = L * 0.06 * Math.pow(s, 1.6) * Math.sin(f.phase - s * 4.5) * Math.min(1.5, k.tailBeat);
-    spine[i * 2] = n[i * 2] - ty * off;
-    spine[i * 2 + 1] = n[i * 2 + 1] + tx * off;
-    if (i > 0) arc[i] = arc[i - 1] + Math.hypot(spine[i * 2] - spine[i * 2 - 2], spine[i * 2 + 1] - spine[i * 2 - 1]);
+  waveSwimSpine(f.nodes, spine, L, f.phase, k.tailBeat);
+  for (let i = 1; i < NODES; i++) {
+    arc[i] = arc[i - 1] + Math.hypot(spine[i * 2] - spine[i * 2 - 2], spine[i * 2 + 1] - spine[i * 2 - 1]);
   }
   const total = arc[NODES - 1] || 1;
   const mid = (NODES / 2) | 0;

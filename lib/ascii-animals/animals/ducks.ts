@@ -1,7 +1,6 @@
 import { SHARED_TUNING, type Animal, type Creature } from "../flock";
 import { INK_DARK, INK_SHIMMER, ink, type RGB } from "../ink";
 import { rand } from "../math";
-import { WHIRLPOOL_SECONDS, whirlpoolCurrent } from "../../whirlpool";
 import { inEllipse } from "./shapes";
 
 interface Duck extends Creature {
@@ -47,18 +46,10 @@ export const ducks: Animal<Duck> = {
     const course = flock.headingFor(d) + d.bias * flock.tuning.spread;
     const weave = .2 * Math.sin(flock.time * .7 + d.id * 2);
     const speed = flock.cruise(d) * d.pace * (startled ? 3 : 1);
-    const acc = flock.begin();
+    flock.begin();
     flock.steer(d, startled ? d.escapeHeading : course + weave, speed, startled ? 5 : 1.8);
     flock.separate(d, flock.tuning.separation, .55);
-    const vortex = flock.lakeWhirlpool;
-    const age = vortex ? (performance.now() - vortex.born) / 1000 : 0;
-    if (age >= WHIRLPOOL_SECONDS) flock.lakeWhirlpool = undefined;
-    const flow = vortex ? whirlpoolCurrent(vortex, d.x, d.y, age) : undefined;
-    if (flow) {
-      acc.x = acc.x * (1 - flow.pull) + (flow.vx - d.vx) * flow.pull * 7;
-      acc.y = acc.y * (1 - flow.pull) + (flow.vy - d.vy) * flow.pull * 7;
-    }
-    const moved = flock.move(d, dt, flow ? Math.max(speed * 1.45, 176) : speed * 1.45);
+    const moved = flock.move(d, dt, speed * 1.45);
     if (flock.passed(d)) flock.reenter(d);
     if (moved > 2) flock.face(d, dt, startled ? 7 : 2.8);
   },

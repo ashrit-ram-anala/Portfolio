@@ -1,5 +1,6 @@
 import { Contact, Education, Experience, Intro, Projects, Stack } from "@/components/Sections";
 import { CraneDrop } from "@/components/CraneDrop";
+import { HammerheadChase } from "@/components/HammerheadChase";
 import { Lighthouse } from "@/components/Lighthouse";
 import { MountainRange } from "@/components/MountainRange";
 import { RisingBubbles } from "@/components/OceanAtmosphere";
@@ -26,6 +27,7 @@ export default function Home() {
       </div>
       <div className="below-surface">
         <RisingBubbles />
+        <HammerheadChase />
         <div className="habitat open-water">
           <div className="rays" aria-hidden="true" />
           <Wildlife animal="koi" />

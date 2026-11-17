@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { AnimalEngine } from "@/lib/ascii-animals/engine";
 import { CRAB_CANVAS_TOP, type CrabFootprint } from "@/lib/shoreline";
-import type { LakeWhirlpool } from "@/lib/whirlpool";
 import type { CraneCargo } from "./CraneDrop";
 import type { AnimalKey } from "@/lib/ascii-animals/animals";
 
@@ -40,24 +39,13 @@ export function Wildlife({ animal }: { animal: keyof typeof scenes & AnimalKey }
       let timer = 0;
       const queue = () => {
         current.queueCraneCarrier(carrier => {
-          const kind = Math.random() < .54 ? "car" : "black-hole";
-          surface?.dispatchEvent(new CustomEvent<CraneCargo>("crane-cargo", { detail: { kind, carrier } }));
+          surface?.dispatchEvent(new CustomEvent<CraneCargo>("crane-cargo", { detail: { carrier } }));
           timer = window.setTimeout(queue, 18000 + Math.random() * 13000);
         });
       };
       timer = window.setTimeout(queue, 7000 + Math.random() * 6500);
       return () => {
         clearTimeout(timer);
-        current.destroy();
-      };
-    }
-    if (animal === "ducks") {
-      const applyVortex = (event: Event) => {
-        if (!reduced.matches) current.setLakeWhirlpool((event as CustomEvent<LakeWhirlpool>).detail);
-      };
-      habitat?.addEventListener("lake-whirlpool", applyVortex);
-      return () => {
-        habitat?.removeEventListener("lake-whirlpool", applyVortex);
         current.destroy();
       };
     }

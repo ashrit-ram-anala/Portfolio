@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { shoreBend, waveEdge, type CrabFootprint } from "@/lib/shoreline";
-import { InterestNotes, placeInterestTargets } from "./InterestNotes";
 import { createBeachFinds } from "./BeachFinds";
 import { LandscapeCanvas } from "./LandscapeCanvas";
 
@@ -83,7 +82,7 @@ function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number
     }
   }
 
-  const targets = paintBeachFinds(ctx, width, height, tide, CELL);
+  paintBeachFinds(ctx, width, height, tide, CELL);
 
   // A print can only survive in the exposed part of the wet sand.
   for (let i = marks.length - 1; i >= 0; i--) {
@@ -102,14 +101,12 @@ function paintShore(ctx: CanvasRenderingContext2D, width: number, height: number
     ctx.fillRect(x + 2, y - 1, 1, 1);
   }
   ctx.globalAlpha = 1;
-  return targets;
 }
 
 export function Shoreline() {
   const marker = useRef<HTMLSpanElement>(null);
   const prints = useRef<Mark[]>([]);
   const finds = useRef(createBeachFinds());
-  const notes = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const beach = marker.current?.parentElement;
     if (!beach) return;
@@ -123,11 +120,10 @@ export function Shoreline() {
     return () => beach.removeEventListener("crab-footprint", addMark);
   }, []);
   const paint = useCallback((ctx: CanvasRenderingContext2D, w: number, h: number, time: number, tint: string) => {
-    placeInterestTargets(notes.current, paintShore(ctx, w, h, time, tint, prints.current, finds.current));
+    paintShore(ctx, w, h, time, tint, prints.current, finds.current);
   }, []);
   return <>
     <span ref={marker} hidden aria-hidden="true" />
     <LandscapeCanvas className="shoreline" paint={paint} tintProperty="--deep-water-floor" />
-    <InterestNotes host={notes} names={["paddle", "monster", "hat"]} />
   </>;
 }
