@@ -129,6 +129,10 @@ export class AnimalEngine {
     animal.shiftPanicOrigin?.(fish, yOffset);
     return {
       canvas,
+      clearOriginal: () => {
+        const bounds = this.canvas.getBoundingClientRect();
+        this.renderer.render(origin, 0, -bounds.top, window.innerHeight - bounds.top);
+      },
       paint: (width: number, height: number, top: number, bottom: number, dt: number) => {
         if (canvas.width !== width || canvas.height !== height) renderer.resize(width, height, 1);
         flock.time += dt;

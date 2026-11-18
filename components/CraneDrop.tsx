@@ -51,7 +51,12 @@ export function CraneDrop() {
   }, []);
 
   const paint = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    ctx.clearRect(0, 0, width, height);
+    // Clear the complete backing store before drawing the car's next position.
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.setTransform(ctx.canvas.width / width, 0, 0, ctx.canvas.height / height, 0, 0);
     const active = drop.current;
     const world = marker.current?.parentElement;
     if (!active || !world) return;

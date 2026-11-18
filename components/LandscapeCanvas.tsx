@@ -26,7 +26,12 @@ export function LandscapeCanvas({ className, paint, tintProperty, animate = true
     let time = 0;
     let tint = "";
 
-    const draw = () => paint(ctx, width, height, time, tint);
+    const draw = () => {
+      if (!width || !height) return;
+      ctx.save();
+      paint(ctx, width, height, time, tint);
+      ctx.restore();
+    };
     const tick = (now: number) => {
       if (!last || now - last >= 40) {
         if (last) time += Math.min(now - last, 100) / 1000;

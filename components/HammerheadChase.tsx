@@ -71,6 +71,8 @@ interface Escape {
   route: typeof routes[number];
   turn?: { heading: number; speed: number; x: number; y: number };
   direction: number;
+  routeTime: number;
+  runner: { x: number; y: number; heading: number };
 }
 
 const escapeLoopDuration = 4.6;
@@ -129,6 +131,12 @@ function updateHunter(hunter: Hunter, target: Swimmer | undefined, width: number
     speed = clamp(Math.hypot(target.vx, target.vy) + (distance - 100) * 1.55, 155, cruising);
   }
 
+  const surfaceMargin = hunter.length * .55;
+  const surfaceTurn = clamp((yMin + surfaceMargin + 80 - hunter.y) / 80, 0, 1);
+  if (surfaceTurn > 0 && Math.sin(hunter.heading) < .3) {
+    x = hunter.x + Math.cos(hunter.heading) * 100;
+    y = hunter.y + 220;
+  }
   const desired = Math.atan2(y - hunter.y, x - hunter.x);
   const maxTurn = leaving ? 3.5 : 3.4;
   const desiredTurn = clamp(angleDiff(hunter.heading, desired) * 4.6, -maxTurn, maxTurn);
@@ -136,6 +144,7 @@ function updateHunter(hunter: Hunter, target: Swimmer | undefined, width: number
   hunter.heading += hunter.turnRate * dt;
   hunter.x += Math.cos(hunter.heading) * speed * dt;
   hunter.y += Math.sin(hunter.heading) * speed * dt;
+  hunter.y = Math.max(yMin + hunter.length * .55, hunter.y);
   hunter.phase = swimTailPhase(hunter.phase, dt, speed, 1.1);
   followSwimSpine(hunter.nodes, hunter.x, hunter.y, hunter.heading, hunter.length);
   waveSwimSpine(hunter.nodes, hunter.spine, hunter.length, hunter.phase, 1.5);
@@ -268,21 +277,54 @@ export function HammerheadChase() {
           const turn = escape.turn;
           let point: ReturnType<typeof escapePoint>;
           if (turn) {
-            const away = Math.atan2((turn.y - hunter.y) * .44, turn.x - hunter.x);
-            turn.heading += clamp(angleDiff(turn.heading, away), -5 * dt, 5 * dt);
-            turn.speed += (285 - turn.speed) * (1 - Math.exp(-dt * 4));
-            turn.x = clamp(turn.x + Math.cos(turn.heading) * turn.speed * dt, 20, width - 20);
             const above = escape.from.y < seam;
-            turn.y = clamp(turn.y + Math.sin(turn.heading) * turn.speed * dt,
-              Math.min(escape.from.y, above ? yMin + 12 : seam + 12),
-              Math.max(escape.from.y, above ? seam - 12 : yMax - 12));
+            const low = Math.min(escape.from.y, above ? yMin + 12 : seam + 12);
+            const high = Math.max(escape.from.y, above ? seam - 12 : yMax - 12);
+            const awayX = turn.x - hunter.x + (turn.x < 100 ? 210 : turn.x > width - 100 ? -210 : 0);
+            const surface = yMin + escape.from.fish.span * .65 + 80;
+            const awayY = (turn.y - hunter.y) * .44 + (turn.y < Math.max(low + 55, surface) ? 350 : turn.y > high - 55 ? -150 : 0);
+            const away = Math.atan2(awayY, awayX);
+            turn.heading += clamp(angleDiff(turn.heading, away), -3.2 * dt, 3.2 * dt);
+            const acceleration = clamp((time - escape.start) / .5, 0, 1);
+            const eased = acceleration * acceleration * (3 - 2 * acceleration);
+            const initialSpeed = Math.hypot(escape.from.vx, escape.from.vy);
+            turn.speed = initialSpeed + (clamp(width * .36, 245, 440) - initialSpeed) * eased;
+            turn.x += Math.cos(turn.heading) * turn.speed * dt;
+            turn.y += Math.sin(turn.heading) * turn.speed * dt;
+            turn.y = Math.max(yMin + escape.from.fish.span * .65, turn.y);
             point = { x: turn.x, y: turn.y, exited: false };
           } else {
-            point = escapePoint(escape, time, width, seam, yMax, hunter.side);
+            escape.routeTime += dt;
+            const pathTime = escape.start + escape.routeTime;
+            const waypoint = escapePoint(escape, pathTime + .55, width, seam, yMax, hunter.side);
+            const runner = escape.runner;
+            const leaving = escape.routeTime > escapeLoopDuration;
+            const aimX = leaving ? (hunter.side < 0 ? width + 450 : -450) : waypoint.x;
+            const aimY = leaving ? runner.y : waypoint.y;
+            const clearance = escape.from.fish.span * .65;
+            const nearSurface = runner.y < yMin + clearance + 120;
+            const desired = nearSurface && Math.sin(runner.heading) < .4
+              ? Math.atan2(300, Math.cos(runner.heading) * 80)
+              : Math.atan2(aimY - runner.y, aimX - runner.x);
+            // A bounded angular speed gives the koi a broad turning radius without braking.
+            runner.heading += clamp(angleDiff(runner.heading, desired), -2.25 * dt, 2.25 * dt);
+            const cruise = clamp(width * .36, 245, 440);
+            const aligned = Math.abs(angleDiff(runner.heading, desired)) < .35;
+            const exitProgress = leaving && aligned
+              ? clamp((escape.routeTime - escapeLoopDuration) / 1.2, 0, 1)
+              : 0;
+            const speed = cruise * (1 + .7 * exitProgress * exitProgress * (3 - 2 * exitProgress));
+            runner.x += Math.cos(runner.heading) * speed * dt;
+            runner.y += Math.sin(runner.heading) * speed * dt;
+            runner.y = Math.max(yMin + clearance, runner.y);
+            const margin = escape.from.fish.span * 1.4;
+            const exited = leaving && (hunter.side < 0 ? runner.x > width + margin : runner.x < -margin);
+            point = { x: runner.x, y: runner.y, exited };
           }
           const runner = escape.swimmer.steer(point.x, point.y, dt);
           if (turn && time - escape.start >= .92) {
             escape.from = runner;
+            escape.runner = { x: point.x, y: point.y, heading: turn.heading };
             escape.direction = Math.cos(turn.heading) < 0 ? -1 : 1;
             escape.start = time;
             escape.turn = undefined;
@@ -357,11 +399,15 @@ export function HammerheadChase() {
       const escape: Escape = {
         swimmer, start: 0, from: target,
         route: routes[Math.floor(Math.random() * routes.length)],
-        direction: hunter.side < 0 ? 1 : -1,
+        direction: hunter.side < 0 ? 1 : -1, routeTime: 0,
+        runner: { x: target.x, y: target.y, heading: target.fish.heading },
         turn: { x: target.x, y: target.y, heading: target.fish.heading, speed: 285 },
       };
-      encounter = { elapsed: 0, hunter, last: performance.now(), escape };
-      frame = requestAnimationFrame(draw);
+      // Paint the transferred fish and clear its original layer in the same browser task.
+      const now = performance.now();
+      encounter = { elapsed: 0, hunter, last: now - period, escape };
+      draw(now);
+      swimmer.clearOriginal();
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
