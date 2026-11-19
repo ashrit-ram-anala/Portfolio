@@ -34,7 +34,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const fonts = [sans, serif, f1, monster, space, winter, cali, pixel].map((f) => f.variable).join(" ");
   return (
-    <html lang="en" className={fonts}>
+    <html lang="en" className={fonts} suppressHydrationWarning>
+      <head>
+        {/* Apply browser-local time before any visible content is parsed. */}
+        <script
+          id="initial-ocean-theme"
+          dangerouslySetInnerHTML={{ __html: `(function(){var h=new Date().getHours();document.documentElement.dataset.oceanNight=String(h>=18||h<6)})();` }}
+        />
+      </head>
       <body>
         <SmoothScroll />
         {children}
