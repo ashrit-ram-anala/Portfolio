@@ -99,7 +99,6 @@
 }
 .below-surface { position: relative; isolation: isolate; }
 .hammerhead-chase { position: absolute; inset: 0 0 auto; width: 100%; z-index: -1; pointer-events: none; }
-.rising-bubbles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
 .sky {
   background:
@@ -561,3 +560,27 @@
   cursor: pointer;
   pointer-events: auto;
 }
+
+.sand-drawing,.bioluminescence{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.seabed .sand-drawing{z-index:-1}
+.seabed .wildlife{z-index:0}
+.night-sky{display:none;position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+html[data-ocean-night="true"]{--horizon:#364b68;--open-water-surface:#315d67}
+html[data-ocean-night="true"] .sky{--ink:#d3dfec;--ink-strong:#edf1f5;--ink-soft:#b8c9dc;--hair:#8da8c14d;background:linear-gradient(#0d1831,#263653 75%,var(--horizon))}
+html[data-ocean-night="true"] .night-sky{display:block}
+html[data-ocean-night="true"] .sky-clouds{opacity:.24}
+html[data-ocean-night="true"] .lake{--ink:#dfebe4;--ink-strong:#f0f3e3;--ink-soft:#bad0ce;background:linear-gradient(in oklab,var(--horizon),#405b72 var(--waterline),#416d75 48%,#355f69 78%,var(--open-water-surface))}
+html[data-ocean-night="true"] .sky .socials a{background:#263e59;border-color:#7893ad70;color:#e2ebef}
+html[data-ocean-night="true"] .sky .socials svg{fill:#e2ebef}
+html[data-ocean-night="true"] .sky .socials a:hover{background:#35536f}
+html[data-ocean-night="true"] .sky .lede{color:#c5d4e4}
+html[data-ocean-night="true"] .mountains{filter:brightness(.58) saturate(.7)}
+.night-stars{position:absolute;inset:0;background-image:radial-gradient(circle at 19px 39px,#f8f5df 1px,transparent 1.6px),radial-gradient(circle at 100px 80px,#b9d9ec 1px,transparent 1.4px),radial-gradient(circle at 51px 12px,#c5c2e6 .6px,transparent 1.2px);background-size:173px 127px,257px 193px,103px 149px;mask-image:linear-gradient(#000 65%,transparent)}
+html[data-ocean-night="true"] .open-water{background:linear-gradient(in oklab,var(--open-water-surface),#2e5965 22%,#244e5d 48%,#194454 73%,var(--deep-water-surface))}
+html[data-ocean-night="true"] .rays{opacity:.3}
+html[data-ocean-night="true"] .water-glass{background:rgb(12 29 46 / 38%);border-color:rgb(191 218 225 / 23%);--glass-reflections:inset 0 1px 0 rgb(211 233 231 / 24%),inset 0 -1px 0 rgb(149 183 197 / 7%),inset 0 0 4px 2px rgb(177 206 218 / 8%);box-shadow:var(--glass-reflections),0 8px 24px rgb(0 8 21 / 18%)}
+html[data-ocean-night="true"] .water-glass::before,html[data-ocean-night="true"] .water-glass::after{opacity:.4}
+html[data-ocean-night="true"] .lake .xp-logo-set{--paper:#304e5c;--tile-hi:#78959b;--icon-face:#d6e0d5;--shadow:#112b3645}
+.open-water::before{color:var(--water-grid-ink);mask-image:none}
+.open-water::after{content:none}
+html[data-ocean-night="true"] .lake::before{color:var(--water-grid-ink)}

@@ -199,6 +199,11 @@ export class Pen {
     this.r.spot(x, y, glyph, color, fill, this.fogFor(depth));
   }
 
+  /** A small smooth thought bubble drawn after the animal grid. */
+  thought(x: number, y: number, opacity: number) {
+    this.r.thoughts.push({ x, y, opacity });
+  }
+
   /** Leave something in the trail at (x, y), scaled by the trail knob. */
   shed(x: number, y: number, amount: number) {
     this.r.shed(x, y, amount);
@@ -215,6 +220,7 @@ export class Pen {
 }
 
 export class AsciiRenderer {
+  readonly thoughts: { x: number; y: number; opacity: number }[] = [];
   cw = 12;
   ch = 18;
   cols = 0;
@@ -358,6 +364,7 @@ export class AsciiRenderer {
     this.diffuse(dt);
 
     this.cellFlag.fill(CELL_NONE, this.firstRow * cols, this.lastRow * cols);
+    this.thoughts.length = 0;
     const animal = flock.animal;
     if (animal.drawAll) animal.drawAll(flock, this.pen);
     else if (animal.draw) for (const c of flock.creatures) animal.draw(c, this.pen, flock);
@@ -378,6 +385,44 @@ export class AsciiRenderer {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     this.drawCells();
+    for (const { x, y, opacity } of this.thoughts) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      const px = Math.round(x / 2) * 2;
+      const py = Math.round(y / 2) * 2;
+      ctx.translate(px, py + 8);
+      ctx.scale(.75, .75);
+      ctx.translate(-px, -py);
+      // Symmetric scallops around a broad centre form a classic thought cloud.
+      const cloud = (col: number, row: number) => {
+        const u = Math.abs(col), v = Math.abs(row);
+        return (u / 9) ** 2 + (v / 6) ** 2 <= 1
+          || ((u - 5) / 4.5) ** 2 + ((v - 5) / 4) ** 2 <= 1
+          || ((u - 9) / 4) ** 2 + (v / 4.5) ** 2 <= 1
+          || (u / 4.5) ** 2 + ((v - 6) / 3.5) ** 2 <= 1;
+      };
+      for (let row = -10; row <= 9; row++) {
+        for (let col = -13; col <= 13; col++) {
+          if (!cloud(col, row)) continue;
+          const edge = !cloud(col - 1, row) || !cloud(col + 1, row)
+            || !cloud(col, row - 1) || !cloud(col, row + 1);
+          ctx.fillStyle = edge ? "#b8bbae" : "#fffdf3";
+          ctx.fillRect(px + col * 2, py + row * 2, 2, 2);
+        }
+      }
+      ctx.fillStyle = "#fffdf3";
+      ctx.fillRect(px - 12, py + 22, 6, 4);
+      ctx.fillRect(px - 10, py + 20, 2, 8);
+      ctx.fillRect(px - 16, py + 30, 3, 3);
+      ctx.fillStyle = "#3e443d";
+      const question = ["01110", "11011", "00011", "00110", "00100", "00000", "00100"];
+      question.forEach((row, j) => {
+        for (let i = 0; i < row.length; i++) {
+          if (row[i] === "1") ctx.fillRect(px - 4 + i * 2, py - 6 + j * 2, 2, 2);
+        }
+      });
+      ctx.restore();
+    }
   }
 
   // ── trail ───────────────────────────────────────────────────────────

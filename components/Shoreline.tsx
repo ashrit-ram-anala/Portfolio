@@ -121,6 +121,7 @@ export function Shoreline() {
   }, []);
   const paint = useCallback((ctx: CanvasRenderingContext2D, w: number, h: number, time: number, tint: string) => {
     paintShore(ctx, w, h, time, tint, prints.current, finds.current);
+    marker.current?.parentElement?.dispatchEvent(new CustomEvent("shore-tide", { detail: time * 1.24 }));
   }, []);
   return <>
     <span ref={marker} hidden aria-hidden="true" />

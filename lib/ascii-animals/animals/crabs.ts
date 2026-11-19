@@ -10,6 +10,7 @@
  * The carapace is a wide rounded shell with a toothed front edge, a pale
  * centre and darker flecks, and two glossy black eyes on stalks at the front.
  */
+import { sandCuriosity, type SandMark } from "../../sand-curiosity";
 import { SHARED_TUNING, type Animal, type Creature } from "../flock";
 import { INK_DARK, INK_SCALE, ink, type RGB } from "../ink";
 import { angleDiff, rand, TAU } from "../math";
@@ -35,6 +36,7 @@ interface Crab extends Creature {
   fleeSpeed: number;
   fleeFrom: number;
   footprintGait: number;
+  inspection?: { path: SandMark[]; index: number; until: number; pause: number; thoughtAt?: number };
 }
 
 const DEFAULTS = {
@@ -91,6 +93,11 @@ export const crabs: Animal<Crab> = {
   create: (c) => ({ ...c, running: true, until: 0, facing: Math.random() < 0.5 ? 1 : -1, gait: rand(0, TAU), alarm: 0, fleeDir: 0, fleeSpeed: 0, fleeFrom: 0, footprintGait: -1 }),
 
   enter(c, flock) {
+    if (sandCuriosity.owner === c) {
+      sandCuriosity.owner = null;
+      sandCuriosity.nextVisit = performance.now() + 20000;
+    }
+    c.inspection = undefined;
     c.running = true;
     c.until = flock.time + rand(0.3, 1.2);
     c.heading = flock.course - (c.facing * Math.PI) / 2;
@@ -111,12 +118,76 @@ export const crabs: Animal<Crab> = {
     const fleeing = t < c.startledUntil;
     // Bolting: run away from the tap, easing from full speed back down as it calms.
     const calm = fleeing ? (t - c.fleeFrom) / (c.startledUntil - c.fleeFrom) : 1;
+    const now = performance.now();
+    if (c.inspection && (fleeing || now > c.inspection.until || !sandCuriosity.marks.includes(c.inspection.path[c.inspection.index]))) {
+      c.inspection = undefined;
+      sandCuriosity.owner = null;
+      sandCuriosity.nextVisit = now + rand(18000, 30000);
+      c.running = false;
+      c.until = t + rand(.6, 1.3);
+    }
+    // Notice a nearby, settled stroke. Use the existing feet and steering, never a canned path.
+    if (!c.inspection && !fleeing && !sandCuriosity.owner && now > sandCuriosity.nextVisit && sandCuriosity.lastDraw > sandCuriosity.inspectedThrough && now - sandCuriosity.lastDraw > 1100) {
+      const marks = sandCuriosity.marks;
+      // Compare the whole flock before claiming, rather than letting update order win.
+      let observer: Creature | undefined;
+      let best = Infinity;
+      for (const candidate of flock.creatures) {
+        if (candidate.gone || t < candidate.startledUntil) continue;
+        const reach = 180 + candidate.span * .65;
+        for (let i = 0; i < marks.length; i += 4) {
+          const mark = marks[i];
+          if (mark.born <= sandCuriosity.inspectedThrough || now - mark.born >= 45000) continue;
+          const distance = Math.hypot(mark.x - candidate.x, mark.y - CRAB_CANVAS_TOP - candidate.y);
+          if (distance < reach && distance < best) { best = distance; observer = candidate; }
+        }
+      }
+      let closest = -1, distance = observer === c ? Infinity : 0;
+      for (let i = 0; i < marks.length; i += 4) {
+        const mark = marks[i];
+        const d = Math.hypot(mark.x - c.x, mark.y - CRAB_CANVAS_TOP - c.y);
+        if (mark.born > sandCuriosity.inspectedThrough && now - mark.born < 45000 && d < distance) { closest = i; distance = d; }
+      }
+      if (closest >= 0) {
+        const path: SandMark[] = [marks[closest]];
+        const direction = Math.random() < .5 ? -1 : 1;
+        for (let i = closest + direction; i >= 0 && i < marks.length && path.length < 6; i += direction) {
+          const previous = path[path.length - 1];
+          const d = Math.hypot(marks[i].x - previous.x, marks[i].y - previous.y);
+          if (d > 55) break; // Separate strokes are not connected.
+          if (d >= 20) path.push(marks[i]);
+        }
+        c.inspection = { path, index: 0, until: now + 13000, pause: now + rand(350, 750) };
+        sandCuriosity.owner = c;
+        sandCuriosity.inspectedThrough = sandCuriosity.lastDraw;
+      }
+    }
+    const visit = c.inspection;
+    let inspectWalk = course, inspectSpeed = 0;
+    if (visit) {
+      const target = visit.path[visit.index];
+      // Follow just beside the groove, keeping the body on the sand.
+      const dx = target.x - c.x;
+      const dy = target.y - CRAB_CANVAS_TOP + c.span * .2 - c.y;
+      const distance = Math.hypot(dx, dy);
+      inspectWalk = distance > 5 ? Math.atan2(dy, dx) : c.heading + c.facing * Math.PI / 2;
+      if (!visit.thoughtAt && distance < 15 && now > visit.pause) {
+        if (visit.index < visit.path.length - 1) {
+          visit.index++;
+          visit.pause = now + rand(180, 480);
+        } else {
+          visit.thoughtAt = now;
+          visit.until = now + 3000;
+        }
+      }
+      inspectSpeed = visit.thoughtAt || now < visit.pause || distance < 12 ? 0 : Math.min(cruise * .7, distance * 1.25);
+    }
     const bySurf = k.walksNearSurf && c.id === 1 && !fleeing;
     const tideLine = shoreHeight(flock.width) * .62 + shoreBend(c.x) - CRAB_CANVAS_TOP;
-    const walk = fleeing ? c.fleeDir : bySurf ? Math.atan2((tideLine - c.y) * .32, 12) : course;
+    const walk = fleeing ? c.fleeDir : visit ? inspectWalk : bySurf ? Math.atan2((tideLine - c.y) * .32, 12) : course;
     flock.begin();
     if (fleeing) flock.steer(c, walk, Math.max(cruise, c.fleeSpeed * (1 - calm * calm)), 8);
-    else flock.steer(c, walk, c.running ? cruise : 0, k.grip * 2);
+    else flock.steer(c, walk, visit ? inspectSpeed : c.running ? cruise : 0, visit ? 3.5 : k.grip * 2);
     flock.separate(c);
     const speed = flock.move(c, dt, fleeing ? Math.max(cruise * 2, c.fleeSpeed) : cruise * 2);
     if (flock.passed(c)) flock.reenter(c);
@@ -209,6 +280,12 @@ export const crabs: Animal<Crab> = {
       }
       return false;
     });
+
+    if (c.inspection?.thoughtAt) {
+      const age = performance.now() - c.inspection.thoughtAt;
+      const opacity = Math.min(1, age / 160, (3000 - age) / 200);
+      pen.thought(c.x + S * .2, c.y - S * .55 - 24, Math.max(0, opacity));
+    }
 
     // Eyes on stalks at the front: one glossy black cell each with a white glint, so they always
     // show and always match.

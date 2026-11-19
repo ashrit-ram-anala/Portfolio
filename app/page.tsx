@@ -3,16 +3,18 @@ import { CraneDrop } from "@/components/CraneDrop";
 import { HammerheadChase } from "@/components/HammerheadChase";
 import { Lighthouse } from "@/components/Lighthouse";
 import { MountainRange } from "@/components/MountainRange";
-import { RisingBubbles } from "@/components/OceanAtmosphere";
 import { Shoreline } from "@/components/Shoreline";
+import { LocalNight, OceanInteractions } from "@/components/OceanInteractions";
 import { Wildlife } from "@/components/OceanMotion";
 
 export default function Home() {
   return (
     <main id="top" className="ocean">
+      <OceanInteractions />
       <div className="surface-world">
         <CraneDrop />
         <div className="habitat sky">
+          <LocalNight />
           <div className="sky-clouds" aria-hidden="true"><span /><span /><span /></div>
           <Wildlife animal="cranes" />
           <Wildlife animal="butterflies" />
@@ -26,7 +28,6 @@ export default function Home() {
         </div>
       </div>
       <div className="below-surface">
-        <RisingBubbles />
         <HammerheadChase />
         <div className="habitat open-water">
           <div className="rays" aria-hidden="true" />
