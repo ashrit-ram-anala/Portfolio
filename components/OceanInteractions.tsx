@@ -59,10 +59,10 @@ export function OceanInteractions() {
       const waterTop = lake.querySelector(".wildlife")?.getBoundingClientRect().top ?? lake.getBoundingClientRect().top;
       const waterBottom = b.top + (shore ? waveEdge(x, shore.height, tide) : 0);
       const now = performance.now();
-      if(!reduced.matches && now-lastWake>30 && e.clientY>=waterTop && e.clientY<waterBottom){
-        lights.push({x:e.clientX+(Math.random()-.5)*7,y:e.clientY+window.scrollY+(Math.random()-.5)*7,born:now,seed:Math.random()});
+      if(!reduced.matches && now-lastWake>24 && e.clientY>=waterTop && e.clientY<waterBottom){
+        for(let i=0;i<2;i++) lights.push({x:e.clientX+(Math.random()-.5)*9,y:e.clientY+window.scrollY+(Math.random()-.5)*9,born:now,seed:Math.random()});
         lastWake=now;
-        if(lights.length>80)lights.splice(0,lights.length-80);
+        if(lights.length>140)lights.splice(0,lights.length-140);
       }
     };
     const down=(e:PointerEvent)=>{if(e.button===0&&!blocked(e.target)){dragging=true;previous=undefined;move(e);}};
@@ -98,15 +98,15 @@ export function OceanInteractions() {
         }
         sandCtx.globalAlpha=1;
         wakeCtx.clearRect(0,0,wake.width,wake.height);
-        lights=lights.filter(g=>now-g.born<1200);
+        lights=lights.filter(g=>now-g.born<1500);
         for(const g of lights){
-          const age=(now-g.born)/1200;
-          wakeCtx.globalAlpha=(1-age)**2*.26;
+          const age=(now-g.born)/1500;
+          wakeCtx.globalAlpha=(1-age)**2*.44;
           const drift=age*12;
           const x=Math.round((g.x+Math.sin(g.seed*30)*drift)/2)*2;
           const y=Math.round((g.y-window.scrollY-drift)/2)*2;
           wakeCtx.fillStyle=g.seed>.5?"#87f3e5":"#5baedd";
-          wakeCtx.fillRect(x,y,2,2);
+          wakeCtx.fillRect(x,y,age>.4?2:3,age>.4?2:3);
         }
       }
       frame=requestAnimationFrame(draw);
