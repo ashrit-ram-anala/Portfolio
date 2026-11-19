@@ -11,8 +11,8 @@ export function OceanInteractions() {
   useEffect(() => {
     const ocean = marker.current?.parentElement;
     const beach = ocean?.querySelector<HTMLElement>(".seabed");
-    const deep = ocean?.querySelector<HTMLElement>(".deep-water");
-    if (!ocean || !beach || !deep) return;
+    const lake = ocean?.querySelector<HTMLElement>(".lake");
+    if (!ocean || !beach || !lake) return;
     const sand = document.createElement("canvas");
     const wake = document.createElement("canvas");
     sand.className = "sand-drawing";
@@ -22,7 +22,7 @@ export function OceanInteractions() {
       canvas.style.pointerEvents="none";
     }
     beach.append(sand);
-    deep.append(wake);
+    ocean.append(wake);
     const sandCtx=sand.getContext("2d"), wakeCtx=wake.getContext("2d");
     if(!sandCtx||!wakeCtx) {sand.remove();wake.remove();return;}
     let grains: Grain[]=[];
@@ -30,7 +30,7 @@ export function OceanInteractions() {
     let particles: Grain[]=[];
     let previous: {x:number;y:number}|undefined;
     let dragging=false,frame=0,last=0;
-    let tide=0;
+    let tide=0, lastWake=0;
     const reduced=matchMedia("(prefers-reduced-motion: reduce)");
     const wash=(e:Event)=>{tide=(e as CustomEvent<number>).detail;};
     beach.addEventListener("shore-tide",wash);
@@ -56,19 +56,23 @@ export function OceanInteractions() {
         previous={x,y};
         if(grains.length>6000)grains.splice(0,grains.length-6000);
       }else previous=undefined;
-      const d=deep.getBoundingClientRect();
-      if(!reduced.matches&&e.clientY>=d.top&&e.clientY<d.bottom){
-        for(let i=0;i<3;i++)lights.push({x:e.clientX-d.left+(Math.random()-.5)*9,y:e.clientY-d.top+(Math.random()-.5)*9,born:performance.now(),seed:Math.random()});
-        if(lights.length>240)lights.splice(0,lights.length-240);
+      const waterTop = lake.querySelector(".wildlife")?.getBoundingClientRect().top ?? lake.getBoundingClientRect().top;
+      const waterBottom = b.top + (shore ? waveEdge(x, shore.height, tide) : 0);
+      const now = performance.now();
+      if(!reduced.matches && now-lastWake>30 && e.clientY>=waterTop && e.clientY<waterBottom){
+        lights.push({x:e.clientX+(Math.random()-.5)*7,y:e.clientY+window.scrollY+(Math.random()-.5)*7,born:now,seed:Math.random()});
+        lastWake=now;
+        if(lights.length>80)lights.splice(0,lights.length-80);
       }
     };
     const down=(e:PointerEvent)=>{if(e.button===0&&!blocked(e.target)){dragging=true;previous=undefined;move(e);}};
     const up=()=>{dragging=false;previous=undefined;};
     const resize=()=>{
       sand.width=beach.clientWidth;sand.height=beach.clientHeight;
-      wake.width=deep.clientWidth;wake.height=deep.clientHeight;
+      wake.width=window.innerWidth;wake.height=window.innerHeight;
     };
-    const size=new ResizeObserver(resize);size.observe(beach);size.observe(deep);resize();
+    const size=new ResizeObserver(resize);size.observe(beach);size.observe(ocean);resize();
+    window.addEventListener("resize",resize);
     const draw=(now:number)=>{
       if(now-last>40){
         last=now;
@@ -94,15 +98,15 @@ export function OceanInteractions() {
         }
         sandCtx.globalAlpha=1;
         wakeCtx.clearRect(0,0,wake.width,wake.height);
-        lights=lights.filter(g=>now-g.born<1900);
+        lights=lights.filter(g=>now-g.born<1200);
         for(const g of lights){
-          const age=(now-g.born)/1900;
-          wakeCtx.globalAlpha=(1-age)**2*.65;
+          const age=(now-g.born)/1200;
+          wakeCtx.globalAlpha=(1-age)**2*.26;
           const drift=age*12;
           const x=Math.round((g.x+Math.sin(g.seed*30)*drift)/2)*2;
-          const y=Math.round((g.y-drift)/2)*2;
+          const y=Math.round((g.y-window.scrollY-drift)/2)*2;
           wakeCtx.fillStyle=g.seed>.5?"#87f3e5":"#5baedd";
-          wakeCtx.fillRect(x,y,age>.45?2:3,age>.45?2:3);
+          wakeCtx.fillRect(x,y,2,2);
         }
       }
       frame=requestAnimationFrame(draw);
@@ -112,6 +116,7 @@ export function OceanInteractions() {
     window.addEventListener("pointerup",up);window.addEventListener("pointercancel",up);window.addEventListener("blur",up);
     return()=>{
       sandCuriosity.marks=[];sandCuriosity.owner=null;
+      window.removeEventListener("resize",resize);
       cancelAnimationFrame(frame);size.disconnect();sand.remove();wake.remove();
       beach.removeEventListener("shore-tide",wash);
       window.removeEventListener("pointerdown",down);window.removeEventListener("pointermove",move);

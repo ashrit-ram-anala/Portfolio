@@ -584,3 +584,6 @@ html[data-ocean-night="true"] .lake .xp-logo-set{--paper:#304e5c;--tile-hi:#7895
 .open-water::before{color:var(--water-grid-ink);mask-image:none}
 .open-water::after{content:none}
 html[data-ocean-night="true"] .lake::before{color:var(--water-grid-ink)}
+
+.rising-bubbles { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none; }
+.bioluminescence { position:fixed;width:100vw;height:100vh; }

@@ -2,6 +2,7 @@ import { Contact, Education, Experience, Intro, Projects, Stack } from "@/compon
 import { CraneDrop } from "@/components/CraneDrop";
 import { HammerheadChase } from "@/components/HammerheadChase";
 import { Lighthouse } from "@/components/Lighthouse";
+import { RisingBubbles } from "@/components/OceanAtmosphere";
 import { MountainRange } from "@/components/MountainRange";
 import { Shoreline } from "@/components/Shoreline";
 import { LocalNight, OceanInteractions } from "@/components/OceanInteractions";
@@ -28,6 +29,7 @@ export default function Home() {
         </div>
       </div>
       <div className="below-surface">
+        <RisingBubbles />
         <HammerheadChase />
         <div className="habitat open-water">
           <div className="rays" aria-hidden="true" />
