@@ -60,19 +60,8 @@ export const ducks: Animal<Duck> = {
     flock.events.push({ x: d.x, y: d.y, radius: 3, amount: .6 });
   },
 
-  draw(d, pen, flock) {
+  draw(d, pen) {
     const pose = { x: d.x, y: d.y, heading: d.heading, span: d.span, depth: d.depth, id: d.id };
-    const stroke = (pen.t * (flock.time < d.startledUntil ? 2 : 1.1) + d.id * .37) % 1;
-    for (const side of [-1, 1]) {
-      for (let ripple = 0; ripple < 3; ripple++) {
-        const travel = (ripple + stroke) / 3;
-        pen.toWorld(pose, -.33 - travel * .51, side * (.12 + travel * .21), at);
-        pen.dot(at.x, at.y, ripple % 2 ? "~" : "-", WAKE, d.depth, .14 + travel * .58);
-      }
-    }
-    pen.toWorld(pose, -.35, 0, at);
-    pen.shed(at.x, at.y, .23 * d.depth);
-
     pen.shape(pose, .68, (u, v) => {
       const out = pen.ink;
       if (inEllipse(u, v, .465, -.075, .115, .044)) return ink(out, ...BILL, undefined, "-=+");
