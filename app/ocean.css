@@ -587,3 +587,24 @@ html[data-ocean-night="true"] .lake::before{color:var(--water-grid-ink)}
 
 .rising-bubbles { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none; }
 .bioluminescence { position:fixed;width:100vw;height:100vh; }
+
+/* Seasonal changes stay above the lake; the underwater palette stays familiar. */
+.seasonal-hero { position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none; }
+html[data-ocean-season="winter"]:not([data-ocean-night="true"]) .sky {
+  background:linear-gradient(transparent 60%,var(--horizon)),radial-gradient(ellipse at 80% 20%,#edf2ed,transparent 55%),linear-gradient(155deg,#b9d0df,#dce6e8);
+}
+html[data-ocean-season="winter"] .sky-clouds span { background:linear-gradient(#f3f7f6 72%,#d7e4e8 72% 86%,#c6d7e0 86%); }
+html[data-ocean-season="spring"]:not([data-ocean-night="true"]) .sky {
+  background:linear-gradient(transparent 60%,var(--horizon)),radial-gradient(ellipse at 85% 30%,#f4e9d7,transparent 55%),linear-gradient(155deg,#bfdde2,#e0ebd7);
+}
+html[data-ocean-season="summer"]:not([data-ocean-night="true"]) .sky {
+  background:linear-gradient(transparent 60%,var(--horizon)),radial-gradient(ellipse at 80% 20%,#f9e6b7,transparent 58%),linear-gradient(155deg,#b9dce6,#e9edda);
+}
+html[data-ocean-season="fall"]:not([data-ocean-night="true"]) .sky {
+  background:linear-gradient(transparent 60%,var(--horizon)),radial-gradient(ellipse at 85% 20%,#edd7ad,transparent 55%),linear-gradient(155deg,#cbd7d5,#e8dcc0);
+}
+html[data-ocean-season="fall"] .sky-clouds span { background:linear-gradient(#f1e9d3 72%,#dedecb 72% 86%,#ccd8ce 86%); }
+.summer-sun { display:none;position:absolute;top:18%;right:13%;width:38px;height:38px;background:#f7de98;z-index:-3;clip-path:polygon(25% 0,75% 0,75% 12%,88% 12%,88% 25%,100% 25%,100% 75%,88% 75%,88% 88%,75% 88%,75% 100%,25% 100%,25% 88%,12% 88%,12% 75%,0 75%,0 25%,12% 25%,12% 12%,25% 12%); }
+html[data-ocean-season="summer"]:not([data-ocean-night="true"]) .summer-sun { display:block;animation:summer-peek 25s ease-in-out infinite; }
+@keyframes summer-peek { 0%,100% {transform:translateY(6px)} 50% {transform:translateY(-8px)} }
+@media(prefers-reduced-motion:reduce) { .summer-sun {animation:none!important;} }

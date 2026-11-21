@@ -4,6 +4,7 @@ import { HammerheadChase } from "@/components/HammerheadChase";
 import { Lighthouse } from "@/components/Lighthouse";
 import { RisingBubbles } from "@/components/OceanAtmosphere";
 import { MountainRange } from "@/components/MountainRange";
+import { SeasonalHero } from "@/components/SeasonalHero";
 import { Shoreline } from "@/components/Shoreline";
 import { LocalNight, OceanInteractions } from "@/components/OceanInteractions";
 import { Wildlife } from "@/components/OceanMotion";
@@ -16,6 +17,8 @@ export default function Home() {
         <CraneDrop />
         <div className="habitat sky">
           <LocalNight />
+          <SeasonalHero />
+          <div className="summer-sun" aria-hidden="true" />
           <div className="sky-clouds" aria-hidden="true"><span /><span /><span /></div>
           <Wildlife animal="cranes" />
           <Wildlife animal="butterflies" />

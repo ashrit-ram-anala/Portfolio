@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Apply browser-local time before any visible content is parsed. */}
         <script
           id="initial-ocean-theme"
-          dangerouslySetInnerHTML={{ __html: `(function(){var h=new Date().getHours();document.documentElement.dataset.oceanNight=String(h>=18||h<6)})();` }}
+          dangerouslySetInnerHTML={{ __html: `(function(){var d=new Date(),h=d.getHours(),m=d.getMonth(),r=document.documentElement;r.dataset.oceanNight=String(h>=18||h<6);r.dataset.oceanSeason=m<=1||m>=10?"winter":m<=4?"spring":m<=7?"summer":"fall"})();` }}
         />
       </head>
       <body>

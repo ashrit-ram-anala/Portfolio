@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { seasonForMonth, type Season } from "@/lib/seasons";
 import { sandCuriosity } from "@/lib/sand-curiosity";
 import { waveEdge } from "@/lib/shoreline";
 
@@ -129,14 +130,27 @@ export function OceanInteractions() {
 export function LocalNight() {
   useEffect(()=>{
     const root=document.documentElement;
+    let previewSeason: Season | undefined;
+    const preview = (event: KeyboardEvent) => {
+      if (event.repeat || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (event.target instanceof Element && event.target.closest("input,textarea,select,[contenteditable]:not([contenteditable='false'])")) return;
+      const seasons: Record<string, Season> = { q:"spring", w:"summer", e:"fall", r:"winter" };
+      const season = seasons[event.key.toLowerCase()];
+      if (!season) return;
+      previewSeason = season;
+      root.dataset.oceanSeason = season;
+    };
+    if (process.env.NODE_ENV === "development") window.addEventListener("keydown", preview);
     const sync=()=>{
-      const hour=new Date().getHours();
+      const date=new Date();
+      const hour=date.getHours();
+      root.dataset.oceanSeason=previewSeason ?? seasonForMonth(date.getMonth());
       root.dataset.oceanNight=String(hour>=18||hour<6);
     };
     sync();
     const timer=window.setInterval(sync,60000);
     document.addEventListener("visibilitychange",sync);
-    return()=>{clearInterval(timer);document.removeEventListener("visibilitychange",sync);delete root.dataset.oceanNight;};
+    return()=>{clearInterval(timer);window.removeEventListener("keydown",preview);document.removeEventListener("visibilitychange",sync);delete root.dataset.oceanNight;};
   },[]);
   return <div className="night-sky" aria-hidden="true"><div className="night-stars"/></div>;
 }

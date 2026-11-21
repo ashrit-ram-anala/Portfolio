@@ -57,6 +57,8 @@ export function LandscapeCanvas({ className, paint, tintProperty, animate = true
       draw();
     };
 
+    const seasonChanges = new MutationObserver(draw);
+    seasonChanges.observe(document.documentElement, { attributes:true, attributeFilter:["data-ocean-season"] });
     const sizes = new ResizeObserver(resize);
     sizes.observe(element);
     const viewport = new IntersectionObserver(([entry]) => {
@@ -69,6 +71,7 @@ export function LandscapeCanvas({ className, paint, tintProperty, animate = true
 
     return () => {
       cancelAnimationFrame(frame);
+      seasonChanges.disconnect();
       sizes.disconnect();
       viewport.disconnect();
       motion.removeEventListener("change", syncMotion);
