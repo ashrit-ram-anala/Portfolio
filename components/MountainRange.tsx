@@ -25,6 +25,46 @@ function shoreHeight(x: number, ridgeHeight: number) {
   return Math.round((ridgeHeight * .88 + Math.sin(x / 109) * 3 + Math.sin(x / 43) * 2) / 3) * 3;
 }
 
+function paintSkier(ctx: CanvasRenderingContext2D, x: number, y: number, time: number, variant: number) {
+  const lean = Math.round(Math.sin(time * .85 + variant * 2) * 1.2);
+  const tuck = Math.round((Math.sin(time * .85 + variant * 2) + 1) * .5);
+  const block = (dx: number, dy: number, w: number, h: number, color: string) => {
+    const scale = .8;
+    const left = Math.round(dx * scale), top = Math.round(dy * scale);
+    ctx.fillStyle = color;
+    ctx.fillRect(x + left, y + top, Math.max(1, Math.round((dx + w) * scale) - left), Math.max(1, Math.round((dy + h) * scale) - top));
+  };
+  const line = (ax: number, ay: number, bx: number, by: number, color: string) => {
+    const steps = Math.max(Math.abs(bx - ax), Math.abs(by - ay));
+    for (let step = 0; step <= steps; step++) block(Math.round(ax + (bx - ax) * step / steps), Math.round(ay + (by - ay) * step / steps), 1, 1, color);
+  };
+  // Offset skis, upturned tips, boots and bent legs make the downhill stance readable.
+  block(-6, 8, 15, 1, "#546e7c");block(9, 7, 2, 1, "#546e7c");
+  block(-3, 11, 15, 1, "#6e8b9a");block(12, 10, 2, 1, "#6e8b9a");
+  line(-1, 1 + tuck, 3, 4, "#344c62");line(3, 4, 0, 7, "#344c62");
+  line(1, 2 + tuck, 6, 6, "#4c6477");line(6, 6, 3, 10, "#4c6477");
+  block(-1, 7, 4, 2, "#273f53");block(2, 10, 4, 1, "#273f53");
+  const jacket = variant ? "#6e9bc2" : "#cb7c65";
+  block(-2 + lean, -5 + tuck, 5, 7, jacket);
+  block(-1 + lean, -6 + tuck, 5, 3, jacket);
+  block(-2 + lean, -2 + tuck, 2, 3, variant ? "#527a9c" : "#a96154");
+  // Forward arms and trailing poles, planted on opposite sides of the skis.
+  line(2 + lean, -3 + tuck, 5 + lean, 0, jacket);
+  line(5 + lean, 0, 8 + lean, -1, jacket);
+  line(-1 + lean, -3 + tuck, -4, 0, jacket);
+  block(8 + lean, -1, 2, 2, "#344c62");block(-5, 0, 2, 2, "#344c62");
+  line(8 + lean, 1, 6, 10, "#71868b");line(-4, 1, -8, 7, "#71868b");
+  // Helmet, goggles, cheek and scarf rather than an anonymous square head.
+  block(1 + lean, -10 + tuck, 4, 4, "#e7e8df");
+  block(2 + lean, -11 + tuck, 3, 1, "#faf6e9");
+  block(3 + lean, -8 + tuck, 3, 1, "#304e64");
+  block(4 + lean, -7 + tuck, 2, 2, "#e1bda1");
+  block(1 + lean, -6 + tuck, 3, 1, "#f0c386");
+  // A little powder releases at the outside ski during each carve.
+  const phase = (time * .8 + variant * .5) % 1;
+  block(-5 - Math.round(phase * 7), 7 - Math.round(Math.sin(phase * Math.PI) * 3), 2, 1, "#f4f8f6");
+}
+
 function paintMountains(ctx: CanvasRenderingContext2D, width: number, height: number, time: number) {
   ctx.clearRect(0, 0, width, height);
   const ridgeHeight = height - 42;
@@ -90,10 +130,7 @@ function paintMountains(ctx: CanvasRenderingContext2D, width: number, height: nu
       const x = Math.round(u * width / 2) * 2;
       const y = Math.round((terrain(RIDGES[0], u) * ridgeHeight + 9 + progress * 8) / 2) * 2;
       ctx.globalAlpha = Math.min(1, progress * 12, (1 - progress) * 12);
-      ctx.fillStyle = "#6b7c83";ctx.fillRect(x - 4, y + 5, 11, 1);ctx.fillRect(x - 2, y + 8, 11, 1);
-      ctx.fillStyle = i ? "#597ba1" : "#ae675e";ctx.fillRect(x, y - 2, 3, 5);
-      ctx.fillStyle = "#e9dfc7";ctx.fillRect(x + 1, y - 5, 3, 3);
-      ctx.fillStyle = "#617179";ctx.fillRect(x - 1, y + 3, 2, 3);ctx.fillRect(x + 4, y + 1, 1, 5);
+      paintSkier(ctx, x, y, time, i);
     }
     ctx.globalAlpha = 1;
   }

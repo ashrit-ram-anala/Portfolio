@@ -18,7 +18,6 @@ export function SeasonalHero() {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let season: Season = currentSeason();
     let width = 0, height = 0, perches: Perch[] = [], flakes: Flake[] = [];
-    let clouds: { x: number; y: number; width: number }[] = [];
     let frame = 0, last = 0, elapsed = 0, spawn = 0, visible = false, disposed = false;
     const resize = () => {
       const box = sky.getBoundingClientRect();
@@ -61,17 +60,27 @@ export function SeasonalHero() {
             && Math.abs(p.y - left.y) <= 2 && Math.abs(right.y - p.y) <= 2;
         });
       }
-      clouds = Array.from(sky.querySelectorAll(".sky-clouds span"), el => {
-        const r = el.getBoundingClientRect();
-        return { x: r.left - box.left, y: r.bottom - box.top - 3, width: r.width };
-      });
+      if (season === "winter") {
+        // Taper each connected cap into its ledge, with a shallow mound in the middle.
+        for (let start = 0; start < perches.length;) {
+          let end = start + 1;
+          while (end < perches.length && perches[end].x - perches[end - 1].x <= 2
+            && Math.abs(perches[end].y - perches[end - 1].y) <= 3) end++;
+          const count = end - start;
+          for (let i = start; i < end; i++) {
+            const u = (i - start + .5) / count;
+            perches[i].amount = Math.min(4.5, count * .45) * Math.sin(Math.PI * u) ** .55;
+          }
+          start = end;
+        }
+      }
       flakes = [];
     };
-    const piece = (x: number, y: number, seed: number, size = 1) => {
+    const piece = (x: number, y: number, seed: number, size = 1, age = 0) => {
       const px = Math.round(x / 2) * 2, py = Math.round(y / 2) * 2;
       ctx.fillStyle = season === "winter" ? "#f8fcff" : season === "spring" ? (seed > .5 ? "#f3b9ca" : "#f9d9df") : (seed > .5 ? "#bb6137" : "#d7a24a");
       if (season === "winter") { ctx.fillRect(px, py, size > 2 ? 4 : 2, size); return; }
-      ctx.save();ctx.translate(px, py);ctx.rotate(Math.sin(seed * 20 + elapsed * 1.2) * .7);
+      ctx.save();ctx.translate(px, py);ctx.rotate(seed * Math.PI * 2 + age * .65);
       ctx.fillRect(-2, -2, 6, 4);ctx.fillRect(0, -4, 2, 8);
       if (season === "fall") {ctx.fillStyle = "#8c653b";ctx.fillRect(0, 3, 1, 4);}
       ctx.restore();
@@ -89,20 +98,23 @@ export function SeasonalHero() {
         }
         if (p.amount > .1) {
           if (winter) {
-            const depth = Math.max(2, Math.round(p.amount / 2) * 2);
+            const depth = Math.max(1, Math.round(p.amount));
             const y = Math.round(p.y / 2) * 2;
-            ctx.fillStyle = "#d6e5ed";
-            ctx.fillRect(p.x - 1, y - 1, 4, 2);
-            ctx.fillStyle = "#f8fcff";
-            ctx.fillRect(p.x - 1, y - depth, 4, depth);
+            ctx.fillStyle = "#e4eff5";
+            // Overlap the antialiased glyph edge so the cap stays attached on curves.
+            ctx.fillRect(p.x, y - depth, 3, depth + 3);
+            // Paint the contact shadow after the fill so it remains visible against pale letters.
+            ctx.fillStyle = "#a9c7d9";
+            ctx.fillRect(p.x, y + 1, 3, 2);
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(p.x, y - depth, 3, 1);
           } else piece(p.x, p.y - 1, i * .17);
         }
       }
       if (!reduced.matches && spawn > (winter ? .12 : 1.1)) {
         spawn = 0;
-        const cloud = clouds[Math.floor(Math.random() * clouds.length)];
-        const x = winter && cloud ? cloud.x + Math.random() * cloud.width : Math.random() * width;
-        const y = winter && cloud ? cloud.y : -10;
+        const x = Math.random() * width;
+        const y = -10;
         flakes.push({ x, y, vx: 3 + Math.random() * 6, vy: winter ? 15 + Math.random() * 14 : 18 + Math.random() * 10, seed: Math.random(), age: 0, loose: false });
       }
       for (const f of flakes) {
@@ -126,7 +138,7 @@ export function SeasonalHero() {
           }
         }
         ctx.globalAlpha = Math.min(1, (height - f.y) / 60, f.loose ? Math.max(0, 1 - f.age / 2.2) : .8);
-        piece(f.x, f.y, f.seed, winter ? 2 : 1);
+        piece(f.x, f.y, f.seed, winter ? (f.seed > .8 ? 3 : 2) : 1, f.age);
       }
       flakes = flakes.filter(f => f.age < (f.loose ? 2.2 : 90) && f.y < height && f.x > -30 && f.x < width + 30).slice(-140);
       ctx.globalAlpha = 1;
